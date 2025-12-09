@@ -6,11 +6,11 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 <header>
     <nav>
+        <Navigation />
         <div>
             <ThemeIcon />
             <Menu />
         </div>
-        <Navigation />
     </nav>
 </header>
 
@@ -24,5 +24,12 @@ import ThemeIcon from "./ThemeIcon.astro";
         background-color: var(--bg1);
         position: sticky;
         top: 0;
+        border-bottom: 1px solid var(--yellow);
+        width: 100%;
+
+        padding: 2px 8px;
+
+        display: flex;
+        justify-content: space-between;
     }
 </style>
