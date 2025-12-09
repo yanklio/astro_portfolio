@@ -1,25 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css";
-
-const pageTitle = "Yanklio | About Me";
-
-const identity = {
-    firstName: "Yaroslav",
-    country: "Poland",
-    occupation: "Software Developer",
-    hobbies: ["reading", "coding", "comics", "music"],
-};
-
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro"];
-
-const happy = true;
-const finished = false;
-const goal = 3;
-
-const skillColor = "crimson";
-const fontWeight = "bold";
-const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -28,11 +9,28 @@ const textCase = "uppercase";
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
+        <title>Yojo | Home</title>
     </head>
     <body>
-        <BaseLayout pageTitle={pageTitle}>
-            <h1>My personal dojo</h1>
+        <BaseLayout>
+            <div>
+                <h1>My personal (y)dojo</h1>
+            </div>
         </BaseLayout>
     </body>
 </html>
+
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    h1 {
+        margin-top: -12px;
+        font-size: 11rem;
+        line-height: 1.4;
+    }
+</style>
