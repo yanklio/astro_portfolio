@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
-    "astro": "^5.16.4"
+    "@iconify-json/pixel": "^1.2.1",
+    "astro": "^5.16.4",
+    "astro-icon": "^1.1.5"
   }
 }

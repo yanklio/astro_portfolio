@@ -21,6 +21,10 @@ h1 {
     font-size: 2.5rem;
 }
 
+svg {
+    color: var(--fg1);
+}
+
 /* nav styles */
 
 .menu {
