@@ -4,27 +4,32 @@ import Social from "./Social.astro";
 interface Platform {
     platform: string;
     username: string;
+    link: string;
 }
 
 const platforms: Platform[] = [
     {
         platform: "Github",
         username: "yanklio",
+        link: "https://github.com/yanklio",
     },
     {
         platform: "LinkedIn",
         username: "yaroslav-u",
+        link: "https://www.linkedin.com/in/yaroslav-u",
     },
 ];
 ---
 
 <footer>
+    <p>Contact:</p>
     {
         platforms.map((platform) => (
             <p>
                 <Social
                     platform={platform.platform}
                     username={platform.username}
+                    link={platform.link}
                 />
             </p>
         ))
@@ -42,5 +47,9 @@ const platforms: Platform[] = [
         display: flex;
         justify-content: center;
         align-items: center;
+
+        gap: 16px;
+
+        color: var(--bg1);
     }
 </style>
