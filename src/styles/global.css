@@ -25,3 +25,22 @@ h1 {
 svg {
     color: var(--fg1);
 }
+
+/* selection */
+
+::selection {
+    background: var(--orange);
+    color: var(--bg);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background: #ff0099;
+    color: #eee;
+    text-shadow: none;
+}
+
+/* shadow */
+.big-shadow {
+    box-shadow: 4px 4px 0px 0px var(--fg1);
+}
