@@ -39,11 +39,11 @@ const currentPath = Astro.url.pathname;
     .nav-container {
         display: flex;
         border: 4px solid var(--fg1);
-        background-color: var(--bg_hard);
+        background-color: var(--bg);
     }
 
     .nav-link {
-        padding: 6px 16px;
+        padding: 4px 16px;
         margin: 6px 6px;
         text-decoration: none;
         font-size: 1.1rem;
@@ -51,6 +51,7 @@ const currentPath = Astro.url.pathname;
         color: var(--fg1);
         background-color: var(--bg_soft);
         transition: background-color 0.2s ease;
+        border: 2px solid var(--fg1);
     }
 
     .nav-link:hover {

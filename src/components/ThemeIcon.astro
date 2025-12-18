@@ -2,23 +2,28 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<button id="themeToggle" aria-label="Toggle theme">
+<button
+    id="themeToggle"
+    class="theme-toggle big-shadow"
+    aria-label="Toggle theme"
+>
     <Icon class="icon sun" name="ic:baseline-wb-sunny" />
     <Icon class="icon moon" name="ic:baseline-dark-mode" />
 </button>
 
 <style>
-    #themeToggle {
-        border: 0;
-        background: none;
+    .theme-toggle {
+        display: flex;
+        align-items: center;
+        border: 3px solid var(--fg1);
+
+        height: 50px;
+        padding: 0 16px;
+        background: var(--bg1);
+        font-size: 1.2rem;
     }
     .moon {
         display: none;
-    }
-
-    .icon {
-        width: 2.1rem;
-        height: 2.1rem;
     }
 
     :global(.dark) .sun {
