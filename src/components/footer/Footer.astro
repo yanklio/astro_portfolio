@@ -1,0 +1,48 @@
+---
+import Logo from "../Logo.astro";
+import Sitemap from "./Sitemap.astro";
+---
+
+<footer>
+    <div class="footer-left">
+        <span>
+            /* Made with love to the software engineering, to creating and
+            experimenting with new things. And with a "few" cups of coffee with
+            some snacks. */
+        </span>
+        <br />
+        <br />
+        <span> @2025 by yanklio </span>
+    </div>
+    <Sitemap />
+</footer>
+
+<style>
+    footer {
+        width: 100%;
+
+        background: var(--bg1);
+        border-top: 4px solid var(--fg2);
+        padding: 18px 2px;
+
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        padding: 16px 16px;
+
+        .footer-left {
+            max-width: 600px;
+            flex: 0 1 auto;
+            min-width: 0;
+            margin-top: 8px;
+            margin-right: 60px;
+        }
+
+        span {
+            color: var(--fg2);
+        }
+    }
+</style>

@@ -1,6 +1,8 @@
 :root {
     color-scheme: light;
 
+    --black: #282828;
+
     /* Background colors */
     --bg_hard: light-dark(#f9f5d7, #1d2021);
     --bg: light-dark(#fbf1c7, #282828);
@@ -74,6 +76,10 @@
 
 .orange {
     color: var(--orange);
+}
+
+.black {
+    color: var(--black);
 }
 
 /* Dim Colors */

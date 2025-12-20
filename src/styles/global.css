@@ -21,7 +21,6 @@ html {
 
 body {
     margin: 0 auto;
-    width: 100%;
     line-height: 1.5;
 }
 
@@ -70,6 +69,10 @@ svg {
     justify-content: center;
 }
 
+.paper-animation:hover {
+    animation: paper-hover 0.2s ease-in-out forwards;
+}
+
 .paper-button:hover {
     animation: paper-hover 0.2s ease-in-out forwards;
 }
@@ -79,7 +82,7 @@ svg {
         transform: translate(0, 0) rotate(0deg);
     }
     100% {
-        transform: translate(1px, -1px) rotate(-3deg);
+        transform: translate(0px, 0px) rotate(-2deg);
     }
 }
 

@@ -4,8 +4,12 @@ const currentPath = Astro.url.pathname;
 
 <nav class="navigation">
     <div class="nav-container paper-border">
-        <a href="/" class:list={["nav-link", { active: currentPath === "/" }]}
-            >/home</a
+        <a
+            href="/"
+            class:list={[
+                "nav-link paper-animation",
+                { active: currentPath === "/" },
+            ]}>/home</a
         >
         <!-- <a
             href="/projects"
@@ -15,7 +19,7 @@ const currentPath = Astro.url.pathname;
         <a
             href="/blog"
             class:list={[
-                "nav-link",
+                "nav-link paper-animation",
                 {
                     active:
                         currentPath === "/blog" ||
@@ -59,7 +63,7 @@ const currentPath = Astro.url.pathname;
 
     .nav-link.active {
         background-color: var(--yellow-dim);
-        color: var(--fg1);
+        color: var(--black);
         font-weight: 600;
     }
 </style>
