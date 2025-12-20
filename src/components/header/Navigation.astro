@@ -7,11 +7,11 @@ const currentPath = Astro.url.pathname;
         <a href="/" class:list={["nav-link", { active: currentPath === "/" }]}
             >/home</a
         >
-        <a
+        <!-- <a
             href="/projects"
             class:list={["nav-link", { active: currentPath === "/projects" }]}
             >/projects</a
-        >
+        > -->
         <a
             href="/blog"
             class:list={[
@@ -23,11 +23,11 @@ const currentPath = Astro.url.pathname;
                 },
             ]}>/blog</a
         >
-        <a
+        <!-- <a
             href="/contact"
             class:list={["nav-link", { active: currentPath === "/contact" }]}
             >/contact</a
-        >
+        > -->
     </div>
 </nav>
 

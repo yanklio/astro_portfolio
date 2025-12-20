@@ -71,5 +71,18 @@ svg {
 }
 
 .paper-button:hover {
+    animation: paper-hover 0.2s ease-in-out forwards;
+}
+
+@keyframes paper-hover {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(1px, -1px) rotate(-3deg);
+    }
+}
+
+.paper-button:hover {
     background: var(--bg2);
 }
