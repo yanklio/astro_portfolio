@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 
 <button
     id="themeToggle"
-    class="theme-toggle big-shadow"
+    class="theme-toggle paper-button"
     aria-label="Toggle theme"
 >
     <Icon class="icon sun" name="ic:baseline-wb-sunny" />
@@ -13,15 +13,14 @@ import { Icon } from "astro-icon/components";
 
 <style>
     .theme-toggle {
-        display: flex;
-        align-items: center;
-        border: 3px solid var(--fg1);
-
         height: 50px;
         padding: 0 16px;
         background: var(--bg1);
         font-size: 1.2rem;
+
+        cursor: pointer;
     }
+
     .moon {
         display: none;
     }

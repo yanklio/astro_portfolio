@@ -3,7 +3,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav class="navigation">
-    <div class="nav-container">
+    <div class="nav-container paper-border">
         <a href="/" class:list={["nav-link", { active: currentPath === "/" }]}
             >/home</a
         >
@@ -38,7 +38,6 @@ const currentPath = Astro.url.pathname;
 
     .nav-container {
         display: flex;
-        border: 4px solid var(--fg1);
         background-color: var(--bg);
     }
 

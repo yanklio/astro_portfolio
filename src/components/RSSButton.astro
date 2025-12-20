@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<a class="rss-button big-shadow" href="/rss.xml">
+<a class="rss-button" href="/rss.xml">
     <Icon name="ic:outline-rss-feed" />
     <span class="rss-text">Feed</span>
 </a>
@@ -11,17 +11,20 @@ import { Icon } from "astro-icon/components";
     .rss-button {
         display: flex;
         align-items: center;
-        border: 3px solid var(--fg1);
 
-        height: 42px;
+        height: 46px;
         padding: 0 20px;
-        background: var(--aqua-dim);
+        background: var(--fg);
         font-size: 1.2rem;
-        color: var(--fg1);
+        color: var(--bg1);
         text-decoration: none;
+
+        svg {
+            color: var(--bg1);
+        }
     }
     .rss-button:hover {
-        background-color: var(--aqua);
+        background-color: var(--fg2);
     }
 
     .rss-text {
