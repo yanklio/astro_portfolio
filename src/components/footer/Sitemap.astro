@@ -1,0 +1,55 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<div class="sitemap">
+    <span class="sitemap-header">Sitemap</span>
+    <div class="divider"></div>
+    <a href="/" class:list={["nav-link", { active: currentPath === "/" }]}
+        >/home</a
+    >
+    <a
+        href="/blog"
+        class:list={[
+            "nav-link",
+            {
+                active:
+                    currentPath === "/blog" || currentPath.startsWith("/blog/"),
+            },
+        ]}>/blog</a
+    >
+</div>
+
+<style>
+    .sitemap {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            color: var(--fg);
+            text-decoration: none;
+            font-size: 1.15rem;
+
+            &.active {
+                color: var(--yellow-dim);
+            }
+
+            &:hover:not(.active) {
+                color: var(--yellow);
+            }
+        }
+    }
+
+    .sitemap-header {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1.75rem;
+    }
+
+    .divider {
+        height: 4px;
+        background-color: var(--fg2);
+        margin-top: -4px;
+        margin-bottom: 12px;
+    }
+</style>

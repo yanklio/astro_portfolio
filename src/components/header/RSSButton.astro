@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<a class="rss-button" href="/rss.xml">
+    <Icon name="ic:outline-rss-feed" />
+    <span class="rss-text">Feed</span>
+</a>
+
+<style>
+    .rss-button {
+        display: flex;
+        align-items: center;
+
+        height: 46px;
+        padding: 0 20px;
+        background: var(--fg);
+        font-size: 1.2rem;
+        color: var(--bg1);
+        text-decoration: none;
+
+        svg {
+            color: var(--bg1);
+        }
+    }
+    .rss-button:hover {
+        background-color: var(--fg2);
+    }
+
+    .rss-text {
+        margin-left: 8px;
+    }
+</style>

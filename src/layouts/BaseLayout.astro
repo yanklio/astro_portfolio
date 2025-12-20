@@ -1,8 +1,8 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "../components/header/Header.astro";
+import Footer from "../components/footer/Footer.astro";
 import "../styles/global.css";
-
+import { ClientRouter } from "astro:transitions";
 const { pageTitle } = Astro.props;
 ---
 
@@ -13,14 +13,25 @@ const { pageTitle } = Astro.props;
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
+        <ClientRouter />
     </head>
     <body>
         <Header />
-        <h1>{pageTitle}</h1>
-        <slot />
+        <main>
+            <slot />
+        </main>
         <Footer />
-        <script>
-            import "../scripts/menu.js";
-        </script>
     </body>
 </html>
+
+<style>
+    body {
+        min-height: 100vh;
+    }
+    main {
+        margin: auto;
+        max-width: 70rem;
+        min-height: 90vh;
+        padding: 24px 32px 24px 16px;
+    }
+</style>
