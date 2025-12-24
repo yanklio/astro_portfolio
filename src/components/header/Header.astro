@@ -18,18 +18,29 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 <style>
     nav {
-        height: 82px;
+        min-height: 82px;
 
         background-color: var(--bg_soft);
         position: sticky;
         top: 0;
         border-bottom: 4px solid var(--fg2);
         width: 100%;
+        z-index: 10;
 
         padding: 2px 16px;
 
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    @media (max-width: 700px) {
+        nav {
+            justify-content: center;
+            padding: 12px;
+            gap: 12px;
+        }
     }
 
     .single-row {
