@@ -3,15 +3,31 @@ import Logo from "../Logo.astro";
 import Navigation from "./Navigation.astro";
 import RSSButton from "./RSSButton.astro";
 import ThemeIcon from "./ThemeIcon.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <header>
     <nav>
         <Logo />
-        <Navigation />
-        <div class="single-row">
-            <RSSButton />
-            <ThemeIcon />
+        <div class="desktop-only">
+            <Navigation />
+        </div>
+
+        <div class="desktop-only">
+            <div class="single-row">
+                <RSSButton />
+                <ThemeIcon />
+            </div>
+        </div>
+
+        <div class="mobile-only">
+            <button
+                id="mobileMenuToggle"
+                class="mobile-menu-btn paper-button"
+                aria-label="Toggle menu"
+            >
+                <Icon name="ic:menu" />
+            </button>
         </div>
     </nav>
 </header>
@@ -31,16 +47,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
         align-items: center;
-    }
-
-    @media (max-width: 700px) {
-        nav {
-            justify-content: center;
-            padding: 12px;
-            gap: 12px;
-        }
     }
 
     .single-row {
@@ -48,4 +55,36 @@ import ThemeIcon from "./ThemeIcon.astro";
         align-items: center;
         gap: 12px;
     }
+
+    .mobile-menu-btn {
+        height: 50px;
+        padding: 0 16px;
+        font-size: 1.5rem;
+        background: var(--bg1);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
+
+<script>
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+
+    mobileMenuToggle?.addEventListener("click", () => {
+        mobileMenu?.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (mobileMenuToggle && mobileMenu) {
+            const target = e.target as Node;
+            if (
+                !mobileMenu.contains(target) &&
+                !mobileMenuToggle.contains(target)
+            ) {
+                mobileMenu.classList.remove("open");
+            }
+        }
+    });
+</script>
