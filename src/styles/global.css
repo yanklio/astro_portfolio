@@ -82,10 +82,29 @@ svg {
         transform: translate(0, 0) rotate(0deg);
     }
     100% {
-        transform: translate(0px, 0px) rotate(-2deg);
+        transform: translate(-2px, -2px) rotate(-1deg);
     }
 }
 
 .paper-button:hover {
     background: var(--bg2);
+}
+
+/* responsive */
+.desktop-only {
+    display: block;
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
 }
