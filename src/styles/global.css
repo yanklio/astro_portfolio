@@ -53,16 +53,16 @@ svg {
 
 /* paper styles */
 .paper-border {
-    border: 3px solid var(--fg1);
+    border: 3px solid var(--fg2);
 }
 
 .paper-shadow {
-    box-shadow: 4px 4px 0px 0px var(--fg1);
+    box-shadow: 4px 4px 0px 0px var(--fg3);
 }
 
 .paper-button {
-    border: 3px solid var(--fg1);
-    box-shadow: 4px 4px 0px 0px var(--fg1);
+    border: 3px solid var(--fg2);
+    box-shadow: 4px 4px 0px 0px var(--fg3);
 
     display: flex;
     align-items: center;
@@ -79,10 +79,10 @@ svg {
 
 @keyframes paper-hover {
     0% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate(0, 0);
     }
     100% {
-        transform: translate(-2px, -2px) rotate(-1deg);
+        transform: translate(-2px, -2px);
     }
 }
 
