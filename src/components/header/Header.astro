@@ -108,6 +108,8 @@ import { Icon } from "astro-icon/components";
     </div>
 </header>
 
+<div id="menuOverlay" class="menu-overlay mobile-only"></div>
+
 <style>
     header {
         position: fixed;
@@ -244,22 +246,43 @@ import { Icon } from "astro-icon/components";
     :global(html.dark) .theme-icons .moon {
         display: block;
     }
+
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--black);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 999;
+    }
+
+    .menu-overlay.open {
+        opacity: 0.8;
+        pointer-events: auto;
+    }
 </style>
 
 <script>
     function setupMobileMenu() {
         const mobileMenu = document.getElementById("mobileMenu");
         const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const menuOverlay = document.getElementById("menuOverlay");
         const copyRSS = document.getElementById("copyRSS");
         const mobileThemeToggle = document.getElementById("mobileThemeToggle");
         const menuLinks = mobileMenu?.querySelectorAll(".menu-link");
 
         function closeMenu() {
             mobileMenu?.classList.remove("open");
+            menuOverlay?.classList.remove("open");
         }
 
         function openMenu() {
             mobileMenu?.classList.add("open");
+            menuOverlay?.classList.add("open");
         }
 
         mobileMenuToggle?.addEventListener("click", () => {
@@ -270,6 +293,8 @@ import { Icon } from "astro-icon/components";
             }
             mobileMenuToggle?.blur();
         });
+
+        menuOverlay?.addEventListener("click", closeMenu);
 
         menuLinks?.forEach((link) => {
             link.addEventListener("click", closeMenu);
