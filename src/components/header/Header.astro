@@ -1,4 +1,4 @@
- ---
+---
 const currentPath = Astro.url.pathname;
 import Logo from "../Logo.astro";
 import Navigation from "./Navigation.astro";
@@ -32,24 +32,47 @@ import { Icon } from "astro-icon/components";
         </div>
     </nav>
 
-    <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
-    <div id="mobileMenu" class="mobile-menu paper-border">
-        <div class="menu-item">
-            <a href="/" class:list={["menu-link", { active: currentPath === "/" }]}>
+    <div id="mobileMenu" class="mobile-menu mobile-only">
+        <div
+            class:list={["menu-item", { "hidden-route": currentPath === "/" }]}
+        >
+            <a
+                href="/"
+                class:list={["menu-link", { active: currentPath === "/" }]}
+            >
                 <div class="menu-content">
                     <div class="menu-title">/home</div>
                     <div class="menu-desc">Navigate to home page</div>
                 </div>
-                <Icon name="ic:baseline-home" />
+                <Icon name="ic:baseline-home" class="menu-icon" />
             </a>
         </div>
-        <div class="menu-item">
-            <a href="/blog" class:list={["menu-link", { active: currentPath === "/blog" || currentPath.startsWith("/blog/") }]}>
+        <div
+            class:list={[
+                "menu-item",
+                {
+                    "hidden-route":
+                        currentPath === "/blog" ||
+                        currentPath.startsWith("/blog/"),
+                },
+            ]}
+        >
+            <a
+                href="/blog"
+                class:list={[
+                    "menu-link",
+                    {
+                        active:
+                            currentPath === "/blog" ||
+                            currentPath.startsWith("/blog/"),
+                    },
+                ]}
+            >
                 <div class="menu-content">
                     <div class="menu-title">/blog</div>
                     <div class="menu-desc">Read blog posts</div>
                 </div>
-                <Icon name="ic:baseline-article" />
+                <Icon name="ic:baseline-article" class="menu-icon" />
             </a>
         </div>
         <div class="menu-divider"></div>
@@ -59,34 +82,50 @@ import { Icon } from "astro-icon/components";
                     <div class="menu-title">RSS Feed</div>
                     <div class="menu-desc">Copy feed URL to clipboard</div>
                 </div>
-                <Icon name="ic:outline-rss-feed" />
+                <Icon name="ic:outline-rss-feed" class="menu-icon" />
             </button>
         </div>
         <div class="menu-item">
             <button id="mobileThemeToggle" class="menu-link">
                 <div class="menu-content">
                     <div class="menu-title">Theme</div>
-                    <div class="menu-desc">Switch between light and dark mode</div>
+                    <div class="menu-desc">
+                        Switch between light and dark mode
+                    </div>
                 </div>
                 <div class="theme-icons">
-                    <Icon class="icon sun" name="ic:baseline-wb-sunny" />
-                    <Icon class="icon moon" name="ic:baseline-dark-mode" />
+                    <Icon
+                        class="icon sun menu-icon"
+                        name="ic:baseline-wb-sunny"
+                    />
+                    <Icon
+                        class="icon moon menu-icon"
+                        name="ic:baseline-dark-mode"
+                    />
                 </div>
             </button>
         </div>
     </div>
 </header>
 
+<div id="menuOverlay" class="menu-overlay mobile-only"></div>
+
 <style>
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
     nav {
         min-height: 82px;
 
         background-color: var(--bg_soft);
-        position: sticky;
-        top: 0;
         border-bottom: 4px solid var(--fg2);
         width: 100%;
-        z-index: 10;
 
         padding: 2px 16px;
 
@@ -112,43 +151,27 @@ import { Icon } from "astro-icon/components";
         align-items: center;
     }
 
-    .mobile-menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 98;
-        display: none;
-    }
-
-    .mobile-menu-overlay.open {
-        display: block;
-    }
-
     .mobile-menu {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 320px;
-        max-width: calc(100vw - 32px);
-        max-height: 80vh;
+        width: 100%;
+        max-height: 0;
         background-color: var(--bg);
-        display: none;
         flex-direction: column;
-        z-index: 99;
-        box-shadow: var(--paper-shadow);
-        overflow-y: auto;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: 3px solid var(--fg1);
     }
 
     .mobile-menu.open {
-        display: flex;
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     .menu-item {
         border-bottom: 2px solid var(--fg2);
+    }
+
+    .menu-item.hidden-route {
+        display: none;
     }
 
     .menu-item:last-child {
@@ -208,6 +231,10 @@ import { Icon } from "astro-icon/components";
         gap: 8px;
     }
 
+    .menu-icon {
+        font-size: 1.5rem;
+    }
+
     .theme-icons .moon {
         display: none;
     }
@@ -220,30 +247,42 @@ import { Icon } from "astro-icon/components";
         display: block;
     }
 
-    @media (min-width: 768px) {
-        .mobile-menu {
-            display: none !important;
-        }
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--black);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 999;
+    }
+
+    .menu-overlay.open {
+        opacity: 0.8;
+        pointer-events: auto;
     }
 </style>
 
 <script>
     function setupMobileMenu() {
         const mobileMenu = document.getElementById("mobileMenu");
-        const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
         const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const menuOverlay = document.getElementById("menuOverlay");
         const copyRSS = document.getElementById("copyRSS");
         const mobileThemeToggle = document.getElementById("mobileThemeToggle");
         const menuLinks = mobileMenu?.querySelectorAll(".menu-link");
 
         function closeMenu() {
             mobileMenu?.classList.remove("open");
-            mobileMenuOverlay?.classList.remove("open");
+            menuOverlay?.classList.remove("open");
         }
 
         function openMenu() {
             mobileMenu?.classList.add("open");
-            mobileMenuOverlay?.classList.add("open");
+            menuOverlay?.classList.add("open");
         }
 
         mobileMenuToggle?.addEventListener("click", () => {
@@ -252,9 +291,10 @@ import { Icon } from "astro-icon/components";
             } else {
                 openMenu();
             }
+            mobileMenuToggle?.blur();
         });
 
-        mobileMenuOverlay?.addEventListener("click", closeMenu);
+        menuOverlay?.addEventListener("click", closeMenu);
 
         menuLinks?.forEach((link) => {
             link.addEventListener("click", closeMenu);
