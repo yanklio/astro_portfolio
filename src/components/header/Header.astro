@@ -32,7 +32,7 @@ import { Icon } from "astro-icon/components";
         </div>
     </nav>
 
-    <div id="mobileMenu" class="mobile-menu paper-border">
+    <div id="mobileMenu" class="mobile-menu mobile-only">
         <div
             class:list={["menu-item", { "hidden-route": currentPath === "/" }]}
         >
@@ -109,15 +109,21 @@ import { Icon } from "astro-icon/components";
 </header>
 
 <style>
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
     nav {
         min-height: 82px;
 
         background-color: var(--bg_soft);
-        position: sticky;
-        top: 0;
         border-bottom: 4px solid var(--fg2);
         width: 100%;
-        z-index: 10;
 
         padding: 2px 16px;
 
@@ -141,13 +147,6 @@ import { Icon } from "astro-icon/components";
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    @media (hover: hover) {
-        .mobile-menu-btn:hover {
-            animation: paper-hover 0.2s ease-in-out forwards;
-            background: var(--bg2);
-        }
     }
 
     .mobile-menu {
@@ -244,12 +243,6 @@ import { Icon } from "astro-icon/components";
 
     :global(html.dark) .theme-icons .moon {
         display: block;
-    }
-
-    @media (min-width: 768px) {
-        .mobile-menu {
-            display: none !important;
-        }
     }
 </style>
 
