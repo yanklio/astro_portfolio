@@ -1,17 +1,21 @@
 ---
-import {Icon} from "astro-icon/components"
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="logo-wrapper">
-    <div class="logo-box paper-border paper-shadow"><Icon name="ic:baseline-code"></Icon></div>
-    <p class="logo-text"><span class="yellow">$&gt;</span>yanklio/yojo</p>
+    <div class="logo-box paper-border paper-shadow">
+        <Icon name="ic:baseline-code" />
+    </div>
+    <p class="logo-text">
+        <span class="yellow">$&gt;</span>guest@yanklio
+    </p>
 </div>
 
 <style>
     .logo-wrapper {
         display: flex;
         gap: 12px;
-        align-items:center;
+        align-items: center;
 
         .logo-box {
             width: 50px;
@@ -23,8 +27,8 @@ import {Icon} from "astro-icon/components"
             justify-content: center;
 
             svg {
-               font-size: 40px;
-               color: var(--black);
+                font-size: 40px;
+                color: var(--black);
             }
         }
 
