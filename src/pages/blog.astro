@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+const pageTitle = "yanklio/blog";
 const allPosts = await getCollection("blog");
 ---
 
@@ -11,10 +12,10 @@ const allPosts = await getCollection("blog");
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>Yojo | Blog</title>
+        <title>{{ pageTitle }}</title>
     </head>
     <body>
-        <BaseLayout pageTitle="My Astro Learning Blog">
+        <BaseLayout pageTitle={pageTitle} path="/blog">
             <p>This is where I will post about my journey learning Astro.</p>
 
             <ul>
