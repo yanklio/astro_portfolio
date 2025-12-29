@@ -3,13 +3,34 @@ import { Icon } from "astro-icon/components";
 ---
 
 <div class="logo-wrapper">
-    <div class="logo-box paper-border paper-shadow">
+    <div class="logo-box paper-button" id="logo-box">
         <Icon name="ic:baseline-code" />
     </div>
     <p class="logo-text">
         <span class="yellow">$&gt;</span>guest@yanklio
     </p>
 </div>
+
+<script is:inline>
+    function initLogoRotation() {
+        const logoBox = document.getElementById("logo-box");
+        if (!logoBox) return;
+
+        const newLogoBox = logoBox.cloneNode(true);
+        logoBox.parentNode.replaceChild(newLogoBox, logoBox);
+
+        newLogoBox.addEventListener("click", function () {
+            this.classList.add("spinning");
+            setTimeout(() => {
+                this.classList.remove("spinning");
+            }, 600);
+        });
+    }
+
+    initLogoRotation();
+
+    document.addEventListener("astro:after-swap", initLogoRotation);
+</script>
 
 <style>
     .logo-wrapper {
@@ -26,6 +47,12 @@ import { Icon } from "astro-icon/components";
             align-items: center;
             justify-content: center;
 
+            cursor: pointer;
+
+            &.spinning {
+                animation: spin 0.6s ease-in-out;
+            }
+
             svg {
                 font-size: 40px;
                 color: var(--black);
@@ -36,6 +63,15 @@ import { Icon } from "astro-icon/components";
             font-weight: 600;
             font-size: 1.1rem;
             padding-top: 7px;
+        }
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
         }
     }
 </style>
