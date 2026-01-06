@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogCard from "../../components/BlogCard.astro";
+import BlogList from "../../components/BlogList.astro";
 
 export async function getStaticPaths() {
     const allPosts = await getCollection("blog");
@@ -32,9 +32,7 @@ const { posts } = Astro.props;
             {posts.length}
             {posts.length === 1 ? "post" : "posts"} tagged with "{tag}"
         </p>
-        <div class="tag-posts-grid">
-            {posts.map((post: any) => <BlogCard post={post} />)}
-        </div>
+        <BlogList posts={posts} />
     </div>
 </BaseLayout>
 
@@ -51,19 +49,9 @@ const { posts } = Astro.props;
         font-size: 1rem;
     }
 
-    .tag-posts-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
     @media (max-width: 768px) {
         .tag-title {
             font-size: 2rem;
-        }
-
-        .tag-posts-grid {
-            grid-template-columns: 1fr;
         }
     }
 </style>
