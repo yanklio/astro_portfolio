@@ -1,9 +1,10 @@
 ---
+import BlogTag from "./BlogTag.astro";
 const { post } = Astro.props;
 ---
 
-<a href={`/blog/${post.id}`} class="blog-card-link">
-    <article class="blog-card paper-border paper-shadow paper-animation">
+<div class="blog-card paper-border paper-shadow paper-animation">
+    <a href={`/blog/${post.id}`} class="blog-card-link">
         <div class="blog-card-image-container">
             <img
                 src={post.data.image.url}
@@ -19,27 +20,17 @@ const { post } = Astro.props;
                     {post.data.pubDate.toLocaleDateString()}
                 </time>
             </div>
-            <div class="blog-card-tags">
-                {
-                    post.data.tags.map((tag: string) => (
-                        <span class="blog-card-tag">{tag}</span>
-                    ))
-                }
-            </div>
         </div>
-    </article>
-</a>
+    </a>
+    <div class="blog-card-tags">
+        {post.data.tags.map((tag: string) => <BlogTag text={tag} slug={tag} />)}
+    </div>
+</div>
 
 <style>
-    .blog-card-link {
-        text-decoration: none;
-        display: block;
-    }
-
     .blog-card {
         background-color: var(--bg);
         transition: background-color 0.2s ease;
-        cursor: pointer;
         max-width: 300px;
         display: flex;
         flex-direction: column;
@@ -47,6 +38,12 @@ const { post } = Astro.props;
 
     .blog-card:hover {
         background-color: var(--bg_soft);
+    }
+
+    .blog-card-link {
+        text-decoration: none;
+        display: block;
+        flex: 1;
     }
 
     .blog-card-image-container {
@@ -65,6 +62,7 @@ const { post } = Astro.props;
 
     .blog-card-content {
         padding: 1rem;
+        padding-bottom: 0.2rem;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -119,23 +117,15 @@ const { post } = Astro.props;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
+        padding: 0 1rem 1rem;
         overflow: hidden;
         flex-shrink: 0;
     }
 
-    .blog-card-tag {
-        padding: 0.3rem 0.6rem;
-        background-color: var(--bg2);
-        border: 2px solid var(--fg2);
-        font-size: 0.7rem;
-        font-weight: 500;
-        color: var(--fg2);
-        white-space: nowrap;
-        transition: all 0.2s ease;
-    }
-
-    .blog-card-tag:hover {
-        background-color: var(--fg2);
-        color: var(--bg);
+    @media (max-width: 700px) {
+        .blog-card {
+            max-width: 100%;
+            width: 100%;
+        }
     }
 </style>
