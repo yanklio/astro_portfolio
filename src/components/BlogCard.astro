@@ -2,7 +2,7 @@
 const { post } = Astro.props;
 ---
 
-<a href={`/posts/${post.id}`} class="blog-card-link">
+<a href={`/blog/${post.id}`} class="blog-card-link">
     <article class="blog-card paper-border paper-shadow paper-animation">
         <div class="blog-card-image-container">
             <img
@@ -18,9 +18,6 @@ const { post } = Astro.props;
                 <time class="blog-card-date">
                     {post.data.pubDate.toLocaleDateString()}
                 </time>
-                <span class="blog-card-author">
-                    {post.data.author}
-                </span>
             </div>
             <div class="blog-card-tags">
                 {
@@ -44,7 +41,6 @@ const { post } = Astro.props;
         transition: background-color 0.2s ease;
         cursor: pointer;
         max-width: 300px;
-        height: 350px;
         display: flex;
         flex-direction: column;
     }
@@ -55,7 +51,6 @@ const { post } = Astro.props;
 
     .blog-card-image-container {
         width: 100%;
-        height: 140px;
         flex-shrink: 0;
         overflow: hidden;
         border-bottom: 3px solid var(--fg2);
@@ -63,8 +58,9 @@ const { post } = Astro.props;
 
     .blog-card-image {
         width: 100%;
-        height: 100%;
-        object-fit: fill;
+        height: auto;
+        object-fit: cover;
+        max-height: 230px;
     }
 
     .blog-card-content {
