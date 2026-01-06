@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogCard from "../components/BlogCard.astro";
 
 const pageTitle = "yanklio/blog";
 const allPosts = await getCollection("blog");
@@ -16,17 +17,54 @@ const allPosts = await getCollection("blog");
     </head>
     <body>
         <BaseLayout pageTitle={pageTitle} path="/blog">
-            <p>This is where I will post about my journey learning Astro.</p>
+            <div class="blog-header">
+                <h1 class="blog-title">DEV BLOGS</h1>
+                <div class="header-divider"></div>
+            </div>
 
-            <ul>
+            <div class="blog-grid">
                 {
-                    allPosts.map((post: any) => (
-                        <li>
-                            <a href={`/posts/${post.id}`}>{post.data.title}</a>
-                        </li>
+                    allPosts.map((post) => (
+                        <BlogCard post={post} />
                     ))
                 }
-            </ul>
+            </div>
         </BaseLayout>
     </body>
 </html>
+
+<style>
+    .blog-header {
+        margin-bottom: 3rem;
+    }
+
+    .blog-title {
+        font-size: clamp(3rem, 10vw, 5rem);
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        color: var(--fg1);
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .header-divider {
+        width: 100px;
+        height: 5px;
+        background-color: var(--orange);
+        margin: 1.5rem 0;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .blog-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+</style>
