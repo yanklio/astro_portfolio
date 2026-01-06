@@ -23,9 +23,11 @@ const { post } = Astro.props;
                 </span>
             </div>
             <div class="blog-card-tags">
-                {post.data.tags.map((tag: string) => (
-                    <span class="blog-card-tag">{tag}</span>
-                ))}
+                {
+                    post.data.tags.map((tag: string) => (
+                        <span class="blog-card-tag">{tag}</span>
+                    ))
+                }
             </div>
         </div>
     </article>
@@ -41,30 +43,10 @@ const { post } = Astro.props;
         background-color: var(--bg);
         transition: background-color 0.2s ease;
         cursor: pointer;
-        max-width: 350px;
-    }
-
-    .blog-card-image-container {
-        width: 100%;
-        height: 140px;
-        overflow: hidden;
-        border-bottom: 3px solid var(--fg2);
-    }
-
-    .blog-card-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .blog-card-content {
-        padding: 1rem;
-    }
-
-    .blog-card-title {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.1rem;
-        color: var(--fg1);
+        max-width: 300px;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
     }
 
     .blog-card:hover {
@@ -73,7 +55,8 @@ const { post } = Astro.props;
 
     .blog-card-image-container {
         width: 100%;
-        height: 200px;
+        height: 140px;
+        flex-shrink: 0;
         overflow: hidden;
         border-bottom: 3px solid var(--fg2);
     }
@@ -81,67 +64,82 @@ const { post } = Astro.props;
     .blog-card-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: fill;
     }
 
     .blog-card-content {
-        padding: 1.5rem;
+        padding: 1rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
     }
 
     .blog-card-title {
-        margin: 0 0 0.75rem 0;
-        font-size: 1.5rem;
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
         color: var(--fg1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .blog-card-description {
-        margin: 0 0 1rem 0;
+        margin: 0 0 0.75rem 0;
         color: var(--fg3);
-        line-height: 1.5;
+        line-height: 1.4;
+        font-size: 0.875rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     .blog-card-meta {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 0.75rem;
-        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.75rem;
         color: var(--fg3);
+        flex-shrink: 0;
     }
 
     .blog-card-date {
         font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .blog-card-author {
         font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .blog-card-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
+        overflow: hidden;
+        flex-shrink: 0;
     }
 
     .blog-card-tag {
-        padding: 0.25rem 0.75rem;
+        padding: 0.3rem 0.6rem;
         background-color: var(--bg2);
-        border: 2px solid var(--fg3);
-        font-size: 0.75rem;
-        color: var(--fg3);
+        border: 2px solid var(--fg2);
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--fg2);
+        white-space: nowrap;
+        transition: all 0.2s ease;
     }
 
-    @media (max-width: 768px) {
-        .blog-card-image-container {
-            height: 150px;
-        }
-
-        .blog-card-title {
-            font-size: 1.25rem;
-        }
-
-        .blog-card-content {
-            padding: 1rem;
-        }
+    .blog-card-tag:hover {
+        background-color: var(--fg2);
+        color: var(--bg);
     }
 </style>
