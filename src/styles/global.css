@@ -37,6 +37,10 @@ svg {
     color: var(--fg1);
 }
 
+img {
+    display: block;
+}
+
 /* selection */
 
 ::selection {

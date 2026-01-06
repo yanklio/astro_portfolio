@@ -4,40 +4,238 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <p>Written by {frontmatter.author}</p>
-    <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by: {frontmatter.author}</p>
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-
-    <div class="tags">
-        {
-            frontmatter.tags.map((tag: string) => (
-                <p class="tag">
-                    <a href={`/tags/${tag}`}>{tag}</a>
-                </p>
-            ))
-        }
+    <div class="header-card paper-border paper-shadow">
+        <img
+            src={frontmatter.image.url}
+            alt={frontmatter.image.alt}
+            class="header-image"
+        />
+        <div class="header-content">
+            <h1 class="post-title">{frontmatter.title}</h1>
+            <div class="post-meta">
+                <span class="meta-item">
+                    <strong>By {frontmatter.author}</strong>
+                </span>
+                <span class="meta-separator">•</span>
+                <time class="meta-item">
+                    {frontmatter.pubDate.toLocaleDateString()}
+                </time>
+            </div>
+            <p class="post-description">{frontmatter.description}</p>
+            <div class="tags">
+                {
+                    frontmatter.tags.map((tag: string) => (
+                        <a class="tag paper-button" href={`/tags/${tag}`}>
+                            #{tag}
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
     </div>
 
-<slot />
+    <article class="post-content">
+        <slot />
+    </article>
+</BaseLayout>
 
 <style>
-    a {
-        color: #00539f;
+    .header-card {
+        background-color: var(--bg0);
+        max-width: 800px;
+        margin-right: 16px;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        padding-left: 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .header-content {
+        flex: 1;
+    }
+
+    .post-title {
+        margin: 0 0 1rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--fg1);
+        line-height: 1.2;
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.85rem;
+        color: var(--fg3);
+    }
+
+    .meta-item {
+        font-weight: 400;
+    }
+
+    .meta-item strong {
+        color: var(--fg2);
+    }
+
+    .meta-separator {
+        color: var(--fg3);
+    }
+
+    .post-description {
+        font-size: 1.15rem;
+        color: var(--fg2);
+        margin: 0;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-image {
+        max-height: 250px;
+        width: auto;
+        max-width: 300px;
+        border-radius: 4px;
+        border: 2px solid var(--fg3);
+        flex-shrink: 0;
     }
 
     .tags {
         display: flex;
         flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .tag {
-        margin: 0.25em;
-        border: dotted 1px #a1a1a1;
-        border-radius: 0.5em;
-        padding: 0.5em 1em;
-        font-size: 1.15em;
-        background-color: #f8fcfd;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        font-family: "JetBrains Mono", monospace;
+        background-color: var(--bg2);
+        color: var(--fg1);
+        text-decoration: none;
+        border-radius: 2px;
+        transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+        background-color: var(--bg2);
+        color: var(--fg1);
+    }
+
+    .post-content {
+        max-width: 800px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .post-content :global(h1) {
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        color: var(--fg1);
+        border-bottom: 2px solid var(--bg2);
+        padding-bottom: 0.5rem;
+    }
+
+    .post-content :global(h2) {
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        font-size: 1.5rem;
+        color: var(--fg1);
+    }
+
+    .post-content :global(h3) {
+        margin-top: 1.75rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        color: var(--fg1);
+    }
+
+    .post-content :global(p) {
+        margin-bottom: 1.25rem;
+        line-height: 1.9;
+        font-size: 1rem;
+    }
+
+    .post-content :global(ul),
+    .post-content :global(ol) {
+        margin-bottom: 1.25rem;
+        padding-left: 1.5rem;
+        line-height: 1.8;
+    }
+
+    .post-content :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .post-content :global(blockquote) {
+        margin: 1.5rem 0;
+        padding: 1rem 1.5rem;
+        border-left: 4px solid var(--orange);
+        background-color: var(--bg2);
+        color: var(--fg2);
+        font-style: italic;
+    }
+
+    .post-content :global(code) {
+        background-color: var(--bg2);
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9em;
+        color: var(--orange);
+    }
+
+    .post-content :global(pre) {
+        background-color: var(--bg2);
+        padding: 1.25rem;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        border: 1px solid var(--fg3);
+    }
+
+    .post-content :global(pre code) {
+        background-color: transparent;
+        padding: 0;
+        color: var(--fg1);
+    }
+
+    .post-content :global(a) {
+        color: var(--orange);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .post-content :global(a:hover) {
+        color: var(--fg1);
+    }
+
+    @media (max-width: 700px) {
+        .header-card {
+            padding-left: 1rem;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .post-title {
+            font-size: 1.75rem;
+        }
+
+        .post-description {
+            font-size: 1rem;
+        }
+
+        .header-image {
+            max-width: 100%;
+        }
+
+        .post-content {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
     }
 </style>
