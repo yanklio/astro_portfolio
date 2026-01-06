@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import BlogTag from "../components/BlogTag.astro";
 const { frontmatter } = Astro.props;
 ---
 
@@ -25,9 +26,7 @@ const { frontmatter } = Astro.props;
             <div class="tags">
                 {
                     frontmatter.tags.map((tag: string) => (
-                        <a class="tag paper-button" href={`/tags/${tag}`}>
-                            #{tag}
-                        </a>
+                        <BlogTag text={tag} slug={tag} />
                     ))
                 }
             </div>
@@ -107,22 +106,6 @@ const { frontmatter } = Astro.props;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
-    }
-
-    .tag {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
-        font-family: "JetBrains Mono", monospace;
-        background-color: var(--bg2);
-        color: var(--fg1);
-        text-decoration: none;
-        border-radius: 2px;
-        transition: all 0.2s ease;
-    }
-
-    .tag:hover {
-        background-color: var(--bg2);
-        color: var(--fg1);
     }
 
     .post-content {

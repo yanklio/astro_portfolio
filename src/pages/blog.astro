@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogCard from "../components/BlogCard.astro";
+import BlogList from "../components/BlogList.astro";
 
 const pageTitle = "yanklio/blog";
 const allPosts = await getCollection("blog");
@@ -18,13 +18,11 @@ const allPosts = await getCollection("blog");
     <body>
         <BaseLayout pageTitle={pageTitle} path="/blog">
             <div class="blog-header">
-                <h1 class="blog-title">DEV BLOGS</h1>
+                <h1 class="blog-title">DEV LOGS</h1>
                 <div class="header-divider"></div>
             </div>
 
-            <div class="blog-grid">
-                {allPosts.map((post) => <BlogCard post={post} />)}
-            </div>
+            <BlogList posts={allPosts} />
         </BaseLayout>
     </body>
 </html>
@@ -50,18 +48,5 @@ const allPosts = await getCollection("blog");
         height: 5px;
         background-color: var(--orange);
         margin: 1.5rem 0;
-    }
-
-    .blog-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-    }
-
-    @media (max-width: 768px) {
-        .blog-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
     }
 </style>
