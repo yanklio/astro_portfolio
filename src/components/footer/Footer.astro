@@ -3,55 +3,79 @@ import Logo from "../Logo.astro";
 import Sitemap from "./Sitemap.astro";
 ---
 
-<footer>
-    <div class="footer-left">
-        <span>
-            /* Made with love to the software engineering, to creating and
-            experimenting with new things. And with a "few" cups of coffee with
-            some snacks. */
-        </span>
-        <br />
-        <br />
-        <span> @2025 by yanklio </span>
-    </div>
-    <div class="footer-right">
-        <Sitemap />
-    </div>
-</footer>
+<div class="footer-wrapper">
+    <footer>
+        <div class="footer-left">
+            <span>
+                /* Made with love to the software engineering, to creating and
+                experimenting with new things. And with a "few" cups of coffee with
+                some snacks. */
+            </span>
+            <br />
+            <br />
+            <span> @2025 by yanklio </span>
+        </div>
+        <div class="footer-right">
+            <Sitemap />
+        </div>
+    </footer>
+</div>
 
 <style>
+    .footer-wrapper {
+        width: 100%;
+        background: var(--bg);
+        border-top: 4px dashed var(--fg3);
+    }
+
     footer {
         width: 100%;
+        padding: 32px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
 
-        background: var(--bg1);
-        border-top: 4px solid var(--fg2);
-        padding: 18px 2px;
+    .footer-left {
+        max-width: 800px;
+        text-align: center;
+        line-height: 1.6;
+        font-family: "JetBrains Mono", monospace;
+    }
 
+    .footer-right {
+        width: 100%;
+        max-width: 800px;
         display: flex;
         justify-content: center;
-        flex-wrap: wrap;
+    }
 
-        gap: 12px;
+    span {
+        color: var(--fg3);
+        font-size: 0.95rem;
+    }
 
-        padding: 16px 16px;
+    @media (min-width: 768px) {
+        footer {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 48px 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
         .footer-left {
-            max-width: 600px;
-            flex: 0 1 auto;
-            min-width: 0;
-            margin-top: 8px;
-            margin-right: 60px;
+            text-align: left;
+            flex: 1;
+            padding-right: 48px;
         }
 
         .footer-right {
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            flex: 0 1 auto;
-        }
-
-        span {
-            color: var(--fg2);
+            flex: 0 0 auto;
+            width: auto;
+            justify-content: flex-end;
         }
     }
 </style>
