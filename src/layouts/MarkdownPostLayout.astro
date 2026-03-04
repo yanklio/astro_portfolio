@@ -2,53 +2,68 @@
 import BaseLayout from "./BaseLayout.astro";
 import BlogTag from "../components/BlogTag.astro";
 const { frontmatter } = Astro.props;
+
+// For single posts, we'll assign a primary accent like orange.
+// If needed, we could generate it from the title hash, but let's stick to orange for consistency with the main theme.
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <div class="header-card paper-border paper-shadow">
-        <img
-            src={frontmatter.image.url}
-            alt={frontmatter.image.alt}
-            class="header-image"
-        />
-        <div class="header-content">
-            <h1 class="post-title">{frontmatter.title}</h1>
-            <div class="post-meta">
-                <span class="meta-item">
-                    <strong>By {frontmatter.author}</strong>
-                </span>
-                <span class="meta-separator">•</span>
-                <time class="meta-item">
-                    {frontmatter.pubDate.toLocaleDateString()}
-                </time>
-            </div>
-            <p class="post-description">{frontmatter.description}</p>
-            <div class="tags">
-                {
-                    frontmatter.tags.map((tag: string) => (
-                        <BlogTag text={tag} slug={tag} />
-                    ))
-                }
+    <div class="post-container">
+        <div class="header-card paper-border paper-shadow border-orange">
+            <img
+                src={frontmatter.image.url}
+                alt={frontmatter.image.alt}
+                class="header-image"
+            />
+            <div class="header-content">
+                <h1 class="post-title">{frontmatter.title}</h1>
+                <div class="post-meta">
+                    <span class="meta-item">
+                        <strong>By {frontmatter.author}</strong>
+                    </span>
+                    <span class="meta-separator">•</span>
+                    <time class="meta-item">
+                        {frontmatter.pubDate.toLocaleDateString()}
+                    </time>
+                </div>
+                <p class="post-description">{frontmatter.description}</p>
+                <div class="tags">
+                    {
+                        frontmatter.tags.map((tag: string) => (
+                            <BlogTag text={tag} slug={tag} />
+                        ))
+                    }
+                </div>
             </div>
         </div>
-    </div>
 
-    <article class="post-content">
-        <slot />
-    </article>
+        <article class="post-content">
+            <slot />
+        </article>
+    </div>
 </BaseLayout>
 
 <style>
+    .post-container {
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     .header-card {
         background-color: var(--bg0);
-        max-width: 800px;
-        margin-right: 16px;
         margin-bottom: 2rem;
         padding: 2rem;
-        padding-left: 16px;
         display: flex;
         align-items: flex-start;
         gap: 2rem;
+    }
+
+    .border-orange {
+        border-color: var(--orange);
+        box-shadow: 4px 4px 0px 0px var(--orange);
     }
 
     .header-content {
@@ -109,9 +124,7 @@ const { frontmatter } = Astro.props;
     }
 
     .post-content {
-        max-width: 800px;
-        padding-left: 16px;
-        padding-right: 16px;
+        width: 100%;
     }
 
     .post-content :global(h1) {

@@ -28,32 +28,56 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={`#${tag}`}>
-    <div class="tag-page">
-        <h1 class="tag-title">#{tag}</h1>
-        <p class="tag-description">
-            {posts.length}
-            {posts.length === 1 ? "post" : "posts"} tagged with "{tag}"
-        </p>
+    <div class="blog-container">
+        <div class="blog-header">
+            <h1 class="tag-title">#{tag}</h1>
+            <p class="tag-description">
+                {posts.length}
+                {posts.length === 1 ? "post" : "posts"} tagged with "{tag}"
+            </p>
+            <div class="header-divider"></div>
+        </div>
         <BlogList posts={posts} />
     </div>
 </BaseLayout>
 
 <style>
+    .blog-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .blog-header {
+        margin-bottom: 3rem;
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
     .tag-title {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
+        font-size: clamp(3rem, 10vw, 5rem);
+        font-weight: 900;
+        letter-spacing: -0.04em;
         color: var(--fg1);
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1;
     }
 
     .tag-description {
         color: var(--fg3);
-        margin-bottom: 2rem;
-        font-size: 1rem;
+        font-size: 1.15rem;
+        margin-top: 1rem;
+        margin-bottom: 0;
     }
 
-    @media (max-width: 768px) {
-        .tag-title {
-            font-size: 2rem;
-        }
+    .header-divider {
+        width: 100px;
+        height: 5px;
+        background-color: var(--orange);
+        margin: 1.5rem 0;
     }
 </style>
