@@ -19,43 +19,7 @@ const { pageTitle, path = Astro.url.pathname } = Astro.props;
     <body>
         <Header />
 
-        <div class="path-container paper-button">
-            <span id="path-text" class="path-text">~{path}</span>
-            <button
-                class="copy-button"
-                aria-label="Copy path"
-                title="Copy path"
-                data-copy-path
-            >
-                <Icon name="ic:outline-content-copy" />
-            </button>
-        </div>
         <main>
-            <script>
-                document.addEventListener("astro:page-load", () => {
-                    const copyButton =
-                        document.querySelector("[data-copy-path]");
-                    const pathText = document.getElementById("path-text");
-
-                    if (copyButton && pathText) {
-                        copyButton.addEventListener("click", async () => {
-                            const path = pathText.textContent;
-                            try {
-                                await navigator.clipboard.writeText(path);
-                                copyButton.setAttribute("title", "Copied!");
-                                setTimeout(() => {
-                                    copyButton.setAttribute(
-                                        "title",
-                                        "Copy path",
-                                    );
-                                }, 2000);
-                            } catch (err) {
-                                console.error("Failed to copy:", err);
-                            }
-                        });
-                    }
-                });
-            </script>
             <slot />
         </main>
         <Footer />
@@ -70,35 +34,7 @@ const { pageTitle, path = Astro.url.pathname } = Astro.props;
         min-height: 80vh;
         padding: 0 16px;
         margin-bottom: 16px;
-    }
-    .path-container {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        margin-top: 96px;
-        margin-left: 16px;
-        background-color: var(--green-dim);
-        color: var(--fg);
-        padding: 8px 16px;
-        font-size: 1rem;
-        font-family: "JetBrains Mono", monospace;
-        margin-bottom: 16px;
-        border: 3px solid var(--fg2);
-        box-shadow: 4px 4px 0px 0px var(--fg3);
-    }
-    .path-text {
-        font-weight: 700;
-    }
-    .copy-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 4px;
-        border-radius: 2px;
-        color: var(--fg);
-        font-size: 1.25rem;
+        margin-top: 128px;
+        margin-bottom: 64px;
     }
 </style>
