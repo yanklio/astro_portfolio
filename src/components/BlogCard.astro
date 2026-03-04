@@ -1,9 +1,13 @@
 ---
 import BlogTag from "./BlogTag.astro";
-const { post } = Astro.props;
+const { post, index = 0 } = Astro.props;
+
+// Determine accent color based on index
+const colors = ["border-orange", "border-blue", "border-purple", "border-green"];
+const colorClass = colors[index % colors.length];
 ---
 
-<div class="blog-card paper-border paper-shadow paper-animation">
+<div class={`blog-card paper-border paper-shadow paper-animation ${colorClass}`}>
     <a href={`/blog/${post.id}`} class="blog-card-link">
         <div class="blog-card-image-container">
             <img
@@ -30,14 +34,14 @@ const { post } = Astro.props;
 <style>
     .blog-card {
         background-color: var(--bg);
-        transition: background-color 0.2s ease;
+        transition: all 0.2s ease;
         max-width: 300px;
         display: flex;
         flex-direction: column;
     }
 
     .blog-card:hover {
-        background-color: var(--bg_soft);
+        transform: translateY(-4px);
     }
 
     .blog-card-link {
@@ -120,6 +124,26 @@ const { post } = Astro.props;
         padding: 0 1rem 1rem;
         overflow: hidden;
         flex-shrink: 0;
+    }
+
+    .border-orange {
+        border-color: var(--orange);
+        box-shadow: 4px 4px 0px 0px var(--orange);
+    }
+
+    .border-blue {
+        border-color: var(--blue);
+        box-shadow: 4px 4px 0px 0px var(--blue);
+    }
+
+    .border-purple {
+        border-color: var(--purple);
+        box-shadow: 4px 4px 0px 0px var(--purple);
+    }
+
+    .border-green {
+        border-color: var(--green);
+        box-shadow: 4px 4px 0px 0px var(--green);
     }
 
     @media (max-width: 700px) {

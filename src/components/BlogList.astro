@@ -6,7 +6,7 @@ const { posts } = Astro.props;
 ---
 
 <div class="blog-list">
-    {posts.map((post: CollectionEntry<"blog">) => <BlogCard post={post} />)}
+    {posts.map((post: CollectionEntry<"blog">, index: number) => <BlogCard post={post} index={index} />)}
 </div>
 
 <style>
@@ -14,6 +14,7 @@ const { posts } = Astro.props;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 2rem;
+        justify-content: center;
     }
 
     @media (max-width: 768px) {
