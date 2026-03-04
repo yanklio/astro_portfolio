@@ -71,7 +71,7 @@ import "../styles/global.css";
             <div class="paper-card paper-border paper-shadow id-card bento-item id-item">
                 <div class="card-content">
                     <span class="label">USER_ID</span>
-                    <h1 class="giant-text">YAROSLAV</h1>
+                    <h1 class="giant-text">YANKLIO</h1>
                     <div class="deco-line"></div>
                     <span class="id-number">#001</span>
                 </div>
@@ -196,8 +196,8 @@ import "../styles/global.css";
          * Row 1: [ID (2)] [Role (2)]
          * Row 2: [ID (2)] [Bio (2)]
          * Row 3: [Exploring (2)] [Bio (2)]
-         * Row 4: [AI (1)] [Linux (1)] [Socials (2)]
-         * Row 5: [Blog (4)]
+         * Row 4: [AI (2)] [Linux (2)]
+         * Row 5: [Socials (2)] [Blog (2)]
          */
 
         .id-item {
@@ -221,12 +221,12 @@ import "../styles/global.css";
         }
 
         .ai-item {
-            grid-column: span 1;
+            grid-column: span 2;
             grid-row: span 1;
         }
 
         .linux-item {
-            grid-column: span 1;
+            grid-column: span 2;
             grid-row: span 1;
         }
 
@@ -236,12 +236,13 @@ import "../styles/global.css";
         }
 
         .blog-item {
-            grid-column: span 4;
+            grid-column: span 2;
             grid-row: span 1;
         }
     }
 
     /* Card Base Styles */
+
 
 
 
@@ -267,18 +268,17 @@ import "../styles/global.css";
 
     .ai-item {
         background-color: var(--bg);
-        border-color: var(--purple);
     }
 
     .linux-item {
         background-color: var(--bg);
-        border-color: var(--blue);
     }
 
     .bio-item {
         background-color: var(--bg);
-        border-color: var(--green);
     }
+
+
 
 
 
