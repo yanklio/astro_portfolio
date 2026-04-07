@@ -8,14 +8,14 @@ const { text, slug } = Astro.props;
 
 <style>
     .tag {
-        padding: 0.3rem 0.6rem;
         background-color: var(--bg2);
+        color: var(--fg1);
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
         border: 2px solid var(--fg2);
-        font-size: 0.7rem;
-        font-weight: 500;
-        color: var(--fg2);
+        box-shadow: 2px 2px 0px 0px var(--fg3);
         white-space: nowrap;
-        transition: all 0.2s ease;
+        transition: all 0.05s ease;
         text-decoration: none;
         display: inline-block;
     }
@@ -23,5 +23,10 @@ const { text, slug } = Astro.props;
     .tag:hover {
         background-color: var(--fg2);
         color: var(--bg);
+    }
+
+    .tag:active {
+        transform: translate(2px, 2px);
+        box-shadow: 0px 0px 0px 0px var(--fg3);
     }
 </style>
