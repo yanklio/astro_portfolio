@@ -57,18 +57,18 @@ img {
 
 /* paper styles */
 .paper-border {
-    border: 2px solid var(--fg2);
+    border: 2px solid light-dark(var(--fg2), var(--bg3));
 }
 
 .paper-shadow {
-    box-shadow: 3px 3px 0px 0px var(--fg3);
+    box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
 }
 
 .paper-button {
     background-color: var(--bg);
     color: var(--fg1);
-    border: 2px solid var(--fg2);
-    box-shadow: 3px 3px 0px 0px var(--fg3);
+    border: 2px solid light-dark(var(--fg2), var(--bg3));
+    box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
 
     display: flex;
     align-items: center;
@@ -84,7 +84,7 @@ img {
 
 .paper-button:active {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px 0px var(--fg3);
+    box-shadow: 1px 1px 0px 0px light-dark(var(--fg3), var(--bg4));
 }
 
 .paper-animation {
