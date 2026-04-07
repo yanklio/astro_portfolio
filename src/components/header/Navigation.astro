@@ -54,7 +54,7 @@ const currentPath = Astro.url.pathname;
         font-weight: 500;
         color: var(--fg1);
         background-color: var(--bg_soft);
-        transition: all 0.05s ease;
+        transition: background-color 0.05s ease;
         border: 2px solid var(--fg1);
         box-shadow: 3px 3px 0px 0px var(--fg3);
     }
@@ -63,9 +63,10 @@ const currentPath = Astro.url.pathname;
         background-color: var(--bg2);
     }
 
-    .nav-link:active {
+    .nav-link.pressed {
         transform: translate(2px, 2px);
         box-shadow: 1px 1px 0px 0px var(--fg3);
+        transition: none;
     }
 
     .nav-link.active {
@@ -75,18 +76,24 @@ const currentPath = Astro.url.pathname;
         transform: translate(2px, 2px);
         box-shadow: 1px 1px 0px 0px var(--fg3);
     }
-
-    .nav-link.pressing {
-        transform: translate(2px, 2px);
-        box-shadow: 1px 1px 0px 0px var(--fg3);
-        transition: none;
-    }
 </style>
 
 <script is:inline>
+    function applyPressed() {
+        const target = sessionStorage.getItem("nav-pressed");
+        if (target) {
+            const link = document.querySelector(`.nav-link[href="${target}"]`);
+            if (link) link.classList.add("pressed");
+        }
+    }
+
     document.querySelectorAll(".nav-link").forEach((link) => {
         link.addEventListener("pointerdown", () => {
-            link.classList.add("pressing");
+            sessionStorage.setItem("nav-pressed", link.getAttribute("href"));
+            link.classList.add("pressed");
         });
     });
+
+    applyPressed();
+    document.addEventListener("astro:page-load", applyPressed);
 </script>
