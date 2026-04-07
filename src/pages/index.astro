@@ -361,14 +361,17 @@ import "../styles/global.css";
         display: flex;
         align-items: center;
         justify-content: space-between;
-        transition: all 0.2s ease;
+        transition: all 0.05s ease;
         font-size: 1.1rem;
     }
 
     .primary-btn:hover {
         background-color: var(--orange);
         color: var(--bg) !important;
-        transform: translate(-2px, -2px);
+    }
+    .primary-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px 0px var(--fg3);
     }
 
     .net-link {
@@ -391,22 +394,22 @@ import "../styles/global.css";
 
     .border-orange {
         border-color: var(--orange) !important;
-        box-shadow: 4px 4px 0px 0px var(--orange) !important;
+        box-shadow: 3px 3px 0px 0px var(--orange) !important;
     }
 
     .border-blue {
         border-color: var(--blue) !important;
-        box-shadow: 4px 4px 0px 0px var(--blue) !important;
+        box-shadow: 3px 3px 0px 0px var(--blue) !important;
     }
 
     .border-purple {
         border-color: var(--purple) !important;
-        box-shadow: 4px 4px 0px 0px var(--purple) !important;
+        box-shadow: 3px 3px 0px 0px var(--purple) !important;
     }
 
     .border-green {
         border-color: var(--green) !important;
-        box-shadow: 4px 4px 0px 0px var(--green) !important;
+        box-shadow: 3px 3px 0px 0px var(--green) !important;
     }
 
 </style>

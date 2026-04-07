@@ -43,6 +43,7 @@ const currentPath = Astro.url.pathname;
     .nav-container {
         display: flex;
         background-color: var(--bg);
+        overflow: visible;
     }
 
     .nav-link {
@@ -53,17 +54,39 @@ const currentPath = Astro.url.pathname;
         font-weight: 500;
         color: var(--fg1);
         background-color: var(--bg_soft);
-        transition: background-color 0.2s ease;
+        transition: all 0.05s ease;
         border: 2px solid var(--fg1);
+        box-shadow: 3px 3px 0px 0px var(--fg3);
     }
 
     .nav-link:hover {
         background-color: var(--bg2);
     }
 
+    .nav-link:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px 0px var(--fg3);
+    }
+
     .nav-link.active {
         background-color: var(--yellow-dim);
         color: var(--black);
         font-weight: 600;
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px 0px var(--fg3);
+    }
+
+    .nav-link.pressing {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px 0px var(--fg3);
+        transition: none;
     }
 </style>
+
+<script is:inline>
+    document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("pointerdown", () => {
+            link.classList.add("pressing");
+        });
+    });
+</script>
