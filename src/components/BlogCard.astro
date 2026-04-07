@@ -1,18 +1,21 @@
 ---
 import BlogTag from "./BlogTag.astro";
 import { Icon } from "astro-icon/components";
-const { post } = Astro.props;
+const { post, isCollapsed = true } = Astro.props;
+
+const href = isCollapsed ? `/blog/${post.id}` : "/blog";
+const iconName = isCollapsed ? "ic:baseline-arrow-forward" : "ic:baseline-arrow-back";
 ---
 
 <div class="simple-card paper-border paper-shadow">
-    <a href={`/blog/${post.id}`} class="read-more-btn paper-button" aria-label="Read full post">
-        <Icon name="ic:baseline-arrow-forward" size={24} />
+    <a href={href} class="read-more-btn paper-button" aria-label={isCollapsed ? "Read full post" : "Back to blog"}>
+        <Icon name={iconName} size={24} />
     </a>
     <span class="label">
         {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
     </span>
     <h2 class="title">{post.data.title}</h2>
-    <p class="bio-text blog-description">{post.data.description}</p>
+    <p class:list={["bio-text", { "blog-description": isCollapsed }]}>{post.data.description}</p>
     <div class="divider"></div>
     <div class="blog-tags">
         {post.data.tags.map((tag: string) => <BlogTag text={tag} slug={tag} />)}

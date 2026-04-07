@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import BlogTag from "../components/BlogTag.astro";
-const { frontmatter } = Astro.props;
+import BlogCard from "../components/BlogCard.astro";
+const { post } = Astro.props;
+const frontmatter = post.data;
 
 // For single posts, we'll assign a primary accent like orange.
 // If needed, we could generate it from the title hash, but let's stick to orange for consistency with the main theme.
@@ -9,32 +10,8 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout pageTitle={frontmatter.title}>
     <div class="post-container">
-        <div class="header-card paper-border paper-shadow border-orange">
-            <img
-                src={frontmatter.image.url}
-                alt={frontmatter.image.alt}
-                class="header-image"
-            />
-            <div class="header-content">
-                <h1 class="post-title">{frontmatter.title}</h1>
-                <div class="post-meta">
-                    <span class="meta-item">
-                        <strong>By {frontmatter.author}</strong>
-                    </span>
-                    <span class="meta-separator">•</span>
-                    <time class="meta-item">
-                        {frontmatter.pubDate.toLocaleDateString()}
-                    </time>
-                </div>
-                <p class="post-description">{frontmatter.description}</p>
-                <div class="tags">
-                    {
-                        frontmatter.tags.map((tag: string) => (
-                            <BlogTag text={tag} slug={tag} />
-                        ))
-                    }
-                </div>
-            </div>
+        <div class="header-wrapper">
+            <BlogCard post={post} isCollapsed={false} />
         </div>
 
         <article class="post-content">
@@ -45,82 +22,16 @@ const { frontmatter } = Astro.props;
 
 <style>
     .post-container {
-        max-width: 800px;
+        max-width: 650px;
         margin: 0 auto;
         width: 100%;
         display: flex;
         flex-direction: column;
+        padding-top: 2rem;
     }
 
-    .header-card {
-        background-color: var(--bg0);
+    .header-wrapper {
         margin-bottom: 2rem;
-        padding: 2rem;
-        display: flex;
-        align-items: flex-start;
-        gap: 2rem;
-    }
-
-    .border-orange {
-        border-color: var(--orange);
-        box-shadow: 4px 4px 0px 0px var(--orange);
-    }
-
-    .header-content {
-        flex: 1;
-    }
-
-    .post-title {
-        margin: 0 0 1rem;
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--fg1);
-        line-height: 1.2;
-    }
-
-    .post-meta {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.85rem;
-        color: var(--fg3);
-    }
-
-    .meta-item {
-        font-weight: 400;
-    }
-
-    .meta-item strong {
-        color: var(--fg2);
-    }
-
-    .meta-separator {
-        color: var(--fg3);
-    }
-
-    .post-description {
-        font-size: 1.15rem;
-        color: var(--fg2);
-        margin: 0;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-
-    .header-image {
-        max-height: 250px;
-        width: auto;
-        max-width: 300px;
-        border-radius: 4px;
-        border: 2px solid var(--fg3);
-        flex-shrink: 0;
-    }
-
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
     }
 
     .post-content {
@@ -211,24 +122,6 @@ const { frontmatter } = Astro.props;
     }
 
     @media (max-width: 700px) {
-        .header-card {
-            padding-left: 1rem;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .post-title {
-            font-size: 1.75rem;
-        }
-
-        .post-description {
-            font-size: 1rem;
-        }
-
-        .header-image {
-            max-width: 100%;
-        }
-
         .post-content {
             padding-left: 1rem;
             padding-right: 1rem;
