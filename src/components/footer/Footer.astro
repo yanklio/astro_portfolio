@@ -1,6 +1,5 @@
 ---
 import Logo from "../Logo.astro";
-import Sitemap from "./Sitemap.astro";
 ---
 
 <div class="footer-wrapper">
@@ -16,7 +15,15 @@ import Sitemap from "./Sitemap.astro";
             <span> @2025 by yanklio </span>
         </div>
         <div class="footer-right">
-            <Sitemap />
+            <pre class="ascii-coffee">   )  (
+    (   ) )
+     ) ( (
+ mrf_______)_
+ .-'---------|  
+( C|/\/\/\/\/|
+ '-./\/\/\/\/|
+   '_________'
+    '-------'</pre>
         </div>
     </footer>
 </div>
@@ -49,6 +56,15 @@ import Sitemap from "./Sitemap.astro";
         max-width: 800px;
         display: flex;
         justify-content: center;
+    }
+
+    .ascii-coffee {
+        color: var(--fg2);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0;
     }
 
     span {

@@ -82,6 +82,7 @@ const currentPath = Astro.url.pathname;
     function applyPressed() {
         const target = sessionStorage.getItem("nav-pressed");
         if (target) {
+            sessionStorage.removeItem("nav-pressed");
             const link = document.querySelector(`.nav-link[href="${target}"]`);
             if (link) link.classList.add("pressed");
         }
