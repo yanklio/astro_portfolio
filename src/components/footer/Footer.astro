@@ -7,19 +7,20 @@ import Logo from "../Logo.astro";
         <div class="footer-left">
             <span>
                 /* Made with love to the software engineering, to creating and
-                experimenting with new things. And with a "few" cups of coffee with
-                some snacks. */
+                experimenting with new things. And with a "few" cups of coffee
+                with some snacks. */
             </span>
             <br />
             <br />
-            <span> @2025 by yanklio </span>
+            <span> @2026 by yanklio </span>
         </div>
         <div class="footer-right">
-            <pre class="ascii-coffee">   )  (
+            <pre
+                class="ascii-coffee">   )  (
     (   ) )
      ) ( (
  mrf_______)_
- .-'---------|  
+ .-'---------|
 ( C|/\/\/\/\/|
  '-./\/\/\/\/|
    '_________'
@@ -37,7 +38,7 @@ import Logo from "../Logo.astro";
 
     footer {
         width: 100%;
-        padding: 32px 16px;
+        padding: 26px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -75,23 +76,23 @@ import Logo from "../Logo.astro";
     @media (min-width: 768px) {
         footer {
             flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 48px 32px;
+            justify-content: center;
+            align-items: center;
+            padding: 26px 32px;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .footer-left {
-            text-align: left;
-            flex: 1;
-            padding-right: 48px;
+            text-align: center;
+            flex: none;
+            padding-right: 0;
         }
 
         .footer-right {
             flex: 0 0 auto;
             width: auto;
-            justify-content: flex-end;
+            justify-content: center;
         }
     }
 </style>
