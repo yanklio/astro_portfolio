@@ -55,6 +55,10 @@ img {
     text-shadow: none;
 }
 
+button, input, textarea, select {
+    font-family: inherit;
+}
+
 /* paper styles */
 .paper-border {
     border: 2px solid light-dark(var(--fg2), var(--bg3));

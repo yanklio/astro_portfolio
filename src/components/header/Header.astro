@@ -27,15 +27,17 @@ import { Icon } from "astro-icon/components";
                 class="mobile-menu-btn paper-button"
                 aria-label="Toggle menu"
             >
-                <Icon name="ic:menu" />
+                <Icon name="ic:menu" class="menu-toggle-icon" />
+                <Icon name="ic:baseline-close" class="menu-close-icon" />
             </button>
         </div>
     </nav>
 
     <div id="mobileMenu" class="mobile-menu mobile-only">
-        <div
-            class:list={["menu-item", { "hidden-route": currentPath === "/" }]}
-        >
+        <div class="mobile-menu-inner">
+            <div
+                class:list={["menu-item", { "hidden-route": currentPath === "/" }]}
+            >
             <a
                 href="/"
                 class:list={["menu-link", { active: currentPath === "/" }]}
@@ -105,7 +107,9 @@ import { Icon } from "astro-icon/components";
                 </div>
             </button>
         </div>
+        </div>
     </div>
+
 </header>
 
 <div id="menuOverlay" class="menu-overlay mobile-only"></div>
@@ -151,31 +155,53 @@ import { Icon } from "astro-icon/components";
         align-items: center;
     }
 
+    .menu-toggle-icon {
+        display: block;
+    }
+
+    .menu-close-icon {
+        display: none;
+    }
+
+    .mobile-menu-btn.open .menu-toggle-icon {
+        display: none;
+    }
+
+    .mobile-menu-btn.open .menu-close-icon {
+        display: block;
+    }
+
     .mobile-menu {
         width: 100%;
         max-height: 0;
-        background-color: var(--bg);
-        flex-direction: column;
+        background-color: var(--bg_soft);
         overflow: hidden;
         transition: max-height 0.3s ease;
-        border-bottom: 3px solid var(--fg1);
+        border-bottom: 0px solid var(--fg2);
+        box-shadow: none;
     }
 
     .mobile-menu.open {
         max-height: 80vh;
+        border-bottom: 4px solid var(--fg2);
+        box-shadow: 0px 4px 0px 0px light-dark(var(--fg3), var(--bg4));
+    }
+
+    .mobile-menu-inner {
+        padding: 24px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         overflow-y: auto;
+        max-height: 80vh;
     }
 
     .menu-item {
-        border-bottom: 2px solid var(--fg2);
+        width: 100%;
     }
 
     .menu-item.hidden-route {
         display: none;
-    }
-
-    .menu-item:last-child {
-        border-bottom: none;
     }
 
     .menu-link {
@@ -188,9 +214,17 @@ import { Icon } from "astro-icon/components";
         color: var(--fg1);
         text-decoration: none;
         font-size: 1rem;
-        transition: background-color 0.2s ease;
+        font-family: inherit;
         cursor: pointer;
-        border: none;
+        
+        border: 3px solid light-dark(var(--fg2), var(--bg3));
+        box-shadow: 4px 4px 0px 0px light-dark(var(--fg3), var(--bg4));
+        transition: all 0.05s ease;
+    }
+
+    .menu-link:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px 0px light-dark(var(--fg3), var(--bg4));
     }
 
     .menu-link:hover {
@@ -201,28 +235,42 @@ import { Icon } from "astro-icon/components";
         background-color: var(--yellow-dim);
         color: var(--black);
         font-weight: 600;
+        border-color: var(--orange);
     }
 
     .menu-content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 4px;
+        gap: 6px;
+        text-align: left;
     }
 
     .menu-title {
-        font-size: 1.1rem;
-        font-weight: 500;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-transform: lowercase;
+        color: var(--fg1);
+    }
+
+    .menu-link.active .menu-title {
+        color: var(--black);
     }
 
     .menu-desc {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         color: var(--fg2);
+        font-weight: normal;
+        text-transform: none;
+    }
+
+    .menu-link.active .menu-desc {
+        color: var(--black);
+        opacity: 0.8;
     }
 
     .menu-divider {
-        height: 2px;
-        background-color: var(--fg2);
+        display: none;
     }
 
     .theme-icons {
@@ -232,7 +280,12 @@ import { Icon } from "astro-icon/components";
     }
 
     .menu-icon {
-        font-size: 1.5rem;
+        font-size: 2rem;
+        color: var(--fg1);
+    }
+
+    .menu-link.active .menu-icon {
+        color: var(--black);
     }
 
     .theme-icons .moon {
@@ -278,11 +331,13 @@ import { Icon } from "astro-icon/components";
         function closeMenu() {
             mobileMenu?.classList.remove("open");
             menuOverlay?.classList.remove("open");
+            mobileMenuToggle?.classList.remove("open");
         }
 
         function openMenu() {
             mobileMenu?.classList.add("open");
             menuOverlay?.classList.add("open");
+            mobileMenuToggle?.classList.add("open");
         }
 
         mobileMenuToggle?.addEventListener("click", () => {
