@@ -47,6 +47,8 @@ import { Icon } from "astro-icon/components";
         text-decoration: none;
         font-weight: 600;
         border: 2px solid var(--fg);
+        box-shadow: 3px 3px 0px 0px var(--fg3);
+        transition: all 0.05s ease;
     }
 
     .home-button:hover {
@@ -54,6 +56,7 @@ import { Icon } from "astro-icon/components";
     }
 
     .home-button:active {
-        transform: translateY(0);
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px 0px var(--fg3);
     }
 </style>
