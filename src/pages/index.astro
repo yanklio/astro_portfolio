@@ -10,19 +10,26 @@ import "../styles/global.css";
             <h1 class="title">Yaroslav</h1>
             <h2 class="subtitle">Full-Stack Dev @ Viseven</h2>
             <div class="divider"></div>
-            <p class="bio-text">Welcome! 👋 And also hi! I'm Yaroslav, a Full-Stack Dev interesting mostly in web technologies. During my journey I used a lot of interesting technologies including TypeScript, React (with recently popular Next.js), NodeJs, Python and that's not all of them. But main focus as should be - always on product 🏆</p>
+            <p class="bio-text">
+                Hi! 👋 I'm Yaroslav, a Full-Stack Developer with a few years of
+                experience. I'm mostly interested in a broad variety of web
+                technologies. During my journey, I've worked with many tools 🛠️,
+                including TypeScript, React (with the popular framework
+                Next.js), Node.js, and Python, and that's not all. There is
+                always room to grow 🌱, but I believe in practical solutions that
+                actually help people
+            </p>
         </div>
 
         <div class="simple-card paper-border paper-shadow">
             <span class="label">SKILLS</span>
             <div class="skills-container">
                 <div class="skill-category">
-                    <span class="category-name">Frontend & Languages</span>
+                    <span class="category-name">Frontend</span>
                     <div class="skills-list">
                         <span class="skill-item">HTML/CSS</span>
                         <span class="skill-item">JavaScript (ES6+)</span>
                         <span class="skill-item">TypeScript</span>
-                        <span class="skill-item">Python</span>
                         <span class="skill-item">React</span>
                         <span class="skill-item">Next.js</span>
                         <span class="skill-item">Vue.js</span>
@@ -31,34 +38,37 @@ import "../styles/global.css";
                 </div>
 
                 <div class="skill-category">
-                    <span class="category-name">Backend & DB</span>
+                    <span class="category-name">Backend</span>
                     <div class="skills-list">
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">Nest.js</span>
+                        <span class="skill-item">Python</span>
                         <span class="skill-item">Django</span>
-                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">Express</span>
+                        <span class="skill-item">Nest.js</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
                     <span class="category-name">Cloud & Infrastructure</span>
                     <div class="skills-list">
-                        <span class="skill-item">AWS (ECS, S3, RDS, CF, IAM)</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item"
+                            >AWS (ECS, S3, RDS, CF, IAM)</span
+                        >
                         <span class="skill-item">Terraform</span>
                         <span class="skill-item">Docker</span>
+                        <span class="skill-item">CI/CD</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <span class="category-name">AI & Practices</span>
+                    <span class="category-name">AI & Tools</span>
                     <div class="skills-list">
-                        <span class="skill-item">LangChain</span>
-                        <span class="skill-item">RAG</span>
-                        <span class="skill-item">Git</span>
-                        <span class="skill-item">GitHub Actions</span>
-                        <span class="skill-item">CI/CD</span>
                         <span class="skill-item">Linux</span>
-                        <span class="skill-item">Agile/Scrum</span>
+                        <span class="skill-item">Git</span>
+                        <span class="skill-item">LangChain</span>
+                        <span class="skill-item">OpenCode</span>
+                        <span class="skill-item">Claude Code</span>
                     </div>
                 </div>
             </div>
@@ -67,8 +77,18 @@ import "../styles/global.css";
         <div class="links-card paper-border paper-shadow">
             <span class="label">CONTACT</span>
             <div class="links-row">
-                <a href="https://github.com/yanklio" target="_blank" rel="noopener noreferrer" class="net-link paper-button">Github</a>
-                <a href="https://www.linkedin.com/in/yaroslav-u/" target="_blank" rel="noopener noreferrer" class="net-link paper-button">LinkedIn</a>
+                <a
+                    href="https://github.com/yanklio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="net-link paper-button">Github</a
+                >
+                <a
+                    href="https://www.linkedin.com/in/yaroslav-u/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="net-link paper-button">LinkedIn</a
+                >
             </div>
         </div>
     </div>
@@ -113,7 +133,8 @@ import "../styles/global.css";
     }
 
     @media (max-width: 600px) {
-        .simple-card, .links-card {
+        .simple-card,
+        .links-card {
             padding: 1.5rem;
         }
         .links-row {
@@ -205,7 +226,7 @@ import "../styles/global.css";
         font-size: 1.1rem;
         background-color: var(--bg);
     }
-    
+
     .net-link:hover {
         background-color: var(--bg2);
     }
