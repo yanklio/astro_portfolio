@@ -5,116 +5,91 @@ import "../styles/global.css";
 
 <BaseLayout pageTitle="yanklio/about" path="/about">
     <div class="hero-center">
-        <div class="computer-illu">
-            <svg
-                width="240"
-                height="160"
-                viewBox="0 0 240 160"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <!-- Monitor -->
-                <rect
-                    x="40"
-                    y="10"
-                    width="160"
-                    height="100"
-                    rx="4"
-                    stroke="var(--fg1)"
-                    stroke-width="3"
-                    fill="var(--bg)"></rect>
-                <rect x="50" y="20" width="140" height="80" fill="var(--bg2)"
-                ></rect>
-                <!-- Stand -->
-                <path d="M90 110 H150 L140 125 H100 L90 110Z" fill="var(--fg1)"
-                ></path>
-                <rect
-                    x="80"
-                    y="125"
-                    width="80"
-                    height="5"
-                    rx="2"
-                    fill="var(--fg1)"></rect>
-                <!-- Keyboard -->
-                <rect
-                    x="25"
-                    y="138"
-                    width="145"
-                    height="12"
-                    rx="2"
-                    stroke="var(--fg1)"
-                    stroke-width="3"
-                    fill="var(--bg)"></rect>
-                <line
-                    x1="35"
-                    y1="144"
-                    x2="160"
-                    y2="144"
-                    stroke="var(--fg1)"
-                    stroke-width="2"
-                    stroke-dasharray="4 4"></line>
-                <!-- Mouse -->
-                <rect
-                    x="185"
-                    y="138"
-                    width="20"
-                    height="12"
-                    rx="6"
-                    stroke="var(--fg1)"
-                    stroke-width="3"
-                    fill="var(--bg)"></rect>
-            </svg>
+        <div class="simple-card paper-border paper-shadow">
+            <span class="label">ABOUT_ME</span>
+            <h1 class="title">Yaroslav</h1>
+            <h2 class="subtitle">Full-Stack Dev @ Viseven</h2>
+            <div class="divider"></div>
+            <p class="bio-text">
+                Hi! 👋 I'm Yaroslav, a Full-Stack Developer with a few years of
+                experience. I'm mostly interested in a broad variety of web
+                technologies. During my journey, I've worked with many tools 🛠️,
+                including TypeScript, React (with the popular framework
+                Next.js), Node.js, and Python, and that's not all. There is
+                always room to grow 🌱, but I believe in practical solutions that
+                actually help people
+            </p>
         </div>
 
-        <div class="bento-grid">
-            <div class="paper-card paper-border paper-shadow id-card bento-item id-item">
-                <div class="card-content">
-                    <span class="label">USER_ID</span>
-                    <h1 class="giant-text">YANKLIO</h1>
-                    <div class="deco-line"></div>
-                    <span class="id-number">#001</span>
+        <div class="simple-card paper-border paper-shadow">
+            <span class="label">SKILLS</span>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <span class="category-name">Frontend</span>
+                    <div class="skills-list">
+                        <span class="skill-item">HTML/CSS</span>
+                        <span class="skill-item">JavaScript (ES6+)</span>
+                        <span class="skill-item">TypeScript</span>
+                        <span class="skill-item">React</span>
+                        <span class="skill-item">Next.js</span>
+                        <span class="skill-item">Vue.js</span>
+                        <span class="skill-item">Angular</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <span class="category-name">Backend</span>
+                    <div class="skills-list">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">Django</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">Express</span>
+                        <span class="skill-item">Nest.js</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <span class="category-name">Cloud & Infrastructure</span>
+                    <div class="skills-list">
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item"
+                            >AWS (ECS, S3, RDS, CF, IAM)</span
+                        >
+                        <span class="skill-item">Terraform</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">CI/CD</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <span class="category-name">AI & Tools</span>
+                    <div class="skills-list">
+                        <span class="skill-item">Linux</span>
+                        <span class="skill-item">Git</span>
+                        <span class="skill-item">LangChain</span>
+                        <span class="skill-item">OpenCode</span>
+                        <span class="skill-item">Claude Code</span>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="paper-card paper-border paper-shadow role-card bento-item role-item">
-                <span class="label">CURRENT_ROLE</span>
-                <span class="value">Full-Stack Dev</span>
-                <span class="sub-value">@ Viseven</span>
+        <div class="links-card paper-border paper-shadow">
+            <span class="label">CONTACT</span>
+            <div class="links-row">
+                <a
+                    href="https://github.com/yanklio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="net-link paper-button">Github</a
+                >
+                <a
+                    href="https://www.linkedin.com/in/yaroslav-u/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="net-link paper-button">LinkedIn</a
+                >
             </div>
-
-            <div class="paper-card paper-border paper-shadow bio-card bento-item bio-item border-orange">
-                <span class="label">ABOUT_ME</span>
-                <p class="bio-text">Welcome! 👋 And also hi! I'm Yaroslav, a Full-Stack Dev and interesting mostly in web technologies. During my journey I used a lot of interesting technologies including TypeScript, React (with recently popular Next.js), NodeJs, Python and that's not all of them. But main focus as should be - always on product 🏆</p>
-            </div>
-
-            <div class="paper-card paper-border paper-shadow exploring-card bento-item exploring-item border-blue">
-                <span class="label">EXPLORING</span>
-                <p class="small-text">🌍 Evolving in web sphere using different technologies (Typescript, React, React Native, Angular, NodeJs, Python, ...)</p>
-            </div>
-
-            <div class="paper-card paper-border paper-shadow ai-card bento-item ai-item border-purple">
-                <span class="label">AI_&_AGENTS</span>
-                <p class="small-text">🪄 Playing with LLM, Agents and AI (Github Copilot, Gemini CLI, Firebase Studio, ...)</p>
-            </div>
-
-            <div class="paper-card paper-border paper-shadow linux-card bento-item linux-item border-green">
-                <span class="label">OS_&_TOOLS</span>
-                <p class="small-text">🐧 And continue to bless Linux as OS (Currently on Fedora + Cosmic❤️, in future strong Vim user💪)</p>
-            </div>
-
-            <!-- Socials Card -->
-            <div class="paper-card paper-border paper-shadow socials-card bento-item socials-item">
-                <div class="social-row">
-                    <a href="https://github.com/yanklio" target="_blank" rel="noopener noreferrer" class="net-link">Github</a>
-                    <span class="divider">/</span>
-                    <a href="https://www.linkedin.com/in/yaroslav-u/" target="_blank" rel="noopener noreferrer" class="net-link">LinkedIn</a>
-                </div>
-            </div>
-
-            <a href="/blog" class="primary-btn paper-button bento-item blog-item">
-                <span class="btn-text">ENTER_BLOG</span>
-                <span class="btn-icon">➜</span>
-            </a>
         </div>
     </div>
 </BaseLayout>
@@ -125,288 +100,134 @@ import "../styles/global.css";
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-height: 80vh;
-        gap: 3rem;
-    }
-
-    .computer-illu {
-        margin-bottom: -1rem;
-    }
-
-    .bento-grid {
-        display: grid;
-        grid-template-columns: 1fr;
+        min-height: 70vh;
         gap: 1.5rem;
         width: 100%;
-        max-width: 1000px;
+        max-width: 650px;
+        margin: 0 auto;
+        padding: 2rem 0;
     }
 
-    @media (min-width: 768px) {
-        .bento-grid {
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: minmax(120px, auto);
-        }
+    .simple-card {
+        background-color: var(--bg);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
 
-        .id-item {
-            grid-column: span 2;
-        }
+    .links-card {
+        background-color: var(--bg);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
 
-        .role-item {
-            grid-column: span 2;
-        }
+    .links-row {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+    }
 
-        .bio-item.border-orange {
-            grid-column: span 2;
+    @media (max-width: 600px) {
+        .simple-card,
+        .links-card {
+            padding: 1.5rem;
         }
-
-        .exploring-item.border-blue {
-            grid-column: span 2;
-        }
-
-        .ai-item.border-purple {
-            grid-column: span 1;
-        }
-
-        .linux-item.border-green {
-            grid-column: span 1;
-        }
-
-        .socials-item {
-            grid-column: span 2;
-        }
-
-        .blog-item {
-            grid-column: span 2;
+        .links-row {
+            flex-direction: column;
         }
     }
 
-    @media (min-width: 1024px) {
-        .bento-grid {
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(120px, auto);
-            grid-auto-flow: dense;
-        }
-
-        /*
-         * Row 1: [ID (2)] [Role (2)]
-         * Row 2: [ID (2)] [Bio (2)]
-         * Row 3: [Exploring (2)] [Bio (2)]
-         * Row 4: [AI (2)] [Linux (2)]
-         * Row 5: [Socials (2)] [Blog (2)]
-         */
-
-        .id-item {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .role-item {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .bio-item.border-orange {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .exploring-item.border-blue {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .ai-item.border-purple {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .linux-item.border-green {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .socials-item {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .blog-item {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
+    .label {
+        font-size: 0.85rem;
+        color: var(--fg4);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
     }
 
-    /* Card Base Styles */
+    .title {
+        font-size: 3.5rem;
+        line-height: 1;
+        margin: 0 0 0.5rem 0;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        color: var(--fg1);
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+        color: var(--fg2);
+        margin: 0 0 1.5rem 0;
+        font-weight: normal;
+    }
+
+    .divider {
+        width: 100%;
+        height: 2px;
+        background-color: var(--fg3);
+        margin: 1.5rem 0;
+    }
 
     .bio-text {
         font-size: 1.1rem;
         line-height: 1.6;
-        color: var(--fg);
+        color: var(--fg1);
         margin: 0;
     }
 
-    .small-text {
-        font-size: 1rem;
-        line-height: 1.5;
-        color: var(--fg2);
-        margin: 0;
-    }
-
-    .paper-card {
-        /* Default background color */
-        background-color: var(--bg) !important;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: transform 0.2s ease;
-    }
-
-    .paper-card:hover {
-        transform: translateY(-2px);
-    }
-
-    /* ID Column */
-    .id-card {
-        justify-content: space-between;
-        min-height: 300px;
-    }
-
-    .card-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .giant-text {
-        font-size: clamp(2.5rem, 9vw, 6rem);
-        line-height: 1;
-        margin: 1rem 0;
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        color: var(--fg);
-        text-transform: uppercase;
-    }
-
-    .deco-line {
-        width: 60px;
-        height: 4px;
-        background-color: var(--orange);
-    }
-
-    .id-number {
-        color: var(--fg4);
-        font-size: 0.9rem;
-        align-self: flex-end;
-    }
-
-    /* Right Stack Column */
-    .stack-col {
+    .skills-container {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        justify-content: space-between;
+        margin-top: 1rem;
     }
 
-    .role-card {
-        flex-grow: 1;
-        justify-content: flex-start;
-    }
-
-    .socials-card {
-        padding: 1.5rem;
-    }
-
-    .social-row {
+    .skill-category {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1.2rem;
+        flex-direction: column;
+        gap: 0.75rem;
     }
 
-    /* Typography Utilities */
-    .label {
-        font-size: 0.75rem;
-        color: var(--gray);
-        margin-bottom: 0.5rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-
-    .role-item {
-        background-color: var(--bg2);
-    }
-
-    .value {
-        color: var(--yellow);
-        font-weight: 700;
-        font-size: 1.5rem;
-        line-height: 1.2;
-    }
-
-    .sub-value {
+    .category-name {
+        font-size: 0.9rem;
         color: var(--fg2);
-        font-size: 1rem;
-        margin-top: 0.25rem;
-    }
-
-    /* Buttons & Links */
-    .primary-btn {
-        background-color: var(--fg1);
-        color: var(--bg) !important;
-        text-decoration: none;
-        padding: 1.5rem 2rem;
         font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        transition: all 0.2s ease;
-        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
-    .primary-btn:hover {
-        background-color: var(--orange);
-        color: var(--bg) !important;
-        transform: translate(-2px, -2px);
+    .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .skill-item {
+        background-color: var(--bg2);
+        color: var(--fg1);
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        border: 2px solid var(--fg2);
+        box-shadow: 2px 2px 0px 0px var(--fg3);
     }
 
     .net-link {
-        color: var(--fg1);
+        flex: 1;
         text-decoration: none;
+        color: var(--fg1);
         font-weight: 700;
-        transition: color 0.2s ease;
         text-transform: uppercase;
+        padding: 1rem;
+        font-size: 1.1rem;
+        background-color: var(--bg);
     }
 
     .net-link:hover {
-        color: var(--orange);
+        background-color: var(--bg2);
     }
-
-    .divider {
-        color: var(--fg4);
-        opacity: 0.5;
-    }
-
-
-    .border-orange {
-        border-color: var(--orange) !important;
-        box-shadow: 4px 4px 0px 0px var(--orange) !important;
-    }
-
-    .border-blue {
-        border-color: var(--blue) !important;
-        box-shadow: 4px 4px 0px 0px var(--blue) !important;
-    }
-
-    .border-purple {
-        border-color: var(--purple) !important;
-        box-shadow: 4px 4px 0px 0px var(--purple) !important;
-    }
-
-    .border-green {
-        border-color: var(--green) !important;
-        box-shadow: 4px 4px 0px 0px var(--green) !important;
-    }
-
 </style>
