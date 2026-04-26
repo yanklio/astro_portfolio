@@ -4,7 +4,11 @@ import Footer from "../components/footer/Footer.astro";
 import Starfield from "../components/Starfield.astro";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-const { pageTitle = Astro.url.pathname } = Astro.props;
+const { pageTitle = "Yanklio", pageDescription } = Astro.props;
+const siteUrl = "https://yanklio.netlify.app";
+const siteName = "Yanklio";
+const defaultDescription = "Just a website that shows me and also blog posts";
+const ogImage = "/og-image.png";
 ---
 
 <html lang="en">
@@ -13,7 +17,51 @@ const { pageTitle = Astro.url.pathname } = Astro.props;
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
+
+        <title>{pageTitle} | {siteName}</title>
+        <meta name="description" content={pageDescription || defaultDescription} />
+        <link rel="canonical" href={siteUrl + Astro.url.pathname} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={siteUrl + Astro.url.pathname} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription || defaultDescription} />
+        <meta property="og:site_name" content={siteName} />
+        <meta property="og:image" content={siteUrl + ogImage} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription || defaultDescription} />
+        <meta name="twitter:image" content={siteUrl + ogImage} />
+
+        <script type="application/ld+json" set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "name": siteName,
+                    "url": siteUrl,
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": {
+                            "@type": "EntryPoint",
+                            "urlTemplate": `${siteUrl}/blog?q={search_term_string}`
+                        },
+                        "query-input": "required name=search_term_string"
+                    }
+                },
+                {
+                    "@type": "Person",
+                    "name": "Yaroslav",
+                    "url": siteUrl,
+                    "sameAs": [
+                        "https://github.com/yanklio",
+                        "https://www.linkedin.com/in/yaroslav-u/"
+                    ]
+                }
+            ]
+        })} />
+
         <ClientRouter />
     </head>
     <body>

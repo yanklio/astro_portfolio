@@ -5,7 +5,7 @@ const { post } = Astro.props;
 const frontmatter = post.data;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout pageTitle={frontmatter.title} pageDescription={frontmatter.description}>
     <div class="post-container">
         <div class="header-wrapper">
             <BlogCard post={post} isCollapsed={false} />

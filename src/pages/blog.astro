@@ -4,27 +4,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogList from "../components/BlogList.astro";
 
 const pageTitle = "yanklio/blog";
+const pageDescription = "Blog posts about web development, programming, and technology.";
 const allPosts = (await getCollection("blog")).sort(
     (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{{ pageTitle }}</title>
-    </head>
-    <body>
-        <BaseLayout pageTitle={pageTitle} path="/blog">
-            <div class="blog-container">
-                <BlogList posts={allPosts} />
-            </div>
-        </BaseLayout>
-    </body>
-</html>
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
+    <div class="blog-container">
+        <BlogList posts={allPosts} />
+    </div>
+</BaseLayout>
 
 <style>
     .blog-container {
