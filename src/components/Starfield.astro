@@ -2,8 +2,10 @@
 const colors = [
     "var(--yellow)",
     "var(--orange)",
-    "var(--fg4)", // A soft neutral color to act as the "dim" stars
+    "var(--fg4)",
 ];
+
+const symbols = ["*", "@", "#", "%", "+", "~", "^", "&", "=", "<"];
 
 const generateStars = (
     count: number,
@@ -16,6 +18,7 @@ const generateStars = (
         cy: Math.random() * height,
         r: Math.random() * maxSize + 0.5,
         fill: colors[Math.floor(Math.random() * colors.length)],
+        symbol: symbols[Math.floor(Math.random() * symbols.length)],
     }));
 };
 
@@ -52,7 +55,7 @@ const starsLg = generateStars(25, 1000, 1000, 4);
                             font-family="monospace"
                             opacity="0.6"
                         >
-                            *
+                            {s.symbol}
                         </text>
                     ))
                 }
@@ -75,7 +78,7 @@ const starsLg = generateStars(25, 1000, 1000, 4);
                             font-family="monospace"
                             opacity="0.8"
                         >
-                            *
+                            {s.symbol}
                         </text>
                     ))
                 }
@@ -98,7 +101,7 @@ const starsLg = generateStars(25, 1000, 1000, 4);
                             font-family="monospace"
                             opacity="1.0"
                         >
-                            *
+                            {s.symbol}
                         </text>
                     ))
                 }
@@ -138,6 +141,12 @@ const starsLg = generateStars(25, 1000, 1000, 4);
         height: 100vh;
         z-index: -10;
         pointer-events: none;
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
+
+    .starfield.visible {
+        opacity: 1;
     }
 
     .star-layer {
@@ -202,6 +211,14 @@ const starsLg = generateStars(25, 1000, 1000, 4);
 </style>
 
 <script>
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            document.getElementById("persistent-starfield")?.classList.add("visible");
+        });
+    });
+</script>
+
+<script>
     // Store accumulated offsets globally so they persist across page transitions
     let offsetSm = 0;
     let offsetMd = 0;
@@ -262,5 +279,12 @@ const starsLg = generateStars(25, 1000, 1000, 4);
             window.addEventListener("scroll", onScroll, { passive: true });
             isInitialized = true;
         }
+    });
+
+    // Delay adding visible class to allow page to render first
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            document.getElementById("persistent-starfield")?.classList.add("visible");
+        });
     });
 </script>
