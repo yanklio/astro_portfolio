@@ -6,7 +6,11 @@ import "../styles/global.css";
 <BaseLayout pageTitle="yanklio/about" pageDescription="Full-Stack Developer at Viseven. Experienced with TypeScript, React, Next.js, Node.js, Python, and more.">
     <div class="hero-center">
         <div class="simple-card paper-border paper-shadow">
-            <span class="label">ABOUT_ME</span>
+            <div class="card-header">
+                <span class="prompt">&gt;</span>
+                <span class="section-number">01</span>
+                <span class="label">ABOUT_ME</span>
+            </div>
             <h1 class="title">Yaroslav</h1>
             <h2 class="subtitle">Full-Stack Dev @ Viseven</h2>
             <div class="divider"></div>
@@ -22,7 +26,11 @@ import "../styles/global.css";
         </div>
 
         <div class="simple-card paper-border paper-shadow">
-            <span class="label">SKILLS</span>
+            <div class="card-header">
+                <span class="prompt">&gt;</span>
+                <span class="section-number">02</span>
+                <span class="label">SKILLS</span>
+            </div>
             <div class="skills-container">
                 <div class="skill-category">
                     <span class="category-name">Frontend</span>
@@ -74,8 +82,12 @@ import "../styles/global.css";
             </div>
         </div>
 
-        <div class="links-card paper-border paper-shadow">
-            <span class="label">CONTACT</span>
+        <div class="simple-card links-card paper-border paper-shadow">
+            <div class="card-header">
+                <span class="prompt">&gt;</span>
+                <span class="section-number">03</span>
+                <span class="label">CONTACT</span>
+            </div>
             <div class="links-row">
                 <a
                     href="https://github.com/yanklio"
@@ -101,27 +113,55 @@ import "../styles/global.css";
         justify-content: center;
         align-items: center;
         min-height: 70vh;
-        gap: 1.5rem;
+        gap: 1.75rem;
         width: 100%;
-        max-width: 650px;
+        max-width: 900px;
         margin: 0 auto;
         padding: 2rem 0;
     }
 
-    .simple-card {
-        background-color: var(--bg);
-        padding: 3rem;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
+    .simple-card,
     .links-card {
         background-color: var(--bg);
-        padding: 3rem;
         display: flex;
         flex-direction: column;
+        min-height: 12rem;
+        padding: 2.5rem;
         width: 100%;
+        position: relative;
+    }
+
+
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .prompt {
+        color: var(--fg3);
+        font-size: 0.85rem;
+        font-weight: 900;
+    }
+
+    .section-number {
+        color: var(--fg2);
+        font-size: 0.85rem;
+        font-weight: 900;
+    }
+
+    .label {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        color: var(--fg4);
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
     }
 
     .links-row {
@@ -135,19 +175,21 @@ import "../styles/global.css";
     @media (max-width: 600px) {
         .simple-card,
         .links-card {
+            transform: none;
             padding: 1.5rem;
         }
+
+        .card-header {
+            margin-bottom: 1rem;
+        }
+
+        .label {
+            margin: 0;
+        }
+
         .links-row {
             flex-direction: column;
         }
-    }
-
-    .label {
-        font-size: 0.85rem;
-        color: var(--fg4);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
     }
 
     .title {
@@ -178,11 +220,12 @@ import "../styles/global.css";
         line-height: 1.6;
         color: var(--fg1);
         margin: 0;
+        max-width: 70ch;
     }
 
     .skills-container {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1.5rem;
         margin-top: 1rem;
     }
@@ -190,7 +233,7 @@ import "../styles/global.css";
     .skill-category {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.85rem;
     }
 
     .category-name {
@@ -199,6 +242,8 @@ import "../styles/global.css";
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 1px;
+        padding-bottom: 0.55rem;
+        border-bottom: 2px solid light-dark(var(--bg2), var(--bg3));
     }
 
     .skills-list {
@@ -224,10 +269,11 @@ import "../styles/global.css";
         text-transform: uppercase;
         padding: 1rem;
         font-size: 1.1rem;
-        background-color: var(--bg);
     }
 
-    .net-link:hover {
-        background-color: var(--bg2);
+    @media (max-width: 700px) {
+        .skills-container {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

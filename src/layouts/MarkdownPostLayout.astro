@@ -22,16 +22,21 @@ const frontmatter = post.data;
         const article = document.querySelector(".post-content");
         if (!article) return;
 
+        const linkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5"/></svg>`;
+        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+
         const headers = article.querySelectorAll("h1, h2, h3, h4, h5, h6");
         
         headers.forEach((header) => {
+            if (header.parentElement?.classList.contains("header-card")) return;
+
             const wrapper = document.createElement("div");
             wrapper.className = "header-card paper-border paper-shadow";
             
             const button = document.createElement("button");
             button.className = "copy-btn paper-button";
             button.setAttribute("aria-label", "Copy header link");
-            button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
+            button.innerHTML = linkIcon;
             
             const slug = header.id || header.textContent?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "";
             if (!header.id) header.id = slug;
@@ -39,9 +44,9 @@ const frontmatter = post.data;
             button.addEventListener("click", async () => {
                 const url = `${window.location.origin}${window.location.pathname}#${slug}`;
                 await navigator.clipboard.writeText(url);
-                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+                button.innerHTML = checkIcon;
                 setTimeout(() => {
-                    button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
+                    button.innerHTML = linkIcon;
                 }, 2000);
             });
             
@@ -51,13 +56,18 @@ const frontmatter = post.data;
         });
     }
     
-    document.addEventListener("DOMContentLoaded", initHeaderCards);
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initHeaderCards);
+    } else {
+        initHeaderCards();
+    }
+
     document.addEventListener("astro:after-swap", initHeaderCards);
 </script>
 
 <style>
     .post-container {
-        max-width: 650px;
+        max-width: 900px;
         margin: 0 auto;
         width: 100%;
         display: flex;
