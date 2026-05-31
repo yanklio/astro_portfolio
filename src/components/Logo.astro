@@ -1,41 +1,20 @@
 ---
-import { Icon } from "astro-icon/components";
 ---
 
-<div class="logo-wrapper">
-    <div class="logo-box paper-button">
-        <Icon name="ic:baseline-code" />
-    </div>
-    <p class="logo-text">
-        <span class="yellow">~&gt;</span>guest@yanklio
-    </p>
-</div>
+<a href="/" class="logo">
+    <span class="prefix">~&gt;</span>guest@yanklio
+</a>
 
 <style>
-    .logo-wrapper {
-        display: flex;
-        gap: 12px;
-        align-items: center;
+    .logo {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--fg1);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+    }
 
-        .logo-box {
-            width: 50px;
-            height: 50px;
-            background: var(--yellow-dim);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            svg {
-                font-size: 40px;
-                color: var(--black);
-            }
-        }
-
-        .logo-text {
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding-top: 7px;
-        }
+    .prefix {
+        color: var(--orange-dim);
     }
 </style>

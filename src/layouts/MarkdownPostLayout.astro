@@ -3,12 +3,9 @@ import BaseLayout from "./BaseLayout.astro";
 import BlogCard from "../components/BlogCard.astro";
 const { post } = Astro.props;
 const frontmatter = post.data;
-
-// For single posts, we'll assign a primary accent like orange.
-// If needed, we could generate it from the title hash, but let's stick to orange for consistency with the main theme.
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout pageTitle={frontmatter.title} pageDescription={frontmatter.description}>
     <div class="post-container">
         <div class="header-wrapper">
             <BlogCard post={post} isCollapsed={false} />
@@ -20,9 +17,57 @@ const frontmatter = post.data;
     </div>
 </BaseLayout>
 
+<script>
+    function initHeaderCards() {
+        const article = document.querySelector(".post-content");
+        if (!article) return;
+
+        const linkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5"/></svg>`;
+        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+
+        const headers = article.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        headers.forEach((header) => {
+            if (header.parentElement?.classList.contains("header-card")) return;
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "header-card paper-border paper-shadow";
+
+            const button = document.createElement("button");
+            button.className = "copy-btn paper-button";
+            button.setAttribute("aria-label", "Copy header link");
+            button.innerHTML = linkIcon;
+
+            const slug = header.id || header.textContent?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "";
+            if (!header.id) header.id = slug;
+
+            button.addEventListener("click", async () => {
+                const url = `${window.location.origin}${window.location.pathname}#${slug}`;
+                await navigator.clipboard.writeText(url);
+                button.innerHTML = checkIcon;
+                setTimeout(() => {
+                    button.innerHTML = linkIcon;
+                }, 2000);
+            });
+
+            header.parentNode?.insertBefore(wrapper, header);
+            wrapper.appendChild(header);
+            wrapper.appendChild(button);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initHeaderCards);
+    } else {
+        initHeaderCards();
+    }
+
+    document.addEventListener("astro:after-swap", initHeaderCards);
+</script>
+
 <style>
     .post-container {
-        max-width: 650px;
+        max-width: 680px;
         margin: 0 auto;
         width: 100%;
         display: flex;
@@ -38,27 +83,30 @@ const frontmatter = post.data;
         width: 100%;
     }
 
+    .post-content :global(h1),
+    .post-content :global(h2),
+    .post-content :global(h3) {
+        color: var(--fg1);
+    }
+
     .post-content :global(h1) {
         margin-top: 2.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
         font-size: 2rem;
-        color: var(--fg1);
-        border-bottom: 2px solid var(--bg2);
-        padding-bottom: 0.5rem;
+        border-bottom: none;
+        padding-bottom: 0;
     }
 
     .post-content :global(h2) {
         margin-top: 2rem;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0;
         font-size: 1.5rem;
-        color: var(--fg1);
     }
 
     .post-content :global(h3) {
         margin-top: 1.75rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
         font-size: 1.25rem;
-        color: var(--fg1);
     }
 
     .post-content :global(p) {
@@ -126,5 +174,31 @@ const frontmatter = post.data;
             padding-left: 1rem;
             padding-right: 1rem;
         }
+    }
+
+    .post-content :global(.header-card) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        margin: 2rem 0 1rem;
+        background-color: var(--bg);
+    }
+
+    .post-content :global(.header-card h1),
+    .post-content :global(.header-card h2),
+    .post-content :global(.header-card h3),
+    .post-content :global(.header-card h4),
+    .post-content :global(.header-card h5),
+    .post-content :global(.header-card h6) {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .post-content :global(.copy-btn) {
+        flex-shrink: 0;
+        padding: 0.4rem 0.6rem;
+        margin-left: 1rem;
     }
 </style>

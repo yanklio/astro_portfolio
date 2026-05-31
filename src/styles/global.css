@@ -2,120 +2,131 @@
 @import "fonts.css";
 
 html {
-    background-color: var(--bg);
-    background-size: 40px 40px;
-    background-image:
-        linear-gradient(
-            to right,
-            rgba(168, 153, 132, 0.1) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            to bottom,
-            rgba(168, 153, 132, 0.1) 1px,
-            transparent 1px
-        );
-    font-family: JetBrainsMono, sans-serif;
-    color: var(--fg1);
+  background-color: var(--bg);
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(168, 153, 132, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 153, 132, 0.1) 1px, transparent 1px);
+  font-family: JetBrainsMono, sans-serif;
+  color: var(--fg1);
 }
 
 body {
-    margin: 0 auto;
-    line-height: 1.5;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 * {
-    box-sizing: border-box;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
+  box-sizing: border-box;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+  display: none; /* Chrome, Safari and Opera */
 }
 
 h1 {
-    margin: 1rem 0;
-    font-size: 2.5rem;
+  margin: 1rem 0;
+  font-size: 2.5rem;
 }
 
 svg {
-    color: var(--fg1);
+  color: var(--fg1);
 }
 
 img {
-    display: block;
+  display: block;
 }
 
 /* selection */
 
 ::selection {
-    background: var(--orange);
-    color: var(--bg);
-    text-shadow: none;
+  background: var(--orange);
+  color: var(--bg);
+  text-shadow: none;
 }
 
 ::-moz-selection {
-    background: var(--orange);
-    color: var(--bg);
-    text-shadow: none;
+  background: var(--orange);
+  color: var(--bg);
+  text-shadow: none;
 }
 
-button, input, textarea, select {
-    font-family: inherit;
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 /* paper styles */
 .paper-border {
-    border: 2px solid light-dark(var(--fg2), var(--bg3));
+  border: 2px solid light-dark(var(--fg2), var(--bg3));
 }
 
 .paper-shadow {
-    box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
+  box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
 }
 
 .paper-button {
-    background-color: var(--bg);
-    color: var(--fg1);
-    border: 2px solid light-dark(var(--fg2), var(--bg3));
-    box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
+  background-color: var(--bg1);
+  color: var(--fg1);
+  border: 2px solid light-dark(var(--fg2), var(--bg3));
+  box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    transition: all 0.05s ease;
-    cursor: pointer;
+  transition: none;
+  cursor: pointer;
 }
 
 .paper-button:hover {
-    background-color: var(--bg2);
+  background-color: light-dark(var(--bg3), var(--bg4));
 }
 
 .paper-button:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px 0px light-dark(var(--fg3), var(--bg4));
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px light-dark(var(--fg1), var(--fg3));
 }
 
 .paper-animation {
-    transition: all 0.05s ease;
+  transition: all 0.05s ease;
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(main),
+::view-transition-new(main) {
+  animation-duration: 0.18s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation-duration: 0.01ms;
+  }
 }
 
 /* responsive */
 .desktop-only {
-    display: block;
+  display: block;
 }
 
 .mobile-only {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 700px) {
-    .desktop-only {
-        display: none;
-    }
+  .desktop-only {
+    display: none;
+  }
 
-    .mobile-only {
-        display: block;
-    }
+  .mobile-only {
+    display: block;
+  }
 }
