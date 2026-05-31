@@ -26,21 +26,21 @@ const frontmatter = post.data;
         const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
 
         const headers = article.querySelectorAll("h1, h2, h3, h4, h5, h6");
-        
+
         headers.forEach((header) => {
             if (header.parentElement?.classList.contains("header-card")) return;
 
             const wrapper = document.createElement("div");
             wrapper.className = "header-card paper-border paper-shadow";
-            
+
             const button = document.createElement("button");
             button.className = "copy-btn paper-button";
             button.setAttribute("aria-label", "Copy header link");
             button.innerHTML = linkIcon;
-            
+
             const slug = header.id || header.textContent?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "";
             if (!header.id) header.id = slug;
-            
+
             button.addEventListener("click", async () => {
                 const url = `${window.location.origin}${window.location.pathname}#${slug}`;
                 await navigator.clipboard.writeText(url);
@@ -49,13 +49,13 @@ const frontmatter = post.data;
                     button.innerHTML = linkIcon;
                 }, 2000);
             });
-            
+
             header.parentNode?.insertBefore(wrapper, header);
             wrapper.appendChild(header);
             wrapper.appendChild(button);
         });
     }
-    
+
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", initHeaderCards);
     } else {
@@ -67,7 +67,7 @@ const frontmatter = post.data;
 
 <style>
     .post-container {
-        max-width: 900px;
+        max-width: 680px;
         margin: 0 auto;
         width: 100%;
         display: flex;

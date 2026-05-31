@@ -103,7 +103,7 @@ const transitionBase = `blog-card-${post.id}`;
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: 900px;
+        max-width: 680px;
         margin: 0 auto;
         position: relative;
     }
@@ -113,7 +113,7 @@ const transitionBase = `blog-card-${post.id}`;
         flex-direction: row;
         align-items: center;
         gap: 2.25rem;
-        max-width: 900px;
+        max-width: 680px;
         min-height: 12rem;
         padding: 2rem 2.25rem;
         overflow: hidden;
@@ -124,7 +124,7 @@ const transitionBase = `blog-card-${post.id}`;
         flex-direction: row;
         align-items: center;
         gap: 2.25rem;
-        max-width: 900px;
+        max-width: 680px;
         min-height: 12rem;
         padding: 2rem 2.25rem;
         overflow: hidden;
@@ -145,7 +145,7 @@ const transitionBase = `blog-card-${post.id}`;
         flex: 0 0 7.5rem;
         align-self: stretch;
         background-color: var(--bg_soft);
-        border-right: 2px solid light-dark(var(--fg2), var(--bg3));
+        border-right: 3px solid var(--orange-dim);
         margin: -2rem 0 -2rem -2.25rem;
         padding: 1rem 0.75rem;
     }
@@ -161,7 +161,7 @@ const transitionBase = `blog-card-${post.id}`;
         font-size: 1.15rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--fg3);
+        color: var(--orange-dim);
     }
 
     .read-more-btn {
@@ -176,7 +176,7 @@ const transitionBase = `blog-card-${post.id}`;
     .blog-item-card .read-more-btn {
         position: static;
         flex: 0 0 4rem;
-        align-self: flex-start;
+        align-self: center;
         width: 4rem;
         height: 4rem;
         min-height: 0;
@@ -238,7 +238,7 @@ const transitionBase = `blog-card-${post.id}`;
     }
 
     .title {
-        font-size: clamp(1.8rem, 3vw, 2.35rem);
+        font-size: 1.25rem;
         line-height: 1.05;
         margin: 0 0 1.15rem 0;
         font-weight: 900;
@@ -259,7 +259,7 @@ const transitionBase = `blog-card-${post.id}`;
     }
 
     .bio-text {
-        font-size: clamp(1.05rem, 2vw, 1.4rem);
+        font-size: 1rem;
         line-height: 1.45;
         color: var(--fg2);
         margin: 0;
@@ -343,7 +343,7 @@ const transitionBase = `blog-card-${post.id}`;
         }
 
         .title {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             margin-bottom: 0.75rem;
             padding-right: 0;
         }
