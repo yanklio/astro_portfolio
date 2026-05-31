@@ -4,10 +4,11 @@ import Footer from "../components/footer/Footer.astro";
 import Starfield from "../components/Starfield.astro";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-const { pageTitle = "Yanklio", pageDescription, pageImage } = Astro.props;
+const { pageTitle = "", pageDescription, pageImage } = Astro.props;
 const siteUrl = "https://yanklio.netlify.app";
-const siteName = "Yanklio";
-const defaultDescription = "Just a website that shows me and also blog posts";
+const siteName = "yanklio";
+const defaultDescription = "Personal website and blog of Yaroslav — Full-Stack Developer working with TypeScript, React, Next.js, Node.js, and Python.";
+const resolvedTitle = pageTitle ? `${pageTitle} | ${siteName}` : siteName;
 const ogImage = pageImage || null;
 ---
 
@@ -18,19 +19,19 @@ const ogImage = pageImage || null;
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
 
-        <title>{pageTitle} | {siteName}</title>
+        <title>{resolvedTitle}</title>
         <meta name="description" content={pageDescription || defaultDescription} />
         <link rel="canonical" href={siteUrl + Astro.url.pathname} />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl + Astro.url.pathname} />
-        <meta property="og:title" content={pageTitle} />
+        <meta property="og:title" content={resolvedTitle} />
         <meta property="og:description" content={pageDescription || defaultDescription} />
         <meta property="og:site_name" content={siteName} />
         {ogImage && <meta property="og:image" content={siteUrl + ogImage} />}
 
         <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
-        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:title" content={resolvedTitle} />
         <meta name="twitter:description" content={pageDescription || defaultDescription} />
         {ogImage && <meta name="twitter:image" content={siteUrl + ogImage} />}
 
