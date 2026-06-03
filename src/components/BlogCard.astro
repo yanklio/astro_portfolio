@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 const { post, isCollapsed = true } = Astro.props;
 
 const href = isCollapsed ? `/blog/${post.id}` : "/blog";
-const iconName = isCollapsed ? "ic:baseline-arrow-forward" : "ic:baseline-arrow-back";
+const iconName = isCollapsed ? "tabler:arrow-right" : "tabler:arrow-left";
 const day = post.data.pubDate.toLocaleDateString("en-US", { day: "2-digit" });
 const month = post.data.pubDate.toLocaleDateString("en-US", { month: "short" });
 const transitionBase = `blog-card-${post.id}`;
@@ -49,10 +49,10 @@ const transitionBase = `blog-card-${post.id}`;
                     <Icon name={iconName} size={24} />
                 </a>
                 <button class="action-btn paper-button" type="button" data-action="copy-article" aria-label="Copy article as Markdown">
-                    <Icon name="ic:baseline-article" size={24} />
+                    <Icon name="tabler:article" size={24} />
                 </button>
                 <button class="action-btn paper-button" type="button" data-action="share-article" aria-label="Share article">
-                    <Icon name="ic:baseline-link" size={24} />
+                    <Icon name="tabler:link" size={24} />
                 </button>
             </div>
         )
