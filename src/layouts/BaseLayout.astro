@@ -73,6 +73,11 @@ const ogImage = pageImage || null;
             <slot />
         </main>
         <Footer />
+        <script>
+            import { initRedirectLoading } from "../scripts/redirect-loading";
+
+            initRedirectLoading();
+        </script>
     </body>
 </html>
 

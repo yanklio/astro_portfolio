@@ -40,7 +40,7 @@ import { Icon } from "astro-icon/components";
             >
             <a
                 href="/"
-                class:list={["menu-link", { active: currentPath === "/" }]}
+                class:list={["menu-link redirect-control", { active: currentPath === "/" }]}
             >
                 <div class="menu-content">
                     <div class="menu-title">/about</div>
@@ -62,7 +62,7 @@ import { Icon } from "astro-icon/components";
             <a
                 href="/blog"
                 class:list={[
-                    "menu-link",
+                    "menu-link redirect-control",
                     {
                         active:
                             currentPath === "/blog" ||

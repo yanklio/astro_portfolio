@@ -7,7 +7,7 @@ const currentPath = Astro.url.pathname;
         <a
             href="/"
             class:list={[
-                "nav-link paper-animation",
+                "nav-link paper-animation redirect-control",
                 { active: currentPath === "/" },
             ]}>/about</a
         >
@@ -19,7 +19,7 @@ const currentPath = Astro.url.pathname;
         <a
             href="/blog"
             class:list={[
-                "nav-link paper-animation",
+                "nav-link paper-animation redirect-control",
                 {
                     active:
                         currentPath === "/blog" ||
@@ -84,24 +84,3 @@ const currentPath = Astro.url.pathname;
         pointer-events: none;
     }
 </style>
-
-<script is:inline>
-    function applyPressed() {
-        const target = sessionStorage.getItem("nav-pressed");
-        if (target) {
-            sessionStorage.removeItem("nav-pressed");
-            const link = document.querySelector(`.nav-link[href="${target}"]`);
-            if (link) link.classList.add("pressed");
-        }
-    }
-
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("pointerdown", () => {
-            sessionStorage.setItem("nav-pressed", link.getAttribute("href"));
-            link.classList.add("pressed");
-        });
-    });
-
-    applyPressed();
-    document.addEventListener("astro:page-load", applyPressed);
-</script>

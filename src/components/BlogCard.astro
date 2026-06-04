@@ -40,12 +40,12 @@ const transitionBase = `blog-card-${post.id}`;
 
     {
         isCollapsed ? (
-            <a href={href} class="read-more-btn paper-button" aria-label="Read full post">
+            <a href={href} class="read-more-btn paper-button redirect-control" aria-label="Read full post">
                 <Icon name={iconName} size={24} />
             </a>
         ) : (
             <div class="action-list" aria-label="Article actions">
-                <a href={href} class="action-btn paper-button" aria-label="Back to blog">
+                <a href={href} class="action-btn paper-button redirect-control" aria-label="Back to blog">
                     <Icon name={iconName} size={24} />
                 </a>
                 <button class="action-btn paper-button" type="button" data-action="copy-article" aria-label="Copy article as Markdown">

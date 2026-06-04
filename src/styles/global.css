@@ -92,6 +92,36 @@ select {
   box-shadow: 2px 2px 0px 0px light-dark(var(--fg1), var(--fg3));
 }
 
+.redirect-control.pressed {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px light-dark(var(--fg3), var(--bg4)) !important;
+  transition: none;
+}
+
+.redirect-loading {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px light-dark(var(--fg3), var(--bg4)) !important;
+  cursor: progress !important;
+  animation: redirect-loading-pulse 0.72s steps(2, end) 0.06s infinite;
+}
+
+@keyframes redirect-loading-pulse {
+  0% {
+    outline: 0 solid transparent;
+    outline-offset: 0;
+  }
+
+  50% {
+    outline: 3px solid var(--yellow-dim);
+    outline-offset: 0px;
+  }
+
+  100% {
+    outline: 0 solid transparent;
+    outline-offset: 0;
+  }
+}
+
 .paper-animation {
   transition: all 0.05s ease;
 }
