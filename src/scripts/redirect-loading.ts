@@ -1,7 +1,6 @@
 const SETUP_KEY = "__redirectLoadingSetup";
 const PRESSED_TARGET_KEY = "redirect-pressed-target";
 const LOADING_STARTED_KEY = "redirect-loading-started";
-const MINIMUM_LOADING_TIME = 900;
 const REDIRECT_CONTROL_SELECTOR = ".redirect-control";
 
 declare global {
@@ -61,15 +60,10 @@ export function initRedirectLoading() {
     if (window[SETUP_KEY]) return;
     window[SETUP_KEY] = true;
 
-    let loadingStartedAt = 0;
-    let loadingTimer: number | undefined;
-
     function setRedirectLoading(link: HTMLAnchorElement) {
-        window.clearTimeout(loadingTimer);
         clearRedirectLoading();
 
-        loadingStartedAt = performance.now();
-        sessionStorage.setItem(LOADING_STARTED_KEY, String(loadingStartedAt));
+        sessionStorage.setItem(LOADING_STARTED_KEY, "true");
 
         const target = getLoadingTarget(link);
         if (!target) return;
@@ -82,16 +76,8 @@ export function initRedirectLoading() {
     }
 
     function finishRedirectLoading() {
-        const storedStartedAt = Number(
-            sessionStorage.getItem(LOADING_STARTED_KEY) || loadingStartedAt,
-        );
-        const elapsed = performance.now() - storedStartedAt;
-        const remaining = Math.max(MINIMUM_LOADING_TIME - elapsed, 0);
-
-        loadingTimer = window.setTimeout(() => {
-            sessionStorage.removeItem(LOADING_STARTED_KEY);
-            clearRedirectLoading();
-        }, remaining);
+        sessionStorage.removeItem(LOADING_STARTED_KEY);
+        clearRedirectLoading();
     }
 
     document.addEventListener(
