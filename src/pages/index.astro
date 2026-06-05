@@ -118,7 +118,7 @@ import "../styles/global.css";
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        max-width: 680px;
+        max-width: var(--content-width);
         margin: 0 auto;
         padding: 2rem 0;
     }
@@ -242,7 +242,11 @@ import "../styles/global.css";
     }
 
     /* ── Responsive ────────────────────────────────── */
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+        .page {
+            max-width: var(--content-compact-width);
+        }
+
         .card-body {
             padding: 1.5rem;
         }

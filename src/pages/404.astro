@@ -20,7 +20,15 @@ import { Icon } from "astro-icon/components";
         justify-content: center;
         min-height: 70vh;
         text-align: center;
+        max-width: var(--content-width);
+        margin: 0 auto;
         padding: 2rem;
+    }
+
+    @media (max-width: 700px) {
+        .container {
+            max-width: var(--content-compact-width);
+        }
     }
 
     .error-icon {

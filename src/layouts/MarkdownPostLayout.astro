@@ -67,7 +67,7 @@ const frontmatter = post.data;
 
 <style>
     .post-container {
-        max-width: 680px;
+        max-width: var(--content-width);
         margin: 0 auto;
         width: 100%;
         display: flex;
@@ -170,6 +170,10 @@ const frontmatter = post.data;
     }
 
     @media (max-width: 700px) {
+        .post-container {
+            max-width: var(--content-compact-width);
+        }
+
         .post-content {
             padding-left: 1rem;
             padding-right: 1rem;

@@ -41,6 +41,7 @@ const transitionBase = `blog-card-${post.id}`;
     {
         isCollapsed ? (
             <a href={href} class="read-more-btn paper-button redirect-control" aria-label="Read full post">
+                <span class="read-more-label">read post</span>
                 <Icon name={iconName} size={24} />
             </a>
         ) : (
@@ -103,7 +104,7 @@ const transitionBase = `blog-card-${post.id}`;
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: 680px;
+        max-width: var(--content-width);
         margin: 0 auto;
         position: relative;
     }
@@ -113,7 +114,7 @@ const transitionBase = `blog-card-${post.id}`;
         flex-direction: row;
         align-items: center;
         gap: 2.25rem;
-        max-width: 680px;
+        max-width: var(--content-width);
         min-height: 12rem;
         padding: 2rem 2.25rem;
         overflow: hidden;
@@ -124,7 +125,7 @@ const transitionBase = `blog-card-${post.id}`;
         flex-direction: row;
         align-items: center;
         gap: 2.25rem;
-        max-width: 680px;
+        max-width: var(--content-width);
         min-height: 12rem;
         padding: 2rem 2.25rem;
         overflow: hidden;
@@ -173,6 +174,10 @@ const transitionBase = `blog-card-${post.id}`;
         z-index: 2;
     }
 
+    .read-more-label {
+        display: none;
+    }
+
     .blog-item-card .read-more-btn {
         position: static;
         flex: 0 0 4rem;
@@ -204,6 +209,10 @@ const transitionBase = `blog-card-${post.id}`;
         height: 4rem;
         padding: 0;
         text-decoration: none;
+    }
+
+    .action-label {
+        display: none;
     }
 
     .action-btn[data-feedback="true"] {
@@ -267,7 +276,7 @@ const transitionBase = `blog-card-${post.id}`;
 
     .blog-description {
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -283,7 +292,7 @@ const transitionBase = `blog-card-${post.id}`;
         width: 100%;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
         .simple-card {
             padding: 1.5rem;
         }
@@ -291,7 +300,7 @@ const transitionBase = `blog-card-${post.id}`;
         .blog-item-card {
             flex-direction: column;
             align-items: stretch;
-            gap: 1rem;
+            gap: 2.25rem;
             min-height: auto;
             padding: 1.5rem;
         }
@@ -307,9 +316,9 @@ const transitionBase = `blog-card-${post.id}`;
             flex-basis: auto;
             align-self: auto;
             border-right: none;
-            border-bottom: 2px solid light-dark(var(--fg2), var(--bg3));
-            margin: -1.5rem -1.5rem 0;
-            padding: 1rem;
+            border-bottom: none;
+            margin: 0;
+            padding: 0;
         }
 
         .read-more-btn {
@@ -317,56 +326,132 @@ const transitionBase = `blog-card-${post.id}`;
             right: 1rem;
         }
 
-        .blog-item-card .read-more-btn {
-            flex-basis: auto;
-            align-self: flex-end;
-            width: 3.5rem;
-            height: 3.5rem;
-            min-height: 0;
+        .blog-item-card .date-block {
+            width: auto;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.65rem;
+            background-color: var(--bg_soft);
+            border-right: none;
+            border-bottom: 3px solid var(--orange-dim);
+            color: var(--fg1);
+            margin: -1.5rem -1.5rem 0;
+            padding: 1rem 1.5rem 0.85rem;
         }
 
-        .post-header-card .read-more-btn {
-            flex-basis: auto;
-            align-self: flex-end;
-            min-height: auto;
+        .blog-item-card .card-content {
+            align-self: auto;
+        }
+
+        .blog-item-card .read-more-btn {
+            align-self: stretch;
+            width: 100%;
+            height: 2.8rem;
+            min-height: 0;
+            padding: 0 1rem;
+            justify-content: space-between;
+        }
+
+        .blog-item-card .read-more-btn:active {
+            box-shadow: 1px 1px 0px 0px light-dark(var(--fg1), var(--fg3));
+        }
+
+        .blog-item-card .read-more-label {
+            display: inline;
+            color: var(--fg1);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+        }
+
+        .blog-item-card .read-more-btn :global(svg) {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .post-header-card .date-block {
+            width: auto;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.65rem;
+            background-color: var(--bg_soft);
+            border-bottom: 3px solid var(--orange-dim);
+            color: var(--fg1);
+            margin: -1.5rem -1.5rem 0;
+            padding: 1rem 1.5rem 0.85rem;
+        }
+
+        .post-header-card .date-day {
+            font-size: 2.35rem;
+            letter-spacing: -0.08em;
+        }
+
+        .post-header-card .date-month {
+            margin-top: 0;
+            font-size: 0.95rem;
         }
 
         .action-list {
             flex-basis: auto;
             flex-direction: row;
-            align-self: flex-end;
+            align-self: stretch;
+            justify-content: stretch;
+            width: 100%;
+            padding-top: 0.25rem;
         }
 
         .action-btn {
-            width: 3.5rem;
+            flex: 1 1 0;
+            width: auto;
             height: 3.5rem;
         }
 
         .title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.12;
             margin-bottom: 0.75rem;
             padding-right: 0;
         }
 
         .post-header-card .title {
-            padding-right: 2rem;
+            padding-right: 0;
         }
 
         .bio-text {
-            font-size: 1rem;
+            font-size: 0.92rem;
+            line-height: 1.45;
         }
 
         .date-day {
-            font-size: 3rem;
+            font-size: 2.35rem;
+            letter-spacing: -0.08em;
         }
 
         .date-month {
-            margin-top: 0.5rem;
-            font-size: 1rem;
+            margin-top: 0;
+            font-size: 0.95rem;
         }
 
         .label {
             padding-right: 2rem;
+        }
+    }
+
+    @media (max-width: 430px) {
+        .blog-item-card {
+            gap: 2.25rem;
+            padding: 1.5rem;
+        }
+
+        .blog-item-card .read-more-btn {
+            height: 2.8rem;
+        }
+
+        .blog-description {
+            -webkit-line-clamp: 3;
         }
     }
 </style>

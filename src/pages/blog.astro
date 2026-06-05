@@ -16,10 +16,16 @@ const allPosts = (await getCollection("blog")).sort(
     </div>
 </BaseLayout>
 
-<style>
+    <style>
     .blog-container {
-        max-width: 680px;
+        max-width: var(--content-width);
         margin: 0 auto;
         width: 100%;
+    }
+
+    @media (max-width: 700px) {
+        .blog-container {
+            max-width: var(--content-compact-width);
+        }
     }
 </style>

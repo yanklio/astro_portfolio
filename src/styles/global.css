@@ -1,6 +1,11 @@
 @import "gruvbox.css";
 @import "fonts.css";
 
+:root {
+  --content-width: 680px;
+  --content-compact-width: 440px;
+}
+
 html {
   background-color: var(--bg);
   background-size: 40px 40px;
