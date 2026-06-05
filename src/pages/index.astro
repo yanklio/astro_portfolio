@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
-import "../styles/global.css";
 ---
 
 <BaseLayout
@@ -11,7 +10,7 @@ import "../styles/global.css";
     <div class="page">
 
         <!-- ── About ───────────────────────────────── -->
-        <div class="card paper-border paper-shadow">
+        <div class="card paper-border paper-shadow screen-card" style="--card-index: 0">
             <div class="card-body">
                 <span class="section-label">// about</span>
                 <h1 class="hero-name">Yaroslav</h1>
@@ -28,7 +27,7 @@ import "../styles/global.css";
         </div>
 
         <!-- ── Skills ─────────────────────────────── -->
-        <div class="card paper-border paper-shadow">
+        <div class="card paper-border paper-shadow screen-card" style="--card-index: 1">
             <div class="card-body">
                 <span class="section-label">// skills</span>
                 <div class="skills-table">
@@ -84,7 +83,7 @@ import "../styles/global.css";
         </div>
 
         <!-- ── Contact ────────────────────────────── -->
-        <div class="card paper-border paper-shadow">
+        <div class="card paper-border paper-shadow screen-card" style="--card-index: 2">
             <div class="card-body">
                 <span class="section-label">// links</span>
                 <div class="contact-row">

@@ -6,7 +6,7 @@ const { posts } = Astro.props;
 ---
 
 <div class="blog-list">
-    {posts.map((post: CollectionEntry<"blog">) => <BlogCard post={post} />)}
+    {posts.map((post: CollectionEntry<"blog">, index: number) => <BlogCard post={post} transitionIndex={index} />)}
 </div>
 
 <style>
