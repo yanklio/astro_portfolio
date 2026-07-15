@@ -1,8 +1,14 @@
+---
+import { site } from "../../config/site";
+
+const currentYear = new Date().getFullYear();
+---
+
 <footer class="site-footer">
     <div class="footer-inner">
-        <span>© 2026 YANKLIO</span>
+        <span>© {currentYear} {site.handle.toUpperCase()}</span>
         <span>Made with love and coffee | v0.8.18</span>
-        <span>Poznan, PL</span>
+        <span>{site.location}</span>
     </div>
 </footer>
 

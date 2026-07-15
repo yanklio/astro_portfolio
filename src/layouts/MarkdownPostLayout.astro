@@ -1,44 +1,27 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import BlogTag from "../components/BlogTag.astro";
+import NoteHeader from "../components/NoteHeader.astro";
+import type { BlogPost } from "../data/blog";
+
+interface Props {
+    post: BlogPost;
+}
 
 const { post } = Astro.props;
-const { title, description, pubDate, tags } = post.data;
-const day = pubDate.toLocaleDateString("en-US", { day: "2-digit" });
-const month = pubDate.toLocaleDateString("en-US", { month: "short" });
-const year = pubDate.toLocaleDateString("en-US", { year: "numeric" });
+const { title, description } = post.data;
 ---
 
 <BaseLayout pageTitle={title} pageDescription={description}>
-    <div class="article-page">
+    <div class="page-container page-top article-page">
         <a class="back-link paper-button" href="/blog"><b>←</b> All notes</a>
-        <header class="article-masthead">
-            <time class="article-date" datetime={pubDate.toISOString()}>
-                <span>{month}</span><strong>{day}</strong><small>{year}</small>
-            </time>
-            <div class="article-intro">
-                <h1>{title}</h1>
-                <div class="article-summary"><span>{description}</span></div>
-                <div class="article-tags">{tags.map((tag: string) => <BlogTag text={tag} />)}</div>
-            </div>
-        </header>
+        <NoteHeader post={post} isDetail />
         <article class="post-content"><slot /></article>
     </div>
 </BaseLayout>
 
 <style>
-    .article-page { margin: 0 auto; max-width: 1080px; padding-top: clamp(3.5rem, 8vw, 6.5rem); }
-    .article-masthead { border: 2px solid var(--line); display: grid; grid-template-columns: 10rem minmax(0, 1fr); }
-    .article-date { align-items: center; background: var(--accent); border-right: 2px solid var(--line); color: var(--bg); display: flex; flex-direction: column; justify-content: space-between; padding: 1.25rem; text-align: center; }
-    .article-date span, .article-date small { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
-    .article-date strong { font-size: 4.75rem; font-weight: 700; letter-spacing: -0.13em; line-height: 0.8; }
-    .article-intro { min-width: 0; padding: 1.5rem 1.5rem 1.5rem 2rem; }
-    .article-intro h1 { font-size: clamp(2.4rem, 5vw, 4.75rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.88; margin: 0 0 1.25rem; max-width: 14ch; }
-    .article-summary { align-items: flex-end; color: var(--fg2); display: flex; gap: 2rem; justify-content: space-between; line-height: 1.7; }
-    .article-summary > span { max-width: 48rem; }
     .back-link { color: var(--fg1); display: flex; font-size: 0.78rem; font-weight: 700; gap: 0.75rem; justify-content: flex-start; margin-bottom: 1.5rem; padding: 0.8rem 1rem; text-decoration: none; text-transform: uppercase; width: 10rem; }
     .back-link b { color: var(--accent); font-size: 1.1rem; }
-    .article-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
     .post-content { margin: 4rem 0 0; max-width: none; }
     .post-content :global(h1), .post-content :global(h2), .post-content :global(h3) { color: var(--fg1); font-weight: 700; letter-spacing: -0.06em; line-height: 1; margin: 3rem 0 1rem; }
     .post-content :global(h1) { font-size: clamp(2.2rem, 5vw, 3.5rem); }
@@ -54,19 +37,10 @@ const year = pubDate.toLocaleDateString("en-US", { year: "numeric" });
     .post-content :global(a) { color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
     @media (max-width: 700px) {
         .article-page { padding-top: 3rem; }
-        .article-masthead { grid-template-columns: 6.5rem 1fr; }
-        .article-date { padding: 1rem 0.75rem; }
-        .article-date strong { font-size: 3.2rem; }
         .back-link { width: 6.5rem; }
-        .article-intro { padding-left: 1rem; }
-        .article-summary { align-items: flex-start; flex-direction: column; gap: 1rem; }
         .post-content { margin-top: 3rem; }
     }
     @media (max-width: 420px) {
-        .article-masthead { display: block; }
         .back-link { width: 100%; }
-        .article-date { align-items: center; border-bottom: 2px solid var(--line); border-right: 0; flex-direction: row; }
-        .article-date strong { font-size: 2.5rem; }
-        .article-intro { padding: 1.5rem 0 0; }
     }
 </style>

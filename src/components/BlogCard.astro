@@ -1,59 +1,12 @@
 ---
-import BlogTag from "./BlogTag.astro";
+import type { BlogPost } from "../data/blog";
+import NoteHeader from "./NoteHeader.astro";
+
+interface Props {
+    post: BlogPost;
+}
 
 const { post } = Astro.props;
-const href = `/blog/${post.id}`;
-const day = post.data.pubDate.toLocaleDateString("en-US", { day: "2-digit" });
-const month = post.data.pubDate.toLocaleDateString("en-US", { month: "short" });
-const year = post.data.pubDate.toLocaleDateString("en-US", { year: "numeric" });
-const longDate = post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 ---
 
-<article class="note-card">
-    <time class="note-date" datetime={post.data.pubDate.toISOString()} aria-label={longDate}>
-        <span class="note-month">{month}</span>
-        <strong>{day}</strong>
-        <small>{year}</small>
-    </time>
-    <div class="note-intro">
-        <h2><a href={href}>{post.data.title}</a></h2>
-        <div class="note-summary">
-            <span>{post.data.description}</span>
-        </div>
-        <div class="note-footer">
-            <div class="note-tags">{post.data.tags.map((tag: string) => <BlogTag text={tag} />)}</div>
-            <a class="read-link paper-button" href={href}>Open <span>→</span></a>
-        </div>
-    </div>
-</article>
-
-<style>
-    .note-card { border: 2px solid var(--line); display: grid; grid-template-columns: 10rem minmax(0, 1fr); }
-    .note-date { align-items: center; background: var(--accent); border-right: 2px solid var(--line); color: var(--bg); display: flex; flex-direction: column; justify-content: space-between; padding: 1.25rem; text-align: center; }
-    .note-date span, .note-date small { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
-    .note-date strong { font-size: 4.75rem; font-weight: 700; letter-spacing: -0.13em; line-height: 0.8; }
-    .note-intro { min-width: 0; padding: 1.5rem 1.5rem 1.5rem 2rem; }
-    .note-intro h2 { font-size: clamp(2.4rem, 5vw, 4.75rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.88; margin: 0 0 1.25rem; max-width: 14ch; }
-    .note-intro h2 a { color: inherit; text-decoration: none; }
-    .note-summary { align-items: flex-end; color: var(--fg2); display: flex; gap: 2rem; justify-content: space-between; line-height: 1.7; }
-    .note-summary > span { max-width: 48rem; }
-    .note-footer { align-items: center; display: flex; gap: 1rem; justify-content: space-between; margin-top: 1.25rem; }
-    .note-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .read-link { align-items: center; background: var(--surface); color: var(--fg1); display: flex; flex: 0 0 5.3rem; font-size: 0.75rem; font-weight: 700; gap: 0.45rem; height: 2.8rem; justify-content: center; text-decoration: none; text-transform: uppercase; width: 5.3rem; }
-    .read-link.paper-button:hover { background: var(--surface); }
-    .read-link span { color: var(--accent); font-size: 1.1rem; }
-    @media (max-width: 700px) {
-        .note-card { grid-template-columns: 6.5rem minmax(0, 1fr); }
-        .note-date { padding: 1rem 0.75rem; }
-        .note-date strong { font-size: 3.2rem; }
-        .note-intro { padding-left: 1rem; }
-        .note-summary { align-items: flex-start; flex-direction: column; gap: 1rem; }
-        .note-footer { align-items: flex-start; flex-direction: column; }
-    }
-    @media (max-width: 420px) {
-        .note-card { display: block; }
-        .note-date { align-items: center; border-bottom: 2px solid var(--line); border-right: 0; flex-direction: row; }
-        .note-date strong { font-size: 2.5rem; }
-        .note-intro { padding: 1.5rem 0 0; }
-    }
-</style>
+<NoteHeader post={post} />

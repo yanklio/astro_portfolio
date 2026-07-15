@@ -1,16 +1,14 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogList from "../components/BlogList.astro";
 import RSSButton from "../components/header/RSSButton.astro";
+import { getBlogPosts } from "../data/blog";
 
-const allPosts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const allPosts = await getBlogPosts();
 ---
 
 <BaseLayout pageTitle="Notes" pageDescription="Notes on web development, programming, and technology.">
-    <div class="blog-page">
+    <div class="page-container page-top blog-page">
         <header class="archive-intro">
             <h1>Notes</h1>
         </header>
@@ -18,8 +16,8 @@ const allPosts = (await getCollection("blog")).sort(
             <span>Also available on:</span>
             <div class="source-buttons">
                 <RSSButton />
-                <button class="source-button paper-button" type="button" disabled>???</button>
-                <button class="source-button paper-button" type="button" disabled>???</button>
+                <button class="source-button compact-button paper-button" type="button" disabled>???</button>
+                <button class="source-button compact-button paper-button" type="button" disabled>???</button>
             </div>
         </div>
         <div class="archive-list">
@@ -29,14 +27,13 @@ const allPosts = (await getCollection("blog")).sort(
 </BaseLayout>
 
 <style>
-    .blog-page { margin: 0 auto; max-width: 1080px; padding-top: clamp(3.5rem, 8vw, 6.5rem); }
     .archive-intro { padding: 1.5rem 0 0; }
     .archive-intro h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.8; margin: 0; }
     .archive-sources { display: grid; gap: 0.7rem; margin-top: 1.5rem; }
     .archive-sources > span { color: var(--accent); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
     .source-buttons { display: grid; gap: 0.8rem; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
     .source-buttons :global(.rss-button), .source-button { width: 100%; }
-    .source-button { background: var(--bg); color: var(--fg3); cursor: not-allowed; font-size: 0.75rem; font-weight: 700; height: 2.8rem; letter-spacing: 0.06em; }
+    .source-button { background: var(--bg); color: var(--fg3); cursor: not-allowed; }
     .source-button:disabled { box-shadow: 4px 4px 0 var(--button-shadow); pointer-events: none; }
     .archive-list { border-top: 2px solid var(--line); margin-top: 4rem; }
     @media (max-width: 600px) {

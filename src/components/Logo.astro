@@ -1,8 +1,9 @@
 ---
+import { site } from "../config/site";
 ---
 
 <a href="/" class="logo">
-    <span class="user">yanklio</span><span class="separator">@</span><span class="host">portfolio</span>
+    <span class="user">{site.handle}</span><span class="separator">@</span><span class="host">portfolio</span>
 </a>
 
 <style>
@@ -14,9 +15,7 @@
         text-decoration: none;
     }
 
-    .user, .cursor {
-        color: var(--orange);
-    }
+    .user { color: var(--orange); }
     .host { color: var(--fg1); }
-    .path, .separator { color: var(--fg3); }
+    .separator { color: var(--fg3); }
 </style>

@@ -1,13 +1,20 @@
 ---
 import Header from "../components/header/Header.astro";
 import Footer from "../components/footer/Footer.astro";
+import { site, socialLinks } from "../config/site";
 import "../styles/global.css";
+
+interface Props {
+    pageDescription?: string;
+    pageImage?: string;
+    pageTitle?: string;
+}
+
 const { pageTitle = "", pageDescription, pageImage } = Astro.props;
-const siteUrl = "https://yanklio.netlify.app";
-const siteName = "yanklio";
-const defaultDescription = "Personal website and blog of Yaroslav — Full-Stack Developer working with TypeScript, React, Next.js, Node.js, and Python.";
-const resolvedTitle = pageTitle ? `${pageTitle} | ${siteName}` : siteName;
-const ogImage = pageImage || null;
+const description = pageDescription ?? site.description;
+const resolvedTitle = pageTitle ? `${pageTitle} | ${site.handle}` : site.handle;
+const canonicalUrl = new URL(Astro.url.pathname, site.url).href;
+const ogImage = pageImage ? new URL(pageImage, site.url).href : undefined;
 ---
 
 <html lang="en">
@@ -18,48 +25,46 @@ const ogImage = pageImage || null;
         <meta name="generator" content={Astro.generator} />
 
         <title>{resolvedTitle}</title>
-        <meta name="description" content={pageDescription || defaultDescription} />
-        <link rel="canonical" href={siteUrl + Astro.url.pathname} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={siteUrl + Astro.url.pathname} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content={resolvedTitle} />
-        <meta property="og:description" content={pageDescription || defaultDescription} />
-        <meta property="og:site_name" content={siteName} />
-        {ogImage && <meta property="og:image" content={siteUrl + ogImage} />}
+        <meta property="og:description" content={description} />
+        <meta property="og:site_name" content={site.handle} />
+        {ogImage && <meta property="og:image" content={ogImage} />}
 
         <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
         <meta name="twitter:title" content={resolvedTitle} />
-        <meta name="twitter:description" content={pageDescription || defaultDescription} />
-        {ogImage && <meta name="twitter:image" content={siteUrl + ogImage} />}
+        <meta name="twitter:description" content={description} />
+        {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-        <script type="application/ld+json" set:html={JSON.stringify({
+        <script is:inline type="application/ld+json" set:html={JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
                 {
                     "@type": "WebSite",
-                    "name": siteName,
-                    "url": siteUrl,
+                    "name": site.handle,
+                    "url": site.url,
                     "potentialAction": {
                         "@type": "SearchAction",
                         "target": {
                             "@type": "EntryPoint",
-                            "urlTemplate": `${siteUrl}/blog?q={search_term_string}`
+                            "urlTemplate": `${site.url}/blog?q={search_term_string}`
                         },
                         "query-input": "required name=search_term_string"
                     }
                 },
                 {
                     "@type": "Person",
-                    "name": "Yaroslav",
-                    "url": siteUrl,
-                    "sameAs": [
-                        "https://github.com/yanklio",
-                        "https://www.linkedin.com/in/yaroslav-u/"
-                    ]
+                    "name": site.name,
+                    "url": site.url,
+                    "sameAs": socialLinks.map(({ href }) => href)
                 }
             ]
         })} />
+        <script>import "../scripts/theme";</script>
 
     </head>
     <body>

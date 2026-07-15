@@ -35,9 +35,6 @@ button, input, textarea, select { font: inherit; }
 img { display: block; max-width: 100%; }
 svg { color: currentColor; }
 
-.paper-border { border: 3px solid var(--line); }
-.paper-shadow { box-shadow: 5px 5px 0 var(--button-shadow); }
-
 .paper-button {
     align-items: center;
     background: var(--surface);
@@ -51,6 +48,22 @@ svg { color: currentColor; }
 
 .paper-button:hover { background: var(--bg1); }
 .paper-button:active { box-shadow: 0 0 0 var(--line); transform: translate(4px, 4px); }
+
+.compact-button {
+    align-items: center;
+    display: inline-flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    gap: 0.45rem;
+    height: 2.8rem;
+    justify-content: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    width: 5.3rem;
+}
+
+.page-container { margin: 0 auto; max-width: 1080px; }
+.page-top { padding-top: clamp(3.5rem, 8vw, 6.5rem); }
 
 .page-kicker {
     color: var(--fg3);

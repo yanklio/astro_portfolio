@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, socialLinks, toolboxGroups } from "../config/site";
 ---
 
 <BaseLayout
@@ -8,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="home-page">
         <section class="intro" aria-labelledby="intro-title">
             <div class="intro-copy">
-                <h1 id="intro-title">Yaroslav</h1>
+                <h1 id="intro-title">{site.name}</h1>
                 <p class="role">Full-stack developer</p>
                 <p class="intro-description">I build useful web products and the systems behind them—mostly with TypeScript, React, Node.js, and Python. Currently at Viseven, based in Poznan.</p>
                 <a class="paper-button intro-link" href="/blog">Read my notes <span>→</span></a>
@@ -39,18 +40,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <h2 id="toolbox-title">Toolbox</h2>
             </header>
             <div class="skills-table">
-                <div class="skill-row"><span>Frontend</span><p>HTML/CSS · JavaScript · TypeScript · React · Next.js · Vue.js · Angular</p></div>
-                <div class="skill-row"><span>Backend</span><p>Python · Django · Node.js · Express · Nest.js</p></div>
-                <div class="skill-row"><span>Platform</span><p>PostgreSQL · AWS · Terraform · Docker · CI/CD</p></div>
-                <div class="skill-row"><span>Tools</span><p>Linux · Git · LangChain · OpenCode · Claude Code</p></div>
+                {toolboxGroups.map(({ label, tools }) => (
+                    <div class="skill-row"><span>{label}</span><p>{tools}</p></div>
+                ))}
             </div>
         </section>
 
         <section class="contact-block" aria-labelledby="links-title">
             <h2 id="links-title">You can find me where</h2>
             <div class="contact-row">
-                <a href="https://github.com/yanklio" target="_blank" rel="noopener noreferrer" class="paper-button contact-link">GitHub <span>↗</span></a>
-                <a href="https://www.linkedin.com/in/yaroslav-u/" target="_blank" rel="noopener noreferrer" class="paper-button contact-link">LinkedIn <span>↗</span></a>
+                {socialLinks.map(({ href, label }) => (
+                    <a href={href} target="_blank" rel="noopener noreferrer" class="paper-button contact-link">{label} <span>↗</span></a>
+                ))}
             </div>
         </section>
     </div>
