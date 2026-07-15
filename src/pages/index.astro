@@ -1,258 +1,94 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import "../styles/global.css";
 ---
 
 <BaseLayout
-    pageTitle=""
-    pageDescription="Full-Stack Developer at Viseven. Experienced with TypeScript, React, Next.js, Node.js, Python, and more."
+    pageDescription="Personal website and notes by Yaroslav, a full-stack developer working with TypeScript, React, Node.js, and Python."
 >
-    <div class="page">
-
-        <!-- ── About ───────────────────────────────── -->
-        <div class="card paper-border paper-shadow">
-            <div class="card-body">
-                <span class="section-label">// about</span>
-                <h1 class="hero-name">Yaroslav</h1>
-                <p class="hero-role">Full-Stack Dev <span class="accent">@</span> Viseven</p>
-                <div class="rule"></div>
-                <p class="bio">
-                    Hi! 👋 I'm Yaroslav, a Full-Stack Developer with a few years of
-                    experience. Mostly interested in a broad variety of web technologies —
-                    TypeScript, React (with Next.js), Node.js, Python, and more.
-                    There is always room to grow 🌱, but I believe in practical solutions
-                    that actually help people.
-                </p>
+    <div class="home-page">
+        <section class="intro" aria-labelledby="intro-title">
+            <div class="intro-copy">
+                <h1 id="intro-title">Yaroslav</h1>
+                <p class="role">Full-stack developer</p>
+                <p class="intro-description">I build useful web products and the systems behind them—mostly with TypeScript, React, Node.js, and Python. Currently at Viseven, based in Poznan.</p>
+                <a class="paper-button intro-link" href="/blog">Read my notes <span>→</span></a>
             </div>
-        </div>
+            <pre class="coffee-art" aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣏⢻⣧⡀⠀⠀⠀⠀⠀⣠⣾⣿⠟⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⠾⢻⣻
+⠀⣴⡾⠿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⢯⣿⣳⢦⡙⢿⣄⣀⣀⣠⣾⣫⣿⢿⡑⢺⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣶⠿⢟⣫⣭⣶⣿⣿⡿
+⣸⡟⠀⠀⣸⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⣤⣄⣀⣀⣼⠏⣼⣷⣭⡷⠟⠛⠉⡉⠉⢉⢭⠉⠛⠿⣿⣤⣿⣇⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⠾⢟⣫⣥⣶⣿⣿⣟⣷⣻⣿⠟⠀
+⣿⠀⠀⢰⣿⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⠿⠛⠋⠉⠉⠉⠉⢻⡟⠀⣿⠟⠉⠤⠀⠀⢀⠀⠠⡇⠈⢣⠀⠉⠒⠙⢿⣿⡀⠀⠀⣀⣤⣶⠾⢟⣫⣽⣾⠿⣟⣯⣿⢿⡽⣾⡽⣾⣿⠏⠀⠀
+⣿⠀⠀⣸⣷⠀⠀⠀⠀⠀⠀⠀⣰⡿⢋⡤⠒⠁⠀⡀⠄⠀⢀⣿⢃⡶⠀⠀⠀⠀⠐⠈⠀⠀⠀⡇⠀⠘⡆⠀⠀⠀⠈⢻⣧⢀⣾⣿⣭⣷⠿⣟⣿⣽⡾⣿⣻⣟⡾⣯⣟⣷⣿⡿⠃⠀⠀⠀
+⢻⣧⠀⣇⠹⢷⣦⣀⡀⠀⠀⣼⢟⡴⠋⠀⠀⠠⠀⠄⠂⠀⢾⡿⢸⠇⠀⠈⠀⠀⠈⠀⠀⠁⠀⢷⠀⠀⣿⢀⠀⠀⡀⠀⢿⣿⣿⣿⣫⣾⡿⣟⡿⣾⣽⣳⣟⡾⣽⣳⣿⣿⡟⠀⠀⠀⠀⠀
+⠁⠻⣷⣝⣦⣤⣬⡽⡿⣿⣿⡏⠌⠀⠀⠄⠁⠀⠁⠀⠄⠈⣾⡇⠈⠀⠀⠀⠀⢹⣷⣤⣆⣼⣧⡼⠀⠀⠸⣿⣷⣷⣾⢿⣿⣿⣿⣧⣿⢯⡿⣽⣻⡿⠋⣿⣯⣟⣷⣿⣿⠏⠀⠀⠀⠀⠀⠀
+⠀⠀⠈⢙⣿⣷⣮⣷⣹⡶⣿⡈⠀⠀⠄⠀⠀⠀⠁⡐⠀⠠⢿⡇⠤⠚⠋⠉⠙⠒⠮⠭⠭⠭⠟⠃⠰⣷⡶⢈⠙⠒⢀⣾⣿⣿⣫⣿⡽⣯⣟⡷⣿⣤⣼⣿⣳⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⢠⣾⢟⢛⣿⠛⠛⠛⠿⣿⢰⡄⠀⢂⠈⡀⠀⠂⠀⠄⠀⢟⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠶⠿⠷⠾⠃⢀⣾⣿⣿⣳⣿⢯⣟⡷⣯⣟⣿⣻⣿⢿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢸⣷⣳⡜⢟⣁⡀⠀⠀⠻⠇⠙⢤⣀⡀⠀⠀⠀⢀⣾⡄⠀⠈⣿⣶⣄⣀⣀⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣳⡿⣯⣟⣾⣽⣷⣿⣻⢯⣟⣿⣾⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠸⣙⠛⠻⠿⢶⣯⣬⣐⣒⠠⠄⣀⡈⠉⠛⠋⢉⣿⠏⠁⠀⠘⣿⠟⠛⠉⠉⠉⠉⠙⣻⢷⣶⣶⣶⣶⣿⣿⣿⣿⣿⡿⣽⣻⣷⢿⣻⣽⣾⣷⣿⣿⣿⣿⠗⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠉⠀⠐⠠⠤⠉⢉⠛⠻⠿⢶⣶⣭⣥⣀⡘⣿⡈⠒⠒⠚⠁⠀⠀⠀⠀⠀⠐⣷⡝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣻⢿⡽⣯⣿⣿⣾⣿⣿⠿⠛⠩⠐⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠂⠤⠌⣉⠙⠛⢿⣿⣶⣶⣶⣶⣾⣿⣿⣿⣷⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣳⣿⣿⣿⣿⣿⠿⠛⠉⠄⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠪⡻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⡿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠟⠻⠿⢿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⡿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠛⢻⣿⠿⠿⠛⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
+        </section>
 
-        <!-- ── Skills ─────────────────────────────── -->
-        <div class="card paper-border paper-shadow">
-            <div class="card-body">
-                <span class="section-label">// skills</span>
-                <div class="skills-table">
+        <section class="home-section" aria-labelledby="toolbox-title">
+            <header class="section-heading">
 
-                    <div class="skill-row">
-                        <span class="skill-cat">Frontend</span>
-                        <div class="skill-pills">
-                            <span class="pill">HTML/CSS</span>
-                            <span class="pill">JavaScript</span>
-                            <span class="pill">TypeScript</span>
-                            <span class="pill">React</span>
-                            <span class="pill">Next.js</span>
-                            <span class="pill">Vue.js</span>
-                            <span class="pill">Angular</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-row">
-                        <span class="skill-cat">Backend</span>
-                        <div class="skill-pills">
-                            <span class="pill">Python</span>
-                            <span class="pill">Django</span>
-                            <span class="pill">Node.js</span>
-                            <span class="pill">Express</span>
-                            <span class="pill">Nest.js</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-row">
-                        <span class="skill-cat">Cloud</span>
-                        <div class="skill-pills">
-                            <span class="pill">PostgreSQL</span>
-                            <span class="pill">AWS (ECS, S3, RDS)</span>
-                            <span class="pill">Terraform</span>
-                            <span class="pill">Docker</span>
-                            <span class="pill">CI/CD</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-row">
-                        <span class="skill-cat">AI &amp; Tools</span>
-                        <div class="skill-pills">
-                            <span class="pill">Linux</span>
-                            <span class="pill">Git</span>
-                            <span class="pill">LangChain</span>
-                            <span class="pill">OpenCode</span>
-                            <span class="pill">Claude Code</span>
-                        </div>
-                    </div>
-
-                </div>
+                <h2 id="toolbox-title">Toolbox</h2>
+            </header>
+            <div class="skills-table">
+                <div class="skill-row"><span>Frontend</span><p>HTML/CSS · JavaScript · TypeScript · React · Next.js · Vue.js · Angular</p></div>
+                <div class="skill-row"><span>Backend</span><p>Python · Django · Node.js · Express · Nest.js</p></div>
+                <div class="skill-row"><span>Platform</span><p>PostgreSQL · AWS · Terraform · Docker · CI/CD</p></div>
+                <div class="skill-row"><span>Tools</span><p>Linux · Git · LangChain · OpenCode · Claude Code</p></div>
             </div>
-        </div>
+        </section>
 
-        <!-- ── Contact ────────────────────────────── -->
-        <div class="card paper-border paper-shadow">
-            <div class="card-body">
-                <span class="section-label">// links</span>
-                <div class="contact-row">
-                    <a
-                        href="https://github.com/yanklio"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="contact-btn paper-button"
-                    >Github</a>
-                    <a
-                        href="https://www.linkedin.com/in/yaroslav-u/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="contact-btn paper-button"
-                    >LinkedIn</a>
-                </div>
+        <section class="contact-block" aria-labelledby="links-title">
+            <h2 id="links-title">You can find me where</h2>
+            <div class="contact-row">
+                <a href="https://github.com/yanklio" target="_blank" rel="noopener noreferrer" class="paper-button contact-link">GitHub <span>↗</span></a>
+                <a href="https://www.linkedin.com/in/yaroslav-u/" target="_blank" rel="noopener noreferrer" class="paper-button contact-link">LinkedIn <span>↗</span></a>
             </div>
-        </div>
-
+        </section>
     </div>
 </BaseLayout>
 
 <style>
-    .page {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 2rem 0;
+    .home-page { margin: 0 auto; max-width: 1080px; padding: clamp(3.5rem, 8vw, 6.5rem) 0 0; }
+    .intro { align-items: center; display: grid; gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: minmax(0, 1fr) clamp(20rem, 45vw, 32rem); padding: 1.75rem 0 3.5rem; }
+    .intro-copy { min-width: 0; }
+    .intro h1 { font-size: clamp(3.7rem, 8.7vw, 6.8rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.85; margin: 1.2rem 0 0.5rem; }
+    .role { color: var(--accent); font-size: clamp(1.1rem, 2.5vw, 1.55rem); font-weight: 500; letter-spacing: -0.04em; margin: 0 0 2rem; }
+    .intro-description { color: var(--fg2); line-height: 1.8; margin: 0 0 1.5rem; max-width: 42rem; }
+    .intro-link { font-size: 0.78rem; font-weight: 700; gap: 1rem; padding: 0.8rem 0.95rem; text-decoration: none; text-transform: uppercase; }
+    .intro-link span { color: var(--accent); font-size: 1.15rem; }
+    .coffee-art { color: var(--accent); font-family: inherit; font-size: clamp(0.22rem, 0.45vw, 0.3rem); font-weight: 700; justify-self: end; letter-spacing: 0; line-height: 1.05; margin: 0; transform: scale(2.1); transform-origin: right center; white-space: pre; }
+    .home-section { border-top: 2px solid var(--line); padding: 4rem 0; }
+    .section-heading { align-items: end; display: flex; justify-content: start; margin-bottom: 1.8rem; }
+    .section-heading h2 { font-size: clamp(2rem, 5vw, 3.65rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.8; margin: 0.45rem 0 0; }
+    .skill-row { display: grid; gap: 2rem; grid-template-columns: 9rem minmax(0, 1fr); padding: 1.05rem 0; border-bottom: 1px solid var(--fg3); }
+    .skill-row:last-child { border-bottom: 0; }
+    .skill-row > span { color: var(--accent); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+    .skill-row p { color: var(--fg2); line-height: 1.6; margin: 0; }
+    .contact-block { background: var(--accent); border: 2px solid var(--line); margin: 0 auto; max-width: 38rem; padding: 2.5rem 1.5rem; text-align: center; }
+    .contact-block h2 { color: var(--bg); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.08em; line-height: 1; margin: 0 0 1.4rem; }
+    .contact-block .contact-row { justify-content: center; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .contact-link { font-size: 0.78rem; font-weight: 700; gap: 1rem; padding: 0.8rem 0.95rem; text-decoration: none; text-transform: uppercase; }
+    .contact-link span { color: var(--accent); font-size: 1.05rem; }
+    @media (max-width: 760px) {
+        .intro { display: block; }
+        .coffee-art { font-size: 0.42rem; margin: 2.5rem auto 0; transform: none; width: max-content; }
     }
-
-    /* ── Card ──────────────────────────────────────── */
-    .card {
-        background-color: var(--bg);
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    /* ── Body ──────────────────────────────────────── */
-    .card-body {
-        padding: 2rem 2.25rem;
-    }
-
-    /* ── Hero ──────────────────────────────────────── */
-    .hero-name {
-        font-size: clamp(2.75rem, 8vw, 5rem);
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        line-height: 1;
-        margin: 0 0 0.45rem 0;
-        color: var(--fg1);
-    }
-
-    .hero-role {
-        font-size: 1.1rem;
-        color: var(--fg3);
-        margin: 0 0 1.75rem 0;
-    }
-
-    .accent {
-        color: var(--orange);
-        font-weight: 700;
-    }
-
-    .rule {
-        width: 40px;
-        height: 3px;
-        background-color: var(--orange);
-        margin-bottom: 1.25rem;
-    }
-
-    .bio {
-        font-size: 1rem;
-        line-height: 1.8;
-        color: var(--fg2);
-        margin: 0;
-    }
-
-    /* ── Skills ────────────────────────────────────── */
-    .skills-table {
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem;
-    }
-
-    .skill-row {
-        display: flex;
-        align-items: flex-start;
-        gap: 1.25rem;
-    }
-
-    .skill-cat {
-        flex: 0 0 80px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--fg4);
-        padding-top: 0.4rem;
-        white-space: nowrap;
-    }
-
-    .skill-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .pill {
-        background-color: var(--bg2);
-        color: var(--fg1);
-        padding: 0.3rem 0.65rem;
-        font-size: 0.875rem;
-        border: 2px solid light-dark(var(--fg2), var(--bg3));
-        box-shadow: 2px 2px 0px 0px light-dark(var(--fg3), var(--bg4));
-        white-space: nowrap;
-    }
-
-    /* ── Section label ─────────────────────────────── */
-    .section-label {
-        display: block;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: var(--orange-dim);
-        letter-spacing: 1px;
-        margin-bottom: 1.25rem;
-    }
-
-    /* ── Contact ───────────────────────────────────── */
-    .contact-row {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .contact-btn {
-        padding: 0.75rem 2rem;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    /* ── Responsive ────────────────────────────────── */
     @media (max-width: 600px) {
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .skill-row {
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .skill-cat {
-            flex: none;
-            padding-top: 0;
-        }
-
-        .contact-row {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .contact-btn {
-            text-align: center;
-        }
+        .home-page { padding-top: 3rem; }
+        .intro { padding: 1.25rem 0 2.5rem; }
+        .coffee-art { font-size: 0.42rem; margin: 2.5rem auto 0; width: max-content; }
+        .home-section { padding: 2.2rem 0; }
+        .section-heading { display: block; }
+        .skill-row { gap: 0.45rem; grid-template-columns: 1fr; }
     }
 </style>

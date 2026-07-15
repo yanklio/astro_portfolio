@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 
 <a class="paper-button rss-button" href="/rss.xml" aria-label="RSS Feed">
     <Icon name="ic:outline-rss-feed" />
-    <span class="rss-text">feed</span>
+    <span class="rss-text">rss feed</span>
 </a>
 
 <style>
@@ -12,9 +12,12 @@ import { Icon } from "astro-icon/components";
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 104px;
-        height: 46px;
-        font-size: 1.2rem;
+        gap: 0.45rem;
+        width: 5.3rem;
+        height: 2.8rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
         text-decoration: none;
         color: var(--fg1);
     }
@@ -24,11 +27,7 @@ import { Icon } from "astro-icon/components";
     .rss-button:hover {
         background-color: var(--bg2);
     }
-    .rss-button:active {
-        transform: translate(2px, 2px);
-        box-shadow: 1px 1px 0px 0px var(--fg3);
-    }
     .rss-text {
-            margin-left: 8px;
-        }
+        text-transform: uppercase;
+    }
 </style>

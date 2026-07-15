@@ -1,107 +1,28 @@
 ---
 const currentPath = Astro.url.pathname;
+const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
 ---
 
-<nav class="navigation">
-    <div class="nav-container paper-border">
-        <a
-            href="/"
-            class:list={[
-                "nav-link paper-animation",
-                { active: currentPath === "/" },
-            ]}>/about</a
-        >
-        <!-- <a
-            href="/projects"
-            class:list={["nav-link", { active: currentPath === "/projects" }]}
-            >/projects</a
-        > -->
-        <a
-            href="/blog"
-            class:list={[
-                "nav-link paper-animation",
-                {
-                    active:
-                        currentPath === "/blog" ||
-                        currentPath === "/blog/" ||
-                        currentPath.startsWith("/blog/")
-                },
-            ]}>/blog</a
-        >
-        <!-- <a
-            href="/contact"
-            class:list={["nav-link", { active: currentPath === "/contact" }]}
-            >/contact</a
-        > -->
-    </div>
+<nav class="navigation" aria-label="Primary navigation">
+    <a href="/" class:list={["nav-link", { active: currentPath === "/" }]}>About</a>
+    <a href="/blog" class:list={["nav-link", { active: blogActive }]}>Notes</a>
 </nav>
 
 <style>
-    .navigation {
-        height: 50px;
-    }
-
-    .nav-container {
-        display: flex;
-        background-color: var(--bg);
-        overflow: visible;
-    }
-
+    .navigation { display: flex; gap: 0.45rem; }
     .nav-link {
-        padding: 4px 16px;
-        margin: 6px 2px;
-        margin-top: 3px;
-        text-decoration: none;
-        font-size: 1.1rem;
-        font-weight: 500;
+        border: 2px solid var(--fg1);
+        box-shadow: 3px 3px 0 var(--fg1);
         color: var(--fg1);
-        background-color: var(--bg_soft);
-        transition: background-color 0.05s ease;
-        border: 2px solid light-dark(var(--fg2), var(--bg3));
-        box-shadow: 3px 3px 0px 0px light-dark(var(--fg3), var(--bg4));
+        background: var(--bg_hard);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 0.55rem 0.85rem;
+        text-decoration: none;
+        text-transform: uppercase;
     }
-
-    .nav-link:last-of-type {
-        margin-right: 6px;
-    }
-
-    .nav-link:hover {
-        background-color: var(--bg2);
-    }
-
-    .nav-link.pressed {
-        transform: translate(2px, 2px);
-        box-shadow: 1px 1px 0px 0px light-dark(var(--fg3), var(--bg4));
-        transition: none;
-    }
-
-    .nav-link.active {
-        background-color: var(--yellow-dim);
-        color: var(--black);
-        font-weight: 600;
-        transform: translate(2px, 2px);
-        box-shadow: 1px 1px 0px 0px light-dark(var(--fg3), var(--bg4));
-        pointer-events: none;
-    }
+    .nav-link:hover { background: var(--bg2); }
+    .nav-link:active { box-shadow: 0 0 0 var(--fg1); transform: translate(3px, 3px); }
+    .nav-link.active { background: var(--nav-accent); color: var(--black); pointer-events: none; }
 </style>
-
-<script is:inline>
-    function applyPressed() {
-        const target = sessionStorage.getItem("nav-pressed");
-        if (target) {
-            sessionStorage.removeItem("nav-pressed");
-            const link = document.querySelector(`.nav-link[href="${target}"]`);
-            if (link) link.classList.add("pressed");
-        }
-    }
-
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("pointerdown", () => {
-            sessionStorage.setItem("nav-pressed", link.getAttribute("href"));
-            link.classList.add("pressed");
-        });
-    });
-
-    applyPressed();
-    document.addEventListener("astro:page-load", applyPressed);
-</script>

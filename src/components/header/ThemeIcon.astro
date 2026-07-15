@@ -13,11 +13,17 @@ import { Icon } from "astro-icon/components";
 
 <style>
     .theme-toggle {
-        width: 46px;
-        height: 46px;
+        background: var(--aqua);
+        color: var(--bg);
+        width: 2.55rem;
+        height: 2.55rem;
         padding: 0;
         font-size: 1.3rem;
         cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+        background: var(--aqua-dim);
     }
 
     .moon {

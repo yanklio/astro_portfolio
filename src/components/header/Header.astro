@@ -1,374 +1,96 @@
 ---
-const currentPath = Astro.url.pathname;
 import Logo from "../Logo.astro";
 import Navigation from "./Navigation.astro";
-import RSSButton from "./RSSButton.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 import { Icon } from "astro-icon/components";
+
+const currentPath = Astro.url.pathname;
+const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
 ---
 
-<header>
-    <nav>
+<header class="site-header">
+    <div class="header-inner">
         <Logo />
-        <div class="desktop-only">
+        <div class="desktop-only header-desktop">
             <Navigation />
+            <div class="header-actions"><ThemeIcon /></div>
         </div>
-
-        <div class="desktop-only">
-            <div class="single-row">
-                <RSSButton />
-                <ThemeIcon />
-            </div>
-        </div>
-
-        <div class="mobile-only">
-            <button
-                id="mobileMenuToggle"
-                class="mobile-menu-btn paper-button"
-                aria-label="Toggle menu"
-            >
-                <Icon name="ic:menu" class="menu-toggle-icon" />
-                <Icon name="ic:baseline-close" class="menu-close-icon" />
-            </button>
-        </div>
-    </nav>
-
-    <div id="mobileMenu" class="mobile-menu mobile-only">
-        <div class="mobile-menu-inner">
-            <div
-                class:list={["menu-item", { "hidden-route": currentPath === "/" }]}
-            >
-            <a
-                href="/"
-                class:list={["menu-link", { active: currentPath === "/" }]}
-            >
-                <div class="menu-content">
-                    <div class="menu-title">/about</div>
-                    <div class="menu-desc">Navigate to home page</div>
-                </div>
-                <Icon name="ic:baseline-home" class="menu-icon" />
-            </a>
-        </div>
-        <div
-            class:list={[
-                "menu-item",
-                {
-                    "hidden-route":
-                        currentPath === "/blog" ||
-                        currentPath.startsWith("/blog/"),
-                },
-            ]}
-        >
-            <a
-                href="/blog"
-                class:list={[
-                    "menu-link",
-                    {
-                        active:
-                            currentPath === "/blog" ||
-                            currentPath.startsWith("/blog/"),
-                    },
-                ]}
-            >
-                <div class="menu-content">
-                    <div class="menu-title">/blog</div>
-                    <div class="menu-desc">Read blog posts</div>
-                </div>
-                <Icon name="ic:baseline-article" class="menu-icon" />
-            </a>
-        </div>
-        <div class="menu-divider"></div>
-        <div class="menu-item">
-            <button id="copyRSS" class="menu-link">
-                <div class="menu-content">
-                    <div class="menu-title">RSS Feed</div>
-                    <div class="menu-desc">Copy feed URL to clipboard</div>
-                </div>
-                <Icon name="ic:outline-rss-feed" class="menu-icon" />
-            </button>
-        </div>
-        <div class="menu-item">
-            <button id="mobileThemeToggle" class="menu-link">
-                <div class="menu-content">
-                    <div class="menu-title">Theme</div>
-                    <div class="menu-desc">
-                        Switch between light and dark mode
-                    </div>
-                </div>
-                <div class="theme-icons">
-                    <Icon
-                        class="icon sun menu-icon"
-                        name="ic:baseline-wb-sunny"
-                    />
-                    <Icon
-                        class="icon moon menu-icon"
-                        name="ic:baseline-dark-mode"
-                    />
-                </div>
-            </button>
-        </div>
-        </div>
+        <button id="mobileMenuToggle" class="mobile-menu-btn mobile-only paper-button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
+            <span class="menu-open-icon"><Icon name="ic:menu" /></span>
+            <span class="menu-close-icon"><Icon name="ic:close" /></span>
+        </button>
     </div>
-
+    <div id="mobileMenu" class="mobile-menu mobile-only">
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <a href="/" class:list={["mobile-nav-link", { active: currentPath === "/" }]}>About</a>
+            <a href="/blog" class:list={["mobile-nav-link", { active: blogActive }]}>Notes</a>
+            <button id="mobileThemeToggle" class="mobile-nav-link" type="button">Theme</button>
+        </nav>
+    </div>
 </header>
 
-<div id="menuOverlay" class="menu-overlay mobile-only"></div>
-
 <style>
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        z-index: 1000;
-    }
-
-    nav {
-        min-height: 82px;
-
-        background-color: var(--bg_soft);
-        border-bottom: 4px solid var(--fg2);
-        width: 100%;
-
-        padding: 2px 16px;
-
+    .site-header { background: var(--bg); border-bottom: 2px solid var(--line); min-height: 4.6rem; }
+    .header-inner {
+        align-items: center;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        margin: 0 auto;
+        height: calc(4.6rem - 2px);
+        padding: 0 clamp(1.25rem, 4vw, 4rem);
     }
-
-    .single-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .mobile-menu-btn {
-        height: 50px;
-        padding: 0 16px;
-        font-size: 1.5rem;
-        background: var(--bg1);
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .menu-toggle-icon {
-        display: block;
-    }
-
-    .menu-close-icon {
-        display: none;
-    }
-
-    .mobile-menu-btn.open .menu-toggle-icon {
-        display: none;
-    }
-
-    .mobile-menu-btn.open .menu-close-icon {
-        display: block;
-    }
-
-    .mobile-menu {
-        width: 100%;
-        max-height: 0;
-        background-color: var(--bg_soft);
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        border-bottom: 0px solid var(--fg2);
-        box-shadow: none;
-    }
-
-    .mobile-menu.open {
-        max-height: 80vh;
-        border-bottom: 4px solid var(--fg2);
-        box-shadow: 0px 4px 0px 0px light-dark(var(--fg3), var(--bg4));
-    }
-
-    .mobile-menu-inner {
-        padding: 24px 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        overflow-y: auto;
-        max-height: 80vh;
-    }
-
-    .menu-item {
-        width: 100%;
-    }
-
-    .menu-item.hidden-route {
-        display: none;
-    }
-
-    .menu-link {
-        width: 100%;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: var(--bg);
+    .header-desktop { align-items: center; display: flex; gap: 1.5rem; }
+    .header-actions { align-items: center; display: flex; gap: 0.6rem; }
+    .mobile-menu-btn { height: 2.8rem; padding: 0; width: 2.8rem; }
+    .mobile-menu-btn :global(svg) { height: 1.45rem; width: 1.45rem; }
+    .menu-close-icon { display: none; }
+    .mobile-menu-btn[aria-expanded="true"] .menu-open-icon { display: none; }
+    .mobile-menu-btn[aria-expanded="true"] .menu-close-icon { display: flex; }
+    .mobile-menu { display: none; margin: 0 auto; }
+    .mobile-menu.open { display: block; }
+    .mobile-nav { display: grid; gap: 0.65rem; padding: 1rem 1.25rem; }
+    .mobile-nav-link {
+        background: var(--bg_hard);
+        border: 3px solid var(--fg1);
+        box-shadow: 3px 3px 0 var(--fg1);
         color: var(--fg1);
-        text-decoration: none;
-        font-size: 1rem;
-        font-family: inherit;
-        cursor: pointer;
-        
-        border: 3px solid light-dark(var(--fg2), var(--bg3));
-        box-shadow: 4px 4px 0px 0px light-dark(var(--fg3), var(--bg4));
-        transition: all 0.05s ease;
-    }
-
-    .menu-link:active {
-        transform: translate(2px, 2px);
-        box-shadow: 2px 2px 0px 0px light-dark(var(--fg3), var(--bg4));
-    }
-
-    .menu-link:hover {
-        background-color: var(--bg2);
-    }
-
-    .menu-link.active {
-        background-color: var(--yellow-dim);
-        color: var(--black);
-        font-weight: 600;
-        border-color: var(--orange);
-    }
-
-    .menu-content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.8rem 1rem;
         text-align: left;
+        text-decoration: none;
+        text-transform: uppercase;
     }
-
-    .menu-title {
-        font-size: 1.3rem;
-        font-weight: bold;
-        text-transform: lowercase;
-        color: var(--fg1);
-    }
-
-    .menu-link.active .menu-title {
-        color: var(--black);
-    }
-
-    .menu-desc {
-        font-size: 0.95rem;
-        color: var(--fg2);
-        font-weight: normal;
-        text-transform: none;
-    }
-
-    .menu-link.active .menu-desc {
-        color: var(--black);
-        opacity: 0.8;
-    }
-
-    .menu-divider {
-        display: none;
-    }
-
-    .theme-icons {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .menu-icon {
-        font-size: 2rem;
-        color: var(--fg1);
-    }
-
-    .menu-link.active .menu-icon {
-        color: var(--black);
-    }
-
-    .theme-icons .moon {
-        display: none;
-    }
-
-    :global(.dark) .theme-icons .sun {
-        display: none;
-    }
-
-    :global(html.dark) .theme-icons .moon {
-        display: block;
-    }
-
-    .menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: var(--black);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-        z-index: 999;
-    }
-
-    .menu-overlay.open {
-        opacity: 0.8;
-        pointer-events: auto;
+    .mobile-nav-link.active { background: var(--yellow-dim); color: var(--black); }
+    .mobile-nav-link:active { box-shadow: 0 0 0 var(--fg1); transform: translate(3px, 3px); }
+    @media (max-width: 700px) {
+        .header-desktop { display: none; }
     }
 </style>
 
 <script>
     function setupMobileMenu() {
-        const mobileMenu = document.getElementById("mobileMenu");
-        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-        const menuOverlay = document.getElementById("menuOverlay");
-        const copyRSS = document.getElementById("copyRSS");
-        const mobileThemeToggle = document.getElementById("mobileThemeToggle");
-        const menuLinks = mobileMenu?.querySelectorAll(".menu-link");
+        const toggle = document.getElementById("mobileMenuToggle");
+        const menu = document.getElementById("mobileMenu");
+        const theme = document.getElementById("mobileThemeToggle");
+        const close = () => {
+            menu?.classList.remove("open");
+            toggle?.setAttribute("aria-expanded", "false");
+            toggle?.setAttribute("aria-label", "Open navigation");
+        };
 
-        function closeMenu() {
-            mobileMenu?.classList.remove("open");
-            menuOverlay?.classList.remove("open");
-            mobileMenuToggle?.classList.remove("open");
-        }
-
-        function openMenu() {
-            mobileMenu?.classList.add("open");
-            menuOverlay?.classList.add("open");
-            mobileMenuToggle?.classList.add("open");
-        }
-
-        mobileMenuToggle?.addEventListener("click", () => {
-            if (mobileMenu?.classList.contains("open")) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-            mobileMenuToggle?.blur();
+        toggle?.addEventListener("click", () => {
+            const open = menu?.classList.toggle("open") ?? false;
+            toggle.setAttribute("aria-expanded", String(open));
+            toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
         });
-
-        menuOverlay?.addEventListener("click", closeMenu);
-
-        menuLinks?.forEach((link) => {
-            link.addEventListener("click", closeMenu);
-        });
-
-        copyRSS?.addEventListener("click", () => {
-            navigator.clipboard.writeText(window.location.origin + "/rss.xml");
-            closeMenu();
-        });
-
-        mobileThemeToggle?.addEventListener("click", () => {
-            const element = document.documentElement;
-            element.classList.toggle("dark");
-            const isDark = element.classList.contains("dark");
-            localStorage.setItem("theme", isDark ? "dark" : "light");
-            closeMenu();
+        menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
+        theme?.addEventListener("click", () => {
+            document.documentElement.classList.toggle("dark");
+            localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light");
+            close();
         });
     }
-
     setupMobileMenu();
-    document.addEventListener("astro:after-swap", setupMobileMenu);
 </script>
