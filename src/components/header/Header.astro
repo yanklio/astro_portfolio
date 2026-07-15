@@ -4,8 +4,6 @@ import Navigation from "./Navigation.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 import { Icon } from "astro-icon/components";
 
-const currentPath = Astro.url.pathname;
-const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
 ---
 
 <header class="site-header">
@@ -21,11 +19,8 @@ const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
         </button>
     </div>
     <div id="mobileMenu" class="mobile-menu mobile-only">
-        <nav class="mobile-nav" aria-label="Mobile navigation">
-            <a href="/" class:list={["mobile-nav-link", { active: currentPath === "/" }]}>About</a>
-            <a href="/blog" class:list={["mobile-nav-link", { active: blogActive }]}>Notes</a>
-            <button id="mobileThemeToggle" class="mobile-nav-link" type="button">Theme</button>
-        </nav>
+        <Navigation variant="mobile" />
+        <button class="mobile-theme-toggle" type="button" data-theme-toggle>Theme</button>
     </div>
 </header>
 
@@ -46,14 +41,13 @@ const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
     .menu-close-icon { display: none; }
     .mobile-menu-btn[aria-expanded="true"] .menu-open-icon { display: none; }
     .mobile-menu-btn[aria-expanded="true"] .menu-close-icon { display: flex; }
-    .mobile-menu { display: none; margin: 0 auto; }
-    .mobile-menu.open { display: block; }
-    .mobile-nav { display: grid; gap: 0.65rem; padding: 1rem 1.25rem; }
-    .mobile-nav-link {
-        background: var(--bg_hard);
+    .mobile-menu { display: none; gap: 0.65rem; margin: 0 auto; padding: 1rem 1.25rem; }
+    .mobile-menu.open { display: grid; }
+    .mobile-theme-toggle {
+        background: var(--aqua);
         border: 3px solid var(--fg1);
         box-shadow: 3px 3px 0 var(--fg1);
-        color: var(--fg1);
+        color: var(--bg);
         font: inherit;
         font-size: 0.85rem;
         font-weight: 700;
@@ -62,8 +56,8 @@ const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
         text-decoration: none;
         text-transform: uppercase;
     }
-    .mobile-nav-link.active { background: var(--yellow-dim); color: var(--black); }
-    .mobile-nav-link:active { box-shadow: 0 0 0 var(--fg1); transform: translate(3px, 3px); }
+    .mobile-theme-toggle:hover { background: var(--aqua-dim); }
+    .mobile-theme-toggle:active { box-shadow: 0 0 0 var(--fg1); transform: translate(3px, 3px); }
     @media (max-width: 700px) {
         .header-desktop { display: none; }
     }
@@ -73,24 +67,23 @@ const blogActive = currentPath === "/blog" || currentPath.startsWith("/blog/");
     function setupMobileMenu() {
         const toggle = document.getElementById("mobileMenuToggle");
         const menu = document.getElementById("mobileMenu");
-        const theme = document.getElementById("mobileThemeToggle");
+
+        if (!toggle || !menu || toggle.dataset.initialized) return;
+        toggle.dataset.initialized = "true";
+
         const close = () => {
-            menu?.classList.remove("open");
-            toggle?.setAttribute("aria-expanded", "false");
-            toggle?.setAttribute("aria-label", "Open navigation");
+            menu.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open navigation");
         };
 
-        toggle?.addEventListener("click", () => {
-            const open = menu?.classList.toggle("open") ?? false;
+        toggle.addEventListener("click", () => {
+            const open = menu.classList.toggle("open");
             toggle.setAttribute("aria-expanded", String(open));
             toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
         });
         menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
-        theme?.addEventListener("click", () => {
-            document.documentElement.classList.toggle("dark");
-            localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light");
-            close();
-        });
+        menu.querySelector("[data-theme-toggle]")?.addEventListener("click", close);
     }
     setupMobileMenu();
 </script>
