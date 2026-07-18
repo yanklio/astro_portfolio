@@ -21,8 +21,8 @@ export const socialLinks = [
 ] as const;
 
 export const toolboxGroups = [
-    { label: "Frontend", tools: "HTML/CSS · JavaScript · TypeScript · React · Next.js · Vue.js · Angular" },
-    { label: "Backend", tools: "Python · Django · Node.js · Express · Nest.js" },
-    { label: "Platform", tools: "PostgreSQL · AWS · Terraform · Docker · CI/CD" },
-    { label: "Tools", tools: "Linux · Git · LangChain · OpenCode · Claude Code" },
+    { label: "Frontend", tools: "HTML/CSS · JavaScript · TypeScript · React · Next.js · Angular" },
+    { label: "Backend", tools: "Node.js · Express · Nest.js · Java · Spring · SQL" },
+    { label: "Infrastructure", tools: "Docker · CI/CD · AWS · Terraform · PostgreSQL · MongoDB" },
+    { label: "Tools", tools: "Linux · Git · Vim · OpenCode · Codex" },
 ] as const;
