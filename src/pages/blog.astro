@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogList from "../components/BlogList.astro";
+import BlogHeroArt from "../components/BlogHeroArt.astro";
 import RSSButton from "../components/header/RSSButton.astro";
 import { getBlogPosts } from "../data/blog";
 
@@ -9,17 +10,34 @@ const allPosts = await getBlogPosts();
 
 <BaseLayout pageTitle="Notes" pageDescription="Notes on web development, programming, and technology.">
     <div class="page-container page-top blog-page">
-        <header class="archive-intro">
-            <h1>Notes</h1>
-        </header>
-        <div class="archive-sources" aria-label="Note availability">
-            <span>Also available on:</span>
+        <div class="archive-header">
+            <header class="archive-intro">
+                <h1>Notes</h1>
+                <p>
+                    I write down the things that make me curious—technology, games, music, and whatever comes next.
+                    There is always something interesting to learn.
+                </p>
+            </header>
+            <BlogHeroArt />
+        </div>
+        <section class="archive-sources" aria-labelledby="availability-title">
+            <span id="availability-title">Available on:</span>
             <div class="source-buttons">
                 <RSSButton />
-                <button class="source-button compact-button paper-button" type="button" disabled>???</button>
-                <button class="source-button compact-button paper-button" type="button" disabled>???</button>
+                <button
+                    class="source-button compact-button paper-button"
+                    type="button"
+                    disabled
+                    aria-label="Additional publishing destination coming soon">???</button
+                >
+                <button
+                    class="source-button compact-button paper-button"
+                    type="button"
+                    disabled
+                    aria-label="Additional publishing destination coming soon">???</button
+                >
             </div>
-        </div>
+        </section>
         <div class="archive-list">
             <BlogList posts={allPosts} />
         </div>
@@ -27,17 +45,100 @@ const allPosts = await getBlogPosts();
 </BaseLayout>
 
 <style>
-    .archive-intro { padding: 1.5rem 0 0; }
-    .archive-intro h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.8; margin: 0; }
-    .archive-sources { display: grid; gap: 0.7rem; margin-top: 1.5rem; }
-    .archive-sources > span { color: var(--accent); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
-    .source-buttons { display: grid; gap: 0.8rem; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
-    .source-buttons :global(.rss-button), .source-button { width: 100%; }
-    .source-button { background: var(--bg); color: var(--fg3); cursor: not-allowed; }
-    .source-button:disabled { box-shadow: 4px 4px 0 var(--button-shadow); pointer-events: none; }
-    .archive-list { border-top: 2px solid var(--line); margin-top: 4rem; }
-    @media (max-width: 600px) {
-        .blog-page { padding-top: 3rem; }
-        .archive-intro { padding-top: 1.25rem; }
+    .archive-header {
+        align-items: center;
+        display: grid;
+        gap: var(--space-9);
+        grid-template-columns: minmax(0, 1fr) clamp(17rem, 34vw, 24rem);
+        padding-top: var(--hero-padding-top);
+    }
+    .archive-intro h1 {
+        font-size: var(--text-page-title);
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--tracking-tight);
+        line-height: var(--leading-tight);
+        margin: 0;
+    }
+    .archive-intro p {
+        color: var(--fg2);
+        line-height: var(--leading-body);
+        margin: var(--space-6) 0 0;
+        max-width: 38rem;
+    }
+    .archive-sources {
+        display: grid;
+        gap: 0.7rem;
+        margin-top: var(--space-8);
+        width: 100%;
+    }
+    .archive-sources > span {
+        color: var(--accent);
+        font-size: var(--text-lead);
+        font-weight: var(--weight-medium);
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+    }
+    .source-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: var(--space-2);
+        width: 100%;
+    }
+    .source-buttons :global(.rss-button),
+    .source-button {
+        flex: 1 1 0;
+        min-width: 0;
+        width: 100%;
+    }
+    .source-button {
+        background: var(--bg);
+        color: var(--fg3);
+        cursor: not-allowed;
+    }
+    .source-button:disabled {
+        box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--button-shadow);
+        pointer-events: none;
+    }
+    .archive-list {
+        border-top: var(--border-width) solid var(--line);
+        margin-top: var(--space-9);
+        padding: var(--space-9) 0;
+    }
+    .archive-list :global(.blog-list) {
+        padding-top: 0;
+    }
+    @media (max-width: 700px) {
+        .blog-page {
+            padding-top: var(--space-8);
+        }
+        .archive-header {
+            display: block;
+            padding-top: var(--space-4);
+        }
+        .archive-intro p {
+            margin-top: var(--space-4);
+        }
+        .archive-sources {
+            margin: var(--space-7) 0 0;
+            width: 100%;
+        }
+        .archive-sources > span {
+            text-align: left;
+        }
+        .source-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            width: 100%;
+        }
+        .source-buttons :global(.rss-button),
+        .source-button {
+            flex: none;
+            min-height: var(--control-height);
+        }
+        .archive-list {
+            margin-top: var(--space-7);
+            padding: var(--space-7) 0 2.2rem;
+        }
     }
 </style>

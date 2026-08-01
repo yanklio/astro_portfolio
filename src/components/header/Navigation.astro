@@ -9,30 +9,63 @@ const currentPath = Astro.url.pathname;
 const { variant = "desktop" } = Astro.props;
 ---
 
-<nav class:list={["navigation", `navigation--${variant}`]} aria-label={variant === "mobile" ? "Mobile navigation" : "Primary navigation"}>
-    {navigationItems.map(({ href, label }) => (
-        <a href={href} class:list={["navigation__link", { "is-active": isNavigationItemActive(currentPath, href) }]}>{label}</a>
-    ))}
+<nav
+    class:list={["navigation", `navigation--${variant}`]}
+    aria-label={variant === "mobile" ? "Mobile navigation" : "Primary navigation"}
+>
+    {
+        navigationItems.map(({ href, label }) => (
+            <a
+                href={href}
+                class:list={[
+                    "navigation__link",
+                    "paper-button",
+                    { "is-active": isNavigationItemActive(currentPath, href) },
+                ]}
+                aria-current={isNavigationItemActive(currentPath, href) ? "page" : undefined}
+            >
+                {label}
+            </a>
+        ))
+    }
 </nav>
 
 <style>
-    .navigation { display: flex; gap: 0.45rem; }
+    .navigation {
+        display: flex;
+        gap: var(--space-1);
+    }
     .navigation__link {
-        border: 2px solid var(--fg1);
-        box-shadow: 3px 3px 0 var(--fg1);
-        color: var(--fg1);
         background: var(--bg_hard);
-        font-size: 0.8rem;
-        font-weight: 700;
+        font-size: var(--text-nav);
+        font-weight: var(--weight-bold);
         letter-spacing: 0.05em;
         padding: 0.55rem 0.85rem;
         text-decoration: none;
         text-transform: uppercase;
     }
-    .navigation__link:hover { background: var(--bg2); }
-    .navigation__link:active { box-shadow: 0 0 0 var(--fg1); transform: translate(3px, 3px); }
-    .navigation__link.is-active { background: var(--nav-accent); color: var(--black); pointer-events: none; }
-    .navigation--mobile { display: grid; gap: 0.65rem; }
-    .navigation--mobile .navigation__link { background: var(--bg_hard); border-width: 3px; font-size: 0.85rem; padding: 0.8rem 1rem; text-align: left; }
-    .navigation--mobile .navigation__link.is-active { background: var(--nav-accent); color: var(--black); }
+    .navigation__link:hover {
+        background: var(--bg2);
+    }
+    .navigation__link.is-active {
+        background: var(--nav-accent);
+        color: var(--black);
+        pointer-events: none;
+    }
+    .navigation--mobile {
+        display: grid;
+        gap: 0.65rem;
+    }
+    .navigation--mobile .navigation__link {
+        background: var(--bg_hard);
+        border-width: 3px;
+        font-size: 0.85rem;
+        justify-content: flex-start;
+        padding: 0.8rem 1rem;
+        text-align: left;
+    }
+    .navigation--mobile .navigation__link.is-active {
+        background: var(--nav-accent);
+        color: var(--black);
+    }
 </style>

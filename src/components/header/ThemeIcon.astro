@@ -4,12 +4,13 @@ import { Icon } from "astro-icon/components";
 
 <button
     class="theme-toggle paper-button"
-    aria-label="Toggle theme"
+    aria-label="Switch color theme"
+    aria-pressed="false"
     type="button"
     data-theme-toggle
 >
-    <Icon class="icon sun" name="ic:baseline-wb-sunny" />
-    <Icon class="icon moon" name="ic:baseline-dark-mode" />
+    <Icon class="icon sun" name="ic:baseline-wb-sunny" aria-hidden="true" />
+    <Icon class="icon moon" name="ic:baseline-dark-mode" aria-hidden="true" />
 </button>
 
 <style>

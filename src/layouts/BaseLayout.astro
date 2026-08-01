@@ -8,13 +8,15 @@ interface Props {
     pageDescription?: string;
     pageImage?: string;
     pageTitle?: string;
+    pageType?: "article" | "website";
 }
 
-const { pageTitle = "", pageDescription, pageImage } = Astro.props;
+const { pageTitle = "", pageDescription, pageImage, pageType = "website" } = Astro.props;
 const description = pageDescription ?? site.description;
 const resolvedTitle = pageTitle ? `${pageTitle} | ${site.handle}` : site.handle;
-const canonicalUrl = new URL(Astro.url.pathname, site.url).href;
-const ogImage = pageImage ? new URL(pageImage, site.url).href : undefined;
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = new URL(pageImage ?? site.defaultImage, siteUrl).href;
 ---
 
 <html lang="en">
@@ -28,54 +30,65 @@ const ogImage = pageImage ? new URL(pageImage, site.url).href : undefined;
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
 
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content={pageType} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content={resolvedTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:site_name" content={site.handle} />
-        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={`${resolvedTitle} preview`} />
 
-        <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={resolvedTitle} />
         <meta name="twitter:description" content={description} />
-        {ogImage && <meta name="twitter:image" content={ogImage} />}
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content={`${resolvedTitle} preview`} />
 
-        <script is:inline type="application/ld+json" set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebSite",
-                    "name": site.handle,
-                    "url": site.url,
-                    "potentialAction": {
-                        "@type": "SearchAction",
-                        "target": {
-                            "@type": "EntryPoint",
-                            "urlTemplate": `${site.url}/blog?q={search_term_string}`
-                        },
-                        "query-input": "required name=search_term_string"
-                    }
-                },
-                {
-                    "@type": "Person",
-                    "name": site.name,
-                    "url": site.url,
-                    "sameAs": socialLinks.map(({ href }) => href)
-                }
-            ]
-        })} />
-        <script>import "../scripts/theme";</script>
-
+        <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebSite",
+                        name: site.handle,
+                        url: siteUrl.href,
+                    },
+                    {
+                        "@type": "Person",
+                        name: site.name,
+                        url: siteUrl.href,
+                        sameAs: socialLinks.map(({ href }) => href),
+                    },
+                ],
+            })}
+        />
+        <script is:inline>
+            (() => {
+                let storedTheme = null;
+                try {
+                    storedTheme = window.localStorage.getItem("theme");
+                } catch {}
+                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const isDark = storedTheme === "dark" || (storedTheme !== "light" && prefersDark);
+                document.documentElement.classList.toggle("dark", isDark);
+            })();
+        </script>
+        <script>
+            import "../scripts/theme";
+        </script>
     </head>
     <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
         <div class="site-shell">
             <aside class="site-rail desktop-only" aria-hidden="true">
-                <span class="rail-header">~</span>
+                <span class="rail-header"></span>
             </aside>
             <div class="header-slot">
                 <Header />
             </div>
-            <main>
+            <main id="main-content">
                 <slot />
             </main>
             <div class="footer-slot">
@@ -86,41 +99,70 @@ const ogImage = pageImage ? new URL(pageImage, site.url).href : undefined;
 </html>
 
 <style>
+    .skip-link {
+        left: 1rem;
+        position: fixed;
+        top: 1rem;
+        transform: translateY(-200%);
+        z-index: 100;
+    }
+    .skip-link:focus {
+        background: var(--surface);
+        border: var(--border-width) solid var(--line);
+        color: var(--fg1);
+        padding: var(--space-2) var(--space-3);
+        transform: translateY(0);
+    }
     body {
         min-height: 100vh;
     }
     .site-shell {
         display: grid;
-        grid-template-columns: 3.5rem minmax(0, 1fr);
-        grid-template-rows: 4.6rem minmax(70vh, 1fr) 4.6rem;
+        grid-template-columns: var(--rail-width) minmax(0, 1fr);
+        grid-template-rows: var(--header-height) minmax(70vh, 1fr) var(--header-height);
         min-height: 100vh;
     }
     .site-rail {
-        border-right: 2px solid var(--line);
+        border-right: var(--border-width) solid var(--line);
         display: grid;
         font-size: 0.9rem;
-        grid-template-rows: 4.6rem minmax(0, 1fr);
+        grid-template-rows: var(--header-height) minmax(0, 1fr);
         grid-column: 1;
         grid-row: 1 / 3;
         text-align: center;
     }
     .site-rail span {
         align-items: center;
-        border-bottom: 2px solid var(--line);
+        border-bottom: var(--border-width) solid var(--line);
         display: flex;
         justify-content: center;
     }
-    .header-slot { align-self: stretch; grid-column: 2; grid-row: 1; min-width: 0; position: sticky; top: 0; z-index: 10; }
+    .header-slot {
+        align-self: stretch;
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
     main {
         grid-column: 2;
         grid-row: 2;
         min-width: 0;
-        padding: 0 clamp(1.25rem, 4vw, 4rem);
+        padding: 0 var(--page-gutter);
     }
-    .footer-slot { grid-column: 1 / 3; grid-row: 3; min-width: 0; }
+    .footer-slot {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        min-width: 0;
+    }
     @media (max-width: 700px) {
-        .site-shell { display: block; }
-        .site-rail { display: none; }
-        main { padding: 0 1.25rem; }
+        .site-shell {
+            display: block;
+        }
+        .site-rail {
+            display: none;
+        }
     }
 </style>

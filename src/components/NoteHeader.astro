@@ -14,56 +14,166 @@ const month = post.data.pubDate.toLocaleDateString("en-US", { month: "short" });
 const year = post.data.pubDate.toLocaleDateString("en-US", { year: "numeric" });
 const longDate = post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 const Root = isDetail ? "header" : "article";
+const titleId = `note-${post.id.replace(/[^a-zA-Z0-9_-]/g, "-")}-title`;
 ---
 
-<Root class="note-header">
+<Root class="note-header" aria-labelledby={titleId}>
     <time class="note-header__date" datetime={post.data.pubDate.toISOString()} aria-label={longDate}>
         <span>{month}</span>
         <strong>{day}</strong>
         <small>{year}</small>
     </time>
     <div class="note-header__content">
-        {isDetail ? (
-            <h1>{post.data.title}</h1>
-        ) : (
-            <h2><a href={href}>{post.data.title}</a></h2>
-        )}
+        {
+            isDetail ? (
+                <h1 id={titleId}>{post.data.title}</h1>
+            ) : (
+                <h2 id={titleId}>
+                    <a href={href}>{post.data.title}</a>
+                </h2>
+            )
+        }
         <div class="note-header__summary"><span>{post.data.description}</span></div>
         <div class="note-header__footer">
-            <div class="note-header__tags">{post.data.tags.map((tag) => <BlogTag text={tag} />)}</div>
-            {!isDetail && <a class="note-header__link compact-button paper-button" href={href}>Open <span>→</span></a>}
+            <div class="note-header__tags" role="list" aria-label="Tags">
+                {
+                    post.data.tags.map((tag) => (
+                        <span role="listitem">
+                            <BlogTag text={tag} />
+                        </span>
+                    ))
+                }
+            </div>
+            {
+                !isDetail && (
+                    <a
+                        class="note-header__link compact-button paper-button"
+                        href={href}
+                        aria-label={`Open ${post.data.title}`}
+                    >
+                        Open <span aria-hidden="true">→</span>
+                    </a>
+                )
+            }
         </div>
     </div>
 </Root>
 
 <style>
-    .note-header { border: 2px solid var(--line); display: grid; grid-template-columns: 10rem minmax(0, 1fr); }
-    .note-header__date { align-items: center; background: var(--accent); border-right: 2px solid var(--line); color: var(--bg); display: flex; flex-direction: column; justify-content: space-between; padding: 1.25rem; text-align: center; }
-    .note-header__date span, .note-header__date small { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
-    .note-header__date strong { font-size: 4.75rem; font-weight: 700; letter-spacing: -0.13em; line-height: 0.8; }
-    .note-header__content { min-width: 0; padding: 1.5rem 1.5rem 1.5rem 2rem; }
-    .note-header__content h1, .note-header__content h2 { font-size: clamp(2.4rem, 5vw, 4.75rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.88; margin: 0 0 1.25rem; max-width: 14ch; }
-    .note-header__content h2 a { color: inherit; text-decoration: none; }
-    .note-header__summary { align-items: flex-end; color: var(--fg2); display: flex; gap: 2rem; justify-content: space-between; line-height: 1.7; }
-    .note-header__summary > span { max-width: 48rem; }
-    .note-header__footer { align-items: center; display: flex; gap: 1rem; justify-content: space-between; margin-top: 1.25rem; }
-    .note-header__tags { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .note-header__link { background: var(--surface); color: var(--fg1); flex: 0 0 5.3rem; text-decoration: none; }
-    .note-header__link.paper-button:hover { background: var(--surface); }
-    .note-header__link span { color: var(--accent); font-size: 1.1rem; }
+    .note-header {
+        border: var(--border-width) solid var(--line);
+        display: grid;
+        grid-template-columns: 10rem minmax(0, 1fr);
+    }
+    .note-header__date {
+        align-items: center;
+        background: var(--accent);
+        border-right: var(--border-width) solid var(--line);
+        color: var(--bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: var(--space-4);
+        text-align: center;
+    }
+    .note-header__date span,
+    .note-header__date small {
+        font-size: var(--text-small);
+        font-weight: var(--weight-medium);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+    .note-header__date strong {
+        font-size: 4.75rem;
+        font-weight: var(--weight-bold);
+        letter-spacing: -0.13em;
+        line-height: 0.8;
+    }
+    .note-header__content {
+        min-width: 0;
+        padding: var(--space-5);
+    }
+    .note-header__content h1,
+    .note-header__content h2 {
+        font-size: var(--text-card-title);
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--tracking-tight);
+        line-height: 0.9;
+        margin: 0 0 var(--space-4);
+    }
+    .note-header__content h2 a {
+        color: inherit;
+        text-decoration: none;
+    }
+    .note-header__summary {
+        align-items: flex-end;
+        color: var(--fg2);
+        display: flex;
+        gap: var(--space-6);
+        justify-content: space-between;
+        line-height: 1.7;
+    }
+    .note-header__summary > span {
+        max-width: var(--text-max);
+    }
+    .note-header__footer {
+        align-items: center;
+        display: flex;
+        gap: var(--space-3);
+        justify-content: space-between;
+        margin-top: var(--space-4);
+    }
+    .note-header__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+    .note-header__link {
+        background: var(--surface);
+        color: var(--fg1);
+        flex: 0 0 var(--control-width);
+        text-decoration: none;
+    }
+    .note-header__link.paper-button:hover {
+        background: var(--surface);
+    }
+    .note-header__link span {
+        color: var(--accent);
+        font-size: 1.1rem;
+    }
 
     @media (max-width: 700px) {
-        .note-header { grid-template-columns: 6.5rem minmax(0, 1fr); }
-        .note-header__date { padding: 1rem 0.75rem; }
-        .note-header__date strong { font-size: 3.2rem; }
-        .note-header__content { padding-left: 1rem; }
-        .note-header__summary { align-items: flex-start; flex-direction: column; gap: 1rem; }
+        .note-header {
+            grid-template-columns: 6.5rem minmax(0, 1fr);
+        }
+        .note-header__date {
+            padding: var(--space-3) var(--space-2);
+        }
+        .note-header__date strong {
+            font-size: 3.2rem;
+        }
+        .note-header__content {
+            padding: var(--space-3);
+        }
+        .note-header__summary {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
     }
 
     @media (max-width: 420px) {
-        .note-header { display: block; }
-        .note-header__date { align-items: center; border-bottom: 2px solid var(--line); border-right: 0; flex-direction: row; }
-        .note-header__date strong { font-size: 2.5rem; }
-        .note-header__content { padding: 1.5rem; }
+        .note-header {
+            display: block;
+        }
+        .note-header__date {
+            align-items: center;
+            border-bottom: var(--border-width) solid var(--line);
+            border-right: 0;
+            flex-direction: row;
+        }
+        .note-header__date strong {
+            font-size: 2.5rem;
+        }
     }
 </style>

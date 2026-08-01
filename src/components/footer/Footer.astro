@@ -13,20 +13,31 @@ const currentYear = new Date().getFullYear();
 </footer>
 
 <style>
-    .site-footer { border-top: 2px solid var(--line); height: 100%; }
+    .site-footer {
+        border-top: var(--border-width) solid var(--line);
+        height: 100%;
+    }
     .footer-inner {
         align-items: center;
         color: var(--fg3);
         display: flex;
-        font-size: 0.78rem;
+        font-size: var(--text-meta);
         height: 100%;
         justify-content: space-between;
         margin: 0 auto;
-        padding: 0 clamp(1.25rem, 4vw, 4rem);
+        padding: 0 var(--page-gutter);
         text-transform: uppercase;
     }
     @media (min-width: 701px) {
-        .footer-inner { padding-left: calc(3.5rem + clamp(1.25rem, 4vw, 4rem)); }
+        .footer-inner {
+            padding-left: calc(var(--rail-width) + var(--page-gutter));
+        }
     }
-    @media (max-width: 600px) { .footer-inner { flex-direction: column; gap: 0.45rem; } }
+    @media (max-width: 700px) {
+        .footer-inner {
+            flex-direction: column;
+            gap: var(--space-1);
+            padding: var(--space-3) var(--page-gutter);
+        }
+    }
 </style>
