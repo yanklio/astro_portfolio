@@ -1,0 +1,63 @@
+:root {
+    /* Color roles */
+    --line: var(--fg1);
+    --surface: var(--bg_hard);
+    --accent: var(--orange);
+    --nav-accent: var(--yellow-dim);
+    --button-shadow: light-dark(var(--fg1), var(--bg4));
+
+    /* Layout */
+    --content-max: 67.5rem;
+    --text-max: 48rem;
+    --page-gutter: clamp(1.25rem, 4vw, 4rem);
+    --page-top: clamp(3.5rem, 8vw, 6.5rem);
+    --hero-padding-top: 1.75rem;
+    --header-height: 4.6rem;
+    --rail-width: 3.5rem;
+
+    /* Spacing scale */
+    --space-1: 0.45rem;
+    --space-2: 0.75rem;
+    --space-3: 1rem;
+    --space-4: 1.25rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 2.5rem;
+    --space-8: 3rem;
+    --space-9: 4rem;
+    --space-10: 8rem;
+
+    /* Type scale */
+    --text-kicker: 0.72rem;
+    --text-small: 0.75rem;
+    --text-meta: 0.78rem;
+    --text-nav: 0.8rem;
+    --text-body: 1rem;
+    --text-body-large: 1.02rem;
+    --text-lead: clamp(1.1rem, 2.5vw, 1.55rem);
+    --text-card-title: clamp(2rem, 4vw, 3.5rem);
+    --text-section-title: clamp(2rem, 5vw, 3.65rem);
+    --text-page-title: clamp(3.7rem, 8.7vw, 6.8rem);
+    --weight-medium: 500;
+    --weight-bold: 700;
+    --tracking-tight: -0.1em;
+    --tracking-label: 0.1em;
+    --leading-tight: 0.85;
+    --leading-body: 1.8;
+
+    /* Paper controls */
+    --border-width: 2px;
+    --border-heavy: 3px;
+    --shadow-offset: 4px;
+    --control-height: 2.8rem;
+    --control-width: 5.3rem;
+    --control-padding-block: 0.8rem;
+    --control-padding-inline: 0.95rem;
+    --control-icon-size: 1.1rem;
+}
+
+@media (max-width: 700px) {
+    :root {
+        --page-gutter: 1.25rem;
+    }
+}

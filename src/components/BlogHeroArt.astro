@@ -1,0 +1,80 @@
+---
+const sourceArt = `                                                                              ▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+                                                                    ░░                      
+                                                    ▒▒▒▒▒▒▒▒                                
+                                            ▒▒▒▒░░                                          
+                        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒                                    ▓▓                
+                ▒▒▒▒                                                    ░░  ░░              
+        ▒▒▒▒▒▒                                                        ▓▓  ░░▓▓▓▓            
+    ░░                                                            ▓▓▓▓  ░░▓▓▓▓              
+                                                        ▓▓▓▓▓▓  ▓▓    ▓▓▓▓▓▓                
+  ▒▒                                                  ░░░░░░░░██░░▓▓░░▓▓▓▓                  
+                                                    ▓▓░░▓▓▓▓██░░▒▒░░▓▓▓▓▓▓                  
+      ░░                                          ▓▓░░▓▓  ██░░▒▒░░▓▓▒▒▓▓                    
+                                                ▓▓░░▓▓  ██░░▒▒░░▓▓▒▒██                      
+            ▒▒                                ▓▓░░▓▓  ██░░▒▒░░▓▓▒▒▒▒                        
+                ▒▒                          ▓▓░░▓▓  ██░░▒▒░░▓▓▒▒██                          
+                    ▒▒                ▓▓▓▓▓▓░░▓▓  ██░░▒▒░░▓▓▒▒██                            
+                        ▒▒          ▓▓░░░░▓▓▓▓  ██░░▒▒░░▓▓▒▒██                              
+                                    ▓▓▓▓▓▓▓▓  ██░░▒▒░░▓▓▒▒██                                
+                                      ▓▓▓▓  ██░░▒▒░░▓▓▒▒██                                  
+                                ░░        ▓▓░░▒▒░░▓▓▒▒██                                    
+                              ▒▒        ▓▓  ▓▓░░▓▓▒▒██                                      
+                            ░░        ██░░▓▓░░▒▒▒▒██                                        
+                      ▒▒▒▒          ██░░▒▒░░▓▓▓▓▓▓                                          
+                  ▒▒              ██░░▒▒░░▓▓▒▒▓▓                                            
+                                ██░░▒▒░░▓▓▒▒██                                              
+      ▒▒▒▒▒▒▒▒▒▒              ██░░▒▒░░▓▓▒▒██                                                
+  ▒▒                        ██░░▒▒░░▓▓▒▒██                                                  
+░░                        ██░░▒▒░░▓▓▒▒██                                                    
+░░                      ██░░▒▒░░▓▓▒▒██                                                      
+░░                    ██░░▒▒░░▓▓▒▒██                                                        
+  ▓▓                ██░░▒▒░░▓▓▒▒██                                                          
+    ▒▒            ▓▓░░▒▒░░▓▓▒▒██                                                            
+                ██  ▓▓░░▓▓▒▒██                                                              
+                ▓▓░░░░▒▒▒▒██                                                                
+          ▒▒  ██  ░░▓▓▓▓▓▓                                                                  
+            ▒▒▓▓▓▓▓▓▓▓▓▓                                                                    
+            ▓▓░░▓▓▓▓                                            ░░                          
+        ▒▒▒▒░░                                                          ░░                  
+                                                                            ▒▒              
+░░                                                                          ▒▒              
+░░                                                                          ▒▒              
+    ░░░░                                                                  ▒▒                `;
+
+const braillePalette: Record<string, string[]> = {
+    "░": ["⠲", "⠴", "⢒", "⡖"],
+    "▒": ["⠶", "⢕", "⡪", "⢵"],
+    "▓": ["⣶", "⣷", "⣯", "⣾"],
+    "█": ["⣿"],
+};
+
+const art = sourceArt.replace(/[░▒▓█]/g, (symbol, offset) => {
+    const variants = braillePalette[symbol];
+    return variants[offset % variants.length];
+});
+---
+
+<pre class="ascii-art blog-hero-art" aria-hidden="true">{art}</pre>
+
+<style>
+    .blog-hero-art {
+        align-self: center;
+        font-family: inherit;
+        font-size: clamp(0.22rem, 0.45vw, 0.3rem);
+        font-weight: 700;
+        justify-self: end;
+        letter-spacing: 0;
+        margin: 0;
+        white-space: pre;
+        width: max-content;
+    }
+
+    @media (max-width: 700px) {
+        .blog-hero-art {
+            font-size: clamp(0.18rem, 0.9vw, 0.3rem);
+            margin: var(--space-7) auto 0;
+            max-width: 100%;
+        }
+    }
+</style>

@@ -9,5 +9,9 @@ const { text } = Astro.props;
 <span class="tag">#{text}</span>
 
 <style>
-    .tag { color: var(--fg3); font-size: 0.78rem; font-weight: 700; }
+    .tag {
+        color: var(--fg3);
+        font-size: var(--text-meta);
+        font-weight: var(--weight-bold);
+    }
 </style>

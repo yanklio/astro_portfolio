@@ -4,27 +4,55 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout pageTitle="Not found">
     <section class="not-found" aria-labelledby="not-found-title">
-        <div class="error-code">404</div>
-        <div class="error-copy">
-            <p class="page-kicker">Route unavailable</p>
-            <h1 id="not-found-title">Nothing here.</h1>
-            <p>The page you requested does not exist, or it has moved somewhere more useful.</p>
-            <a class="paper-button" href="/">Back to index <span>←</span></a>
-        </div>
+        <p class="error-code" aria-hidden="true">404</p>
+        <p class="page-kicker">Route unavailable</p>
+        <h1 id="not-found-title">Nothing here.</h1>
+        <p class="error-message">The page may have moved, or it never existed.</p>
+        <a class="paper-button action-button" href="/">
+            Back home <span class="action-button__icon" aria-hidden="true">←</span>
+        </a>
     </section>
 </BaseLayout>
 
 <style>
-    .not-found { align-items: stretch; display: grid; grid-template-columns: minmax(13rem, 0.6fr) 1fr; margin: 0 auto; max-width: 1080px; min-height: 62vh; padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
-    .error-code { align-items: center; background: var(--accent); border: 2px solid var(--line); color: var(--bg); display: flex; font-size: clamp(5rem, 14vw, 11rem); font-weight: 700; justify-content: center; letter-spacing: -0.14em; line-height: 0.7; }
-    .error-copy { border: 2px solid var(--line); border-left: 0; display: flex; flex-direction: column; justify-content: center; padding: clamp(1.5rem, 5vw, 4rem); }
-    .error-copy h1 { font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.8; margin: 1.25rem 0; }
-    .error-copy > p:not(.page-kicker) { color: var(--fg2); line-height: 1.75; margin: 0 0 1.75rem; max-width: 30rem; }
-    .error-copy a { align-self: flex-start; font-size: 0.78rem; font-weight: 700; gap: 0.8rem; padding: 0.8rem 0.95rem; text-decoration: none; text-transform: uppercase; }
-    .error-copy a span { color: var(--accent); font-size: 1.05rem; }
-    @media (max-width: 520px) {
-        .not-found { grid-template-columns: 1fr; min-height: 0; }
-        .error-code { min-height: 11rem; }
-        .error-copy { border-left: 2px solid var(--line); border-top: 0; }
+    .not-found {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: var(--content-max);
+        min-height: 0;
+        padding: var(--space-6) 0;
+        text-align: center;
+    }
+    .error-code {
+        color: var(--accent);
+        font-size: clamp(7rem, 20vw, 14rem);
+        font-weight: var(--weight-bold);
+        letter-spacing: -0.14em;
+        line-height: 0.65;
+        margin: 0 0 var(--space-7);
+        padding-right: 0.14em;
+    }
+    .not-found h1 {
+        font-size: var(--text-section-title);
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--tracking-tight);
+        line-height: var(--leading-tight);
+        margin: var(--space-3) 0;
+    }
+    .error-message {
+        color: var(--fg2);
+        line-height: var(--leading-body);
+        margin: 0 0 var(--space-6);
+        max-width: 30rem;
+    }
+    @media (max-width: 700px) {
+        .not-found {
+            min-height: calc(100svh - var(--header-height));
+            padding: var(--space-9) 0;
+        }
     }
 </style>

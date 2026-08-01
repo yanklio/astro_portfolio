@@ -8,39 +8,110 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description } = post.data;
+const { title, description, image } = post.data;
 ---
 
-<BaseLayout pageTitle={title} pageDescription={description}>
+<BaseLayout pageTitle={title} pageDescription={description} pageImage={image} pageType="article">
     <div class="page-container page-top article-page">
-        <a class="back-link paper-button" href="/blog"><b>←</b> All notes</a>
+        <a class="back-link paper-button action-button" href="/blog">
+            <b class="action-button__icon" aria-hidden="true">←</b> All notes
+        </a>
         <NoteHeader post={post} isDetail />
         <article class="post-content"><slot /></article>
     </div>
 </BaseLayout>
 
 <style>
-    .back-link { color: var(--fg1); display: flex; font-size: 0.78rem; font-weight: 700; gap: 0.75rem; justify-content: flex-start; margin-bottom: 1.5rem; padding: 0.8rem 1rem; text-decoration: none; text-transform: uppercase; width: 10rem; }
-    .back-link b { color: var(--accent); font-size: 1.1rem; }
-    .post-content { margin: 4rem 0 0; max-width: none; }
-    .post-content :global(h1), .post-content :global(h2), .post-content :global(h3) { color: var(--fg1); font-weight: 700; letter-spacing: -0.06em; line-height: 1; margin: 3rem 0 1rem; }
-    .post-content :global(h1) { font-size: clamp(2.2rem, 5vw, 3.5rem); }
-    .post-content :global(h2) { font-size: clamp(1.7rem, 4vw, 2.5rem); }
-    .post-content :global(h3) { font-size: 1.35rem; }
-    .post-content :global(p) { color: var(--fg2); font-size: 1.02rem; line-height: 1.95; margin: 0 0 1.4rem; }
-    .post-content :global(ul), .post-content :global(ol) { color: var(--fg2); line-height: 1.8; margin: 0 0 1.4rem; padding-left: 1.35rem; }
-    .post-content :global(li) { margin-bottom: 0.4rem; }
-    .post-content :global(blockquote) { background: var(--bg1); border-left: 6px solid var(--accent); color: var(--fg2); font-style: italic; line-height: 1.8; margin: 2rem 0; padding: 1.25rem 1.5rem; }
-    .post-content :global(code) { background: var(--bg1); color: var(--fg1); padding: 0.15rem 0.35rem; }
-    .post-content :global(pre) { background: var(--bg1); border: 3px solid var(--line); box-shadow: 4px 4px 0 var(--line); margin: 2rem 0; overflow-x: auto; padding: 1.25rem; }
-    .post-content :global(pre code) { background: transparent; padding: 0; }
-    .post-content :global(a) { color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+    .back-link {
+        color: var(--fg1);
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: var(--space-5);
+        width: 10rem;
+    }
+    .post-content {
+        margin: var(--space-9) 0 0;
+        max-width: none;
+    }
+    .post-content :global(h1),
+    .post-content :global(h2),
+    .post-content :global(h3) {
+        color: var(--fg1);
+        font-weight: var(--weight-bold);
+        letter-spacing: -0.06em;
+        line-height: 1;
+        margin: var(--space-8) 0 var(--space-3);
+    }
+    .post-content :global(h1) {
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+    }
+    .post-content :global(h2) {
+        font-size: clamp(1.7rem, 4vw, 2.5rem);
+    }
+    .post-content :global(h3) {
+        font-size: 1.35rem;
+    }
+    .post-content :global(p) {
+        color: var(--fg2);
+        font-size: var(--text-body-large);
+        line-height: 1.95;
+        margin: 0 0 1.4rem;
+    }
+    .post-content :global(ul),
+    .post-content :global(ol) {
+        color: var(--fg2);
+        line-height: 1.8;
+        margin: 0 0 1.4rem;
+        padding-left: 1.35rem;
+    }
+    .post-content :global(li) {
+        margin-bottom: 0.4rem;
+    }
+    .post-content :global(blockquote) {
+        background: var(--bg1);
+        border-left: 6px solid var(--accent);
+        color: var(--fg2);
+        font-style: italic;
+        line-height: var(--leading-body);
+        margin: var(--space-6) 0;
+        padding: var(--space-4) var(--space-5);
+    }
+    .post-content :global(code) {
+        background: var(--bg1);
+        color: var(--fg1);
+        padding: 0.15rem 0.35rem;
+    }
+    .post-content :global(pre) {
+        background: var(--bg1);
+        border: var(--border-heavy) solid var(--line);
+        box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--line);
+        margin: var(--space-6) 0;
+        overflow-x: auto;
+        padding: var(--space-4);
+    }
+    .post-content :global(pre code) {
+        background: transparent;
+        padding: 0;
+    }
+    .post-content :global(a) {
+        color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.2em;
+    }
     @media (max-width: 700px) {
-        .article-page { padding-top: 3rem; }
-        .back-link { width: 6.5rem; }
-        .post-content { margin-top: 3rem; }
+        .article-page {
+            padding-top: var(--space-8);
+        }
+        .back-link {
+            width: 6.5rem;
+        }
+        .post-content {
+            margin-top: var(--space-8);
+        }
     }
     @media (max-width: 420px) {
-        .back-link { width: 100%; }
+        .back-link {
+            width: 100%;
+        }
     }
 </style>

@@ -11,10 +11,16 @@ import { site, socialLinks, toolboxGroups } from "../config/site";
             <div class="intro-copy">
                 <h1 id="intro-title">{site.name}</h1>
                 <p class="role">Full-stack developer</p>
-                <p class="intro-description">I’m drawn to interesting technical products and the systems behind them. Most of my experience is in the JavaScript ecosystem, working across both frontend and backend. I’m also moving deeper into Java world and mastering cloud infrastructure and DevOps<br/><br/>Based in Poznań, PL and open to remote work too</p>
-                <a class="paper-button intro-link" href="/blog">Read my notes <span>→</span></a>
+                <p class="intro-description">
+                    I’m drawn to interesting technical products and the systems behind them. Most of my experience is in
+                    the JavaScript ecosystem, working across both frontend and backend. I’m also moving deeper into Java
+                    world and mastering cloud infrastructure and DevOps<br /><br />Based in Poznań, PL and open to
+                    remote work too
+                </p>
             </div>
-            <pre class="coffee-art" aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠
+            <pre
+                class="ascii-art coffee-art"
+                aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣏⢻⣧⡀⠀⠀⠀⠀⠀⣠⣾⣿⠟⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⠾⢻⣻
 ⠀⣴⡾⠿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⢯⣿⣳⢦⡙⢿⣄⣀⣀⣠⣾⣫⣿⢿⡑⢺⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣶⠿⢟⣫⣭⣶⣿⣿⡿
 ⣸⡟⠀⠀⣸⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⣤⣄⣀⣀⣼⠏⣼⣷⣭⡷⠟⠛⠉⡉⠉⢉⢭⠉⠛⠿⣿⣤⣿⣇⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⠾⢟⣫⣥⣶⣿⣿⣟⣷⣻⣿⠟⠀
@@ -36,60 +42,180 @@ import { site, socialLinks, toolboxGroups } from "../config/site";
 
         <section class="home-section" aria-labelledby="toolbox-title">
             <header class="section-heading">
-
                 <h2 id="toolbox-title">Toolbox</h2>
             </header>
             <div class="skills-table">
-                {toolboxGroups.map(({ label, tools }) => (
-                    <div class="skill-row"><span>{label}</span><p>{tools}</p></div>
-                ))}
+                {
+                    toolboxGroups.map(({ label, tools }) => (
+                        <div class="skill-row">
+                            <>
+                                <span>{label}</span>
+                                <p>{tools}</p>
+                            </>
+                        </div>
+                    ))
+                }
             </div>
         </section>
 
         <section class="contact-block" aria-labelledby="links-title">
             <h2 id="links-title">Find me online</h2>
             <div class="contact-row">
-                {socialLinks.map(({ href, label }) => (
-                    <a href={href} target="_blank" rel="noopener noreferrer" class="paper-button contact-link">{label} <span>↗</span></a>
-                ))}
+                {
+                    socialLinks.map(({ href, label }) => (
+                        <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="paper-button action-button"
+                            aria-label={`${label} (opens in a new tab)`}
+                        >
+                            {label}{" "}
+                            <span class="action-button__icon" aria-hidden="true">
+                                ↗
+                            </span>
+                        </a>
+                    ))
+                }
             </div>
         </section>
     </div>
 </BaseLayout>
 
 <style>
-    .home-page { margin: 0 auto; max-width: 1080px; padding: clamp(3.5rem, 8vw, 6.5rem) 0 0; }
-    .intro { align-items: center; display: grid; gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: minmax(0, 1fr) clamp(20rem, 45vw, 32rem); padding: 1.75rem 0 3.5rem; }
-    .intro-copy { min-width: 0; }
-    .intro h1 { font-size: clamp(3.7rem, 8.7vw, 6.8rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.85; margin: 1.2rem 0 0.5rem; }
-    .role { color: var(--accent); font-size: clamp(1.1rem, 2.5vw, 1.55rem); font-weight: 500; letter-spacing: -0.04em; margin: 0 0 2rem; }
-    .intro-description { color: var(--fg2); line-height: 1.8; margin: 0 0 1.5rem; max-width: 42rem; }
-    .intro-link { font-size: 0.78rem; font-weight: 700; gap: 1rem; padding: 0.8rem 0.95rem; text-decoration: none; text-transform: uppercase; }
-    .intro-link span { color: var(--accent); font-size: 1.15rem; }
-    .coffee-art { color: var(--accent); font-family: inherit; font-size: clamp(0.22rem, 0.45vw, 0.3rem); font-weight: 700; justify-self: end; letter-spacing: 0; margin: 0; transform: scale(2.1); transform-origin: right center; white-space: pre; }
-    .home-section { border-top: 2px solid var(--line); padding: 4rem 0; }
-    .section-heading { align-items: end; display: flex; justify-content: start; margin-bottom: 1.8rem; }
-    .section-heading h2 { font-size: clamp(2rem, 5vw, 3.65rem); font-weight: 700; letter-spacing: -0.1em; line-height: 0.8; margin: 0.45rem 0 0; }
-    .skill-row { display: grid; gap: 2rem; grid-template-columns: 9rem minmax(0, 1fr); padding: 1.05rem 0; border-bottom: 1px solid var(--fg3); }
-    .skill-row:last-child { border-bottom: 0; }
-    .skill-row > span { color: var(--accent); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
-    .skill-row p { color: var(--fg2); line-height: 1.6; margin: 0; }
-    .contact-block { background: var(--accent); border: 2px solid var(--line); border-bottom: 0; margin: 0 auto; max-width: 38rem; padding: 2.5rem 1.5rem; text-align: center; }
-    .contact-block h2 { color: var(--bg); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.08em; line-height: 1; margin: 0 0 1.4rem; }
-    .contact-block .contact-row { justify-content: center; }
-    .contact-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-    .contact-link { font-size: 0.78rem; font-weight: 700; gap: 1rem; padding: 0.8rem 0.95rem; text-decoration: none; text-transform: uppercase; }
-    .contact-link span { color: var(--accent); font-size: 1.05rem; }
-    @media (max-width: 760px) {
-        .intro { display: block; }
-        .coffee-art { font-size: 0.42rem; margin: 2.5rem auto 0; transform: none; width: max-content; }
+    .home-page {
+        margin: 0 auto;
+        max-width: var(--content-max);
+        padding: var(--page-top) 0 0;
     }
-    @media (max-width: 600px) {
-        .home-page { padding-top: 3rem; }
-        .intro { padding: 1.25rem 0 2.5rem; }
-        .coffee-art { font-size: 0.42rem; margin: 2.5rem auto 0; width: max-content; }
-        .home-section { padding: 2.2rem 0; }
-        .section-heading { display: block; }
-        .skill-row { gap: 0.45rem; grid-template-columns: 1fr; }
+    .intro {
+        align-items: center;
+        display: grid;
+        gap: clamp(1.5rem, 3vw, 3rem);
+        grid-template-columns: minmax(0, 1fr) clamp(20rem, 45vw, 32rem);
+        padding: var(--hero-padding-top) 0 3.5rem;
+    }
+    .intro-copy {
+        min-width: 0;
+    }
+    .intro h1 {
+        font-size: var(--text-page-title);
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--tracking-tight);
+        line-height: var(--leading-tight);
+        margin: 1.2rem 0 0.5rem;
+    }
+    .role {
+        color: var(--accent);
+        font-size: var(--text-lead);
+        font-weight: var(--weight-medium);
+        letter-spacing: -0.04em;
+        margin: 0 0 var(--space-6);
+    }
+    .intro-description {
+        color: var(--fg2);
+        line-height: var(--leading-body);
+        margin: 0 0 var(--space-5);
+        max-width: 42rem;
+    }
+    .coffee-art {
+        font-family: inherit;
+        font-size: clamp(0.22rem, 0.45vw, 0.3rem);
+        font-weight: 700;
+        justify-self: end;
+        letter-spacing: 0;
+        margin: 0;
+        transform: scale(1.8);
+        transform-origin: right center;
+        white-space: pre;
+    }
+    .home-section {
+        border-top: var(--border-width) solid var(--line);
+        padding: var(--space-9) 0;
+    }
+    .section-heading {
+        align-items: end;
+        display: flex;
+        justify-content: start;
+        margin-bottom: 1.8rem;
+    }
+    .section-heading h2 {
+        font-size: var(--text-section-title);
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--tracking-tight);
+        line-height: 0.8;
+        margin: var(--space-1) 0 0;
+    }
+    .skill-row {
+        display: grid;
+        gap: var(--space-6);
+        grid-template-columns: 9rem minmax(0, 1fr);
+        padding: 1.05rem 0;
+        border-bottom: 1px solid var(--fg3);
+    }
+    .skill-row:last-child {
+        border-bottom: 0;
+    }
+    .skill-row > span {
+        color: var(--accent);
+        font-size: var(--text-small);
+        font-weight: var(--weight-medium);
+        letter-spacing: var(--tracking-label);
+        text-transform: uppercase;
+    }
+    .skill-row p {
+        color: var(--fg2);
+        line-height: 1.6;
+        margin: 0;
+    }
+    .contact-block {
+        background: var(--accent);
+        border: var(--border-width) solid var(--line);
+        border-bottom: 0;
+        margin: 0 auto;
+        max-width: 38rem;
+        padding: var(--space-7) var(--space-5);
+        text-align: center;
+    }
+    .contact-block h2 {
+        color: var(--bg);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: var(--weight-bold);
+        letter-spacing: -0.08em;
+        line-height: 1;
+        margin: 0 0 1.4rem;
+    }
+    .contact-block .contact-row {
+        justify-content: center;
+    }
+    .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    @media (max-width: 700px) {
+        .intro {
+            display: block;
+            padding: var(--space-4) 0 var(--space-7);
+        }
+        .coffee-art {
+            font-size: 0.42rem;
+            margin: var(--space-7) auto 0;
+            transform: none;
+            width: max-content;
+        }
+        .home-page {
+            padding-top: var(--space-8);
+        }
+        .home-section {
+            padding: 2.2rem 0;
+        }
+        .section-heading {
+            display: block;
+        }
+        .skill-row {
+            gap: 0.45rem;
+            grid-template-columns: 1fr;
+        }
     }
 </style>
