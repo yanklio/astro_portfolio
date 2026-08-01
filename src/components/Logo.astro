@@ -2,20 +2,26 @@
 import { site } from "../config/site";
 ---
 
-<a href="/" class="logo">
+<a href="/" class="logo" aria-label={`${site.name} — home`}>
     <span class="user">{site.handle}</span><span class="separator">@</span><span class="host">portfolio</span>
 </a>
 
 <style>
     .logo {
-        font-size: 1rem;
-        font-weight: 700;
+        font-size: var(--text-body);
+        font-weight: var(--weight-bold);
         letter-spacing: -0.04em;
         color: var(--fg1);
         text-decoration: none;
     }
 
-    .user { color: var(--orange); }
-    .host { color: var(--fg1); }
-    .separator { color: var(--fg3); }
+    .user {
+        color: var(--orange);
+    }
+    .host {
+        color: var(--fg1);
+    }
+    .separator {
+        color: var(--fg3);
+    }
 </style>

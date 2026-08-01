@@ -4,6 +4,8 @@ import { site } from "../config/site";
 import { getBlogPosts } from "../data/blog";
 
 export const GET: APIRoute = async ({ site: siteUrl }) => {
+    if (!siteUrl) throw new Error("The site URL must be configured to generate the RSS feed.");
+
     const posts = await getBlogPosts();
 
     return rss({
@@ -15,7 +17,7 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
             pubDate: post.data.pubDate,
             title: post.data.title,
         })),
-        site: siteUrl ?? site.url,
+        site: siteUrl,
         title: `${site.handle} | Notes`,
     });
 };

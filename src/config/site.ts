@@ -1,9 +1,9 @@
 export const site = {
+    defaultImage: "/blog-images/00-personal-photo.jpeg",
     description: "Personal website and blog of Yaroslav — Full-Stack Developer working with TypeScript, React, Next.js, Node.js, and Python.",
     handle: "yanklio",
     location: "Poznan, PL",
     name: "Yaroslav",
-    url: "https://yanklio.netlify.app",
 } as const;
 
 export const navigationItems = [

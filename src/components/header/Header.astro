@@ -3,7 +3,6 @@ import Logo from "../Logo.astro";
 import Navigation from "./Navigation.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 import { Icon } from "astro-icon/components";
-
 ---
 
 <header class="site-header">
@@ -13,53 +12,94 @@ import { Icon } from "astro-icon/components";
             <Navigation />
             <div class="header-actions"><ThemeIcon /></div>
         </div>
-        <button id="mobileMenuToggle" class="mobile-menu-btn mobile-only paper-button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
-            <span class="menu-open-icon"><Icon name="ic:menu" /></span>
-            <span class="menu-close-icon"><Icon name="ic:close" /></span>
+        <button
+            id="mobileMenuToggle"
+            class="mobile-menu-btn mobile-only paper-button"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+            aria-label="Open navigation"
+        >
+            <span class="menu-open-icon" aria-hidden="true"><Icon name="ic:menu" /></span>
+            <span class="menu-close-icon" aria-hidden="true"><Icon name="ic:close" /></span>
         </button>
     </div>
-    <div id="mobileMenu" class="mobile-menu mobile-only">
+    <div id="mobileMenu" class="mobile-menu mobile-only" hidden>
         <Navigation variant="mobile" />
-        <button class="mobile-theme-toggle" type="button" data-theme-toggle>Theme</button>
+        <button
+            class="mobile-theme-toggle paper-button action-button"
+            type="button"
+            data-theme-toggle
+            aria-label="Switch color theme"
+            aria-pressed="false">Theme</button
+        >
     </div>
 </header>
 
 <style>
-    .site-header { background: var(--bg); border-bottom: 2px solid var(--line); min-height: 4.6rem; }
+    .site-header {
+        background: var(--bg);
+        border-bottom: var(--border-width) solid var(--line);
+        min-height: var(--header-height);
+    }
     .header-inner {
         align-items: center;
         display: flex;
         justify-content: space-between;
         margin: 0 auto;
-        height: calc(4.6rem - 2px);
-        padding: 0 clamp(1.25rem, 4vw, 4rem);
+        height: calc(var(--header-height) - var(--border-width));
+        padding: 0 var(--page-gutter);
     }
-    .header-desktop { align-items: center; display: flex; gap: 1.5rem; }
-    .header-actions { align-items: center; display: flex; gap: 0.6rem; }
-    .mobile-menu-btn { height: 2.8rem; padding: 0; width: 2.8rem; }
-    .mobile-menu-btn :global(svg) { height: 1.45rem; width: 1.45rem; }
-    .menu-close-icon { display: none; }
-    .mobile-menu-btn[aria-expanded="true"] .menu-open-icon { display: none; }
-    .mobile-menu-btn[aria-expanded="true"] .menu-close-icon { display: flex; }
-    .mobile-menu { display: none; gap: 0.65rem; margin: 0 auto; padding: 1rem 1.25rem; }
-    .mobile-menu.open { display: grid; }
+    .header-desktop {
+        align-items: center;
+        display: flex;
+        gap: var(--space-5);
+    }
+    .header-actions {
+        align-items: center;
+        display: flex;
+        gap: 0.6rem;
+    }
+    .mobile-menu-btn {
+        height: var(--control-height);
+        padding: 0;
+        width: var(--control-height);
+    }
+    .mobile-menu-btn :global(svg) {
+        height: 1.45rem;
+        width: 1.45rem;
+    }
+    .menu-close-icon {
+        display: none;
+    }
+    .mobile-menu-btn[aria-expanded="true"] .menu-open-icon {
+        display: none;
+    }
+    .mobile-menu-btn[aria-expanded="true"] .menu-close-icon {
+        display: flex;
+    }
+    .mobile-menu {
+        display: none;
+        gap: 0.65rem;
+        margin: 0 auto;
+        padding: var(--space-3) var(--page-gutter);
+    }
+    .mobile-menu.open {
+        display: grid;
+    }
     .mobile-theme-toggle {
         background: var(--aqua);
-        border: 3px solid var(--fg1);
-        box-shadow: 3px 3px 0 var(--fg1);
         color: var(--bg);
-        font: inherit;
         font-size: 0.85rem;
-        font-weight: 700;
-        padding: 0.8rem 1rem;
+        justify-content: flex-start;
         text-align: left;
-        text-decoration: none;
-        text-transform: uppercase;
     }
-    .mobile-theme-toggle:hover { background: var(--aqua-dim); }
-    .mobile-theme-toggle:active { box-shadow: 0 0 0 var(--fg1); transform: translate(3px, 3px); }
+    .mobile-theme-toggle:hover {
+        background: var(--aqua-dim);
+    }
     @media (max-width: 700px) {
-        .header-desktop { display: none; }
+        .header-desktop {
+            display: none;
+        }
     }
 </style>
 
@@ -73,17 +113,25 @@ import { Icon } from "astro-icon/components";
 
         const close = () => {
             menu.classList.remove("open");
+            menu.hidden = true;
             toggle.setAttribute("aria-expanded", "false");
             toggle.setAttribute("aria-label", "Open navigation");
         };
 
         toggle.addEventListener("click", () => {
             const open = menu.classList.toggle("open");
+            menu.hidden = !open;
             toggle.setAttribute("aria-expanded", String(open));
             toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
         });
         menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
         menu.querySelector("[data-theme-toggle]")?.addEventListener("click", close);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+                close();
+                toggle.focus();
+            }
+        });
     }
     setupMobileMenu();
 </script>
