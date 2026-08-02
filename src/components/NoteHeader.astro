@@ -45,16 +45,7 @@ const titleId = `note-${post.id.replace(/[^a-zA-Z0-9_-]/g, "-")}-title`;
                 }
             </div>
             {
-                isDetail ? (
-                    <button
-                        class="note-header__link note-header__link--current compact-button paper-button"
-                        type="button"
-                        disabled
-                        aria-current="page"
-                    >
-                        Open <span aria-hidden="true">→</span>
-                    </button>
-                ) : (
+                !isDetail && (
                     <a
                         class="note-header__link compact-button paper-button"
                         href={href}
@@ -145,11 +136,6 @@ const titleId = `note-${post.id.replace(/[^a-zA-Z0-9_-]/g, "-")}-title`;
     }
     .note-header__link.paper-button:hover {
         background: var(--surface);
-    }
-    .note-header__link--current:disabled {
-        box-shadow: none;
-        pointer-events: none;
-        transform: translate(var(--shadow-offset), var(--shadow-offset));
     }
     .note-header__link span {
         color: var(--accent);
